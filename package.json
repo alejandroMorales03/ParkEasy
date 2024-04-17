@@ -19,6 +19,7 @@
   "homepage": "https://github.com/alejandroMorales03/ParkEasy#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
     "express": "^4.19.2"
   }
 }

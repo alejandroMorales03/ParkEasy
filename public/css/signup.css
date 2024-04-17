@@ -1,0 +1,77 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* Ensures vertical stacking of all container elements */
+  background-image: url("/login-background.jpeg");
+  font-family: "Gluten", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
+.container {
+  box-shadow: rgb(255, 255, 255, 0.1);
+  background-color: rgb(225, 225, 225, 0.1);
+}
+
+.sign-up-form {
+  width: 300px; /* Adjust based on your design requirements */
+  padding: 30px;
+  text-align: center; /* Centers text inside the container */
+  color: white;
+}
+
+.title {
+  font-size: 2rem;
+  margin-left: 10px; /* Space between the logo and the title */
+  margin-right: 20px;
+  color: white;
+}
+.heading {
+  display: flex; /* Makes the heading a flex container */
+  align-items: center; /* Aligns children vertically in the center */
+  justify-content: center; /* Centers children horizontally */
+  margin-bottom: 20px; /* Space below the heading */
+  width: 300px; /* Adjust based on your design requirements */
+  padding: 20px;
+  text-align: center; /* Centers text inside the container */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.logo {
+  height: 50px; /* Adjust as needed */
+  width: auto; /* Maintain aspect ratio */
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+input[type="submit"] {
+  width: 50%;
+  margin: auto;
+  padding: 8px;
+  font-family: "Gluten", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  background-color: rgb(243, 243, 243);
+  border-radius: 40px;
+}
