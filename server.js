@@ -1,3 +1,4 @@
+import { dir } from "console";
 import express from "express"
 import {dirname} from "path"
 import {fileURLToPath} from "url"
@@ -8,12 +9,13 @@ const port = 3000;
 
 app.use(express.static('public'));
 
-app.get("/", (req, res)=>{
-    
-
+app.get("/signup", (req, res)=>{
     res.render(__dirname + "/views/signup.ejs")
-
-
+})
+app.get("/", (req, res)=>{
+    res.render(__dirname + "/views/login.ejs");
+    
+    
 })
 
 app.listen(3000);

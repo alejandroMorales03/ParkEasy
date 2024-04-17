@@ -14,18 +14,6 @@ html {
   font-size: 1rem;
 }
 
-.container {
-  box-shadow: rgb(255, 255, 255, 0.1);
-  background-color: rgb(225, 225, 225, 0.1);
-}
-
-.sign-up-form {
-  width: 300px; /* Adjust based on your design requirements */
-  padding: 30px;
-  text-align: center; /* Centers text inside the container */
-  color: white;
-}
-
 .title {
   font-size: 2rem;
   margin-left: 10px; /* Space between the logo and the title */
@@ -42,6 +30,25 @@ html {
   text-align: center; /* Centers text inside the container */
 }
 
+.logo {
+  height: 50px; /* Adjust as needed */
+  width: auto; /* Maintain aspect ratio */
+  border-radius: 10px;
+  border: 2px solid #2bd2be;
+}
+
+.container {
+  box-shadow: rgb(255, 255, 255, 0.1);
+  background-color: rgb(225, 225, 225, 0.1);
+}
+
+.login-form {
+  width: 300px; /* Adjust based on your design requirements */
+  padding: 30px;
+  text-align: center; /* Centers text inside the container */
+  color: white;
+}
+
 .form-group {
   margin-bottom: 15px;
 }
@@ -52,25 +59,17 @@ html {
   text-align: left;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"] {
+.form-group input[type="password"],
+.form-group input[type="email"] {
   width: 100%;
   padding: 8px;
   box-sizing:content-box;
   border-style:inherit;
 }
 
-.logo {
-  height: 50px; /* Adjust as needed */
-  width: auto; /* Maintain aspect ratio */
-  border-radius: 10px;
-  border: 2px solid #2bd2be;
-}
-
 input[type="submit"] {
   transition: box-shadow 0.3s ease;
-  transition: background-color 0.5s, transform 0.10s;
+  transition: background-color 0.5s, transform 0.1s;
   width: 50%;
   margin: auto;
   padding: 8px;
@@ -85,7 +84,7 @@ input[type="submit"] {
 }
 input[type="submit"]:focus {
   outline: none; /* Removes default focus outline */
-  box-shadow: 0 0 0 3px rgba(0,123,255,0.5); /* Adds a blue glow */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Adds a blue glow */
 }
 
 input[type="submit"]:active {
@@ -93,23 +92,19 @@ input[type="submit"]:active {
   transform: translateY(2px); /* Slightly shifts the button down */
 }
 
-input[type="submit"]:hover{
+input[type="submit"]:hover {
   color: white;
   background-color: #2bd2be;
 }
 
-a{
+a {
   font-size: 1rem;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   color: white;
-
 }
-a:hover{
+a:hover {
   color: #2bd2be;
 }
-a:active{
+a:active {
   color: #004085;
-
 }
-
-
