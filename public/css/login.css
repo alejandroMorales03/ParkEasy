@@ -108,3 +108,7 @@ a:hover {
 a:active {
   color: #004085;
 }
+
+.error{
+  margin-top: 10px;
+}

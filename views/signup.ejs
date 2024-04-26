@@ -61,6 +61,11 @@
           <div clas="login">
             <a href="/">Log In</a>
           </div>
+          <div class="error">
+            <% if(locals.error){ %>
+              <%= error %>
+              <% } %>
+          </div>
         </form>
       </div>
     </div>
