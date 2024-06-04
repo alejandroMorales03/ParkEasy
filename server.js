@@ -1,15 +1,19 @@
 import bodyParser from "body-parser";
-import { dir, error } from "console";
 import express from "express"
 import {dirname} from "path"
 import {fileURLToPath} from "url"
 import pg from  "pg"
 import bcrypt from "bcrypt"
 
+
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = 3000;
 const saltRounds = 10;
+
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended:true}))
 
 const db = new pg.Client({
     user: "postgres",
@@ -20,8 +24,6 @@ const db = new pg.Client({
 
 db.connect();
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended:true}))
 
 app.get("/signup", (req, res)=>{
     res.render(__dirname + "/views/signup.ejs")
@@ -29,6 +31,8 @@ app.get("/signup", (req, res)=>{
 app.get("/", (req, res)=>{
     res.render(__dirname + "/views/login.ejs"); 
 })
+
+
 
 app.post('/', async (req, res) => {
     const email = req.body.email;
@@ -44,16 +48,16 @@ app.post('/', async (req, res) => {
                     console.log("Error comparing passwords: ", err)
                 else{
                     if(result){
-                        res.render("home.ejs");
+                        res.render(__dirname + "/views/home.ejs");
                     }
                     else{
-                        res.render("login.ejs", {error: "Invalid Password"});
+                        res.render(__dirname + "/views/login.ejs", {error: "Invalid Password"});
                     }
                 }
             })
         }
         else{
-            res.render("login.ejs", {error: "No Account Associated with that Email"});
+            res.render(__dirname + "/views/login.ejs", {error: "No Account Associated with that Email"});
         }
     }catch(error){
         console.error("Error occured when trying to login");
@@ -71,7 +75,7 @@ app.post('/signup', async (req, res) => {
         const checkResult = await db.query(`SELECT * FROM users WHERE users.email = $1`, [email]);
 
         if (checkResult.rows.length > 0) {
-            res.render("signup.ejs", { error: "This email is already associated with an account" });
+            res.render(__dirname + "/views/signup.ejs", { error: "This email is already associated with an account" });
         } else {
             bcrypt.hash(password, saltRounds, async (err, hash) =>{
                 if(err)
@@ -79,7 +83,7 @@ app.post('/signup', async (req, res) => {
                 else{
                     const result = await db.query('INSERT INTO users VALUES ($1, $2, $3, $4)', [first, last, email, hash]);
                     console.log(result);
-                    res.render('home.ejs');
+                    res.render(__dirname + "/views/home.ejs");
                 }
 
             })
@@ -87,7 +91,7 @@ app.post('/signup', async (req, res) => {
         }
     } catch (error) {
         console.error('Error checking email existence:', error);
-        res.render("signup.ejs", { error: "An error occurred. Please try again later." });
+        res.render(__dirname + "/views/login.ejs", { error: "An error occurred. Please try again later." });
     }
 
     
