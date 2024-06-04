@@ -16,11 +16,13 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}))
 
 const db = new pg.Client({
-    user: "postgres",
-    password: "7865768083Aa*",
-    host: "localhost",
-    port: "5432"}
-)
+    user: 'AlejandroMorales',
+    password: 'Ihoenys2024*',
+    host: 'parkeasy.postgres.database.azure.com',
+    port: 5432,
+    database: 'ParkEasyAz',
+    ssl: true 
+});
 
 db.connect();
 
@@ -42,7 +44,7 @@ app.post('/', async (req, res) => {
         const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
         if(checkResult.rows.length > 0){
-            const storedPassword = checkResult.rows[0].hash;
+            const storedPassword = checkResult.rows[0].password;
             bcrypt.compare(loginPassword, storedPassword, (err, result) =>{
                 if(err)
                     console.log("Error comparing passwords: ", err)
