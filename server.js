@@ -83,7 +83,7 @@ app.post('/signup', async (req, res) => {
                 if(err)
                     console.log("Error hashing: ", err);
                 else{
-                    const result = await db.query('INSERT INTO users VALUES ($1, $2, $3, $4)', [first, last, email, hash]);
+                    const result = await db.query('INSERT INTO users VALUES ($1, $2, $3, $4)', [first, last, email, password]);
                     console.log(result);
                     res.render(__dirname + "/views/home.ejs");
                 }
