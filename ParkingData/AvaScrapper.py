@@ -17,7 +17,7 @@ conn = psycopg2.connect(conn_string)
 print("Connection established")
 
 def scrape_and_save_data():
-    driver = webdriver.Chrome()  # Change this to Firefox or other if needed
+    driver = webdriver.Chrome() 
     driver.get('https://parking.fiu.edu')
 
     try:
@@ -49,6 +49,6 @@ def scrape_and_save_data():
         cursor.close()
         conn.close()
 
-    time.sleep(60)  # Sleep for 60 seconds before running again
+    time.sleep(60)
 
 scrape_and_save_data()
