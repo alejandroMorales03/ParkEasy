@@ -1,19 +1,19 @@
 import bodyParser from "body-parser";
-import express from "express"
-import {dirname} from "path"
-import {fileURLToPath} from "url"
-import pg from  "pg"
-import bcrypt from "bcrypt"
-
+import express from "express";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import pg from "pg";
+import bcrypt from "bcrypt";
+import { exec } from 'child_process';
+import { CronJob } from 'cron';
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = 3000;
 const saltRounds = 10;
 
-
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = new pg.Client({
     user: 'AlejandroMorales',
@@ -21,10 +21,33 @@ const db = new pg.Client({
     host: 'parkeasy.postgres.database.azure.com',
     port: 5432,
     database: 'ParkEasyAz',
-    ssl: true 
+    ssl: true
 });
 
 db.connect();
+
+const runPythonScraper = () => {
+    exec('python3 ParkingData/AvaScrapper.py', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing scraper: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`Scraper stderr: ${stderr}`);
+            return;
+        }
+        console.log(`Scraper stdout: ${stdout}`);
+    });
+};
+
+
+const job = new CronJob('*/5 * * * *', () => {
+    console.log('Running Python scraper...');
+    runPythonScraper();
+});
+
+
+job.start();
 
 
 app.get("/signup", (req, res)=>{
@@ -83,7 +106,7 @@ app.post('/signup', async (req, res) => {
                 if(err)
                     console.log("Error hashing: ", err);
                 else{
-                    const result = await db.query('INSERT INTO users VALUES ($1, $2, $3, $4)', [first, last, email, password]);
+                    const result = await db.query('INSERT INTO users VALUES ($1, $2, $3, $4)', [first, last, email, hash]);
                     console.log(result);
                     res.render(__dirname + "/views/home.ejs");
                 }

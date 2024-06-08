@@ -9,3 +9,5 @@ node_modules/
 
 # Lock files
 package-lock.json
+
+.vscode/settings.json
