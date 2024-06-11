@@ -14,6 +14,7 @@ const saltRounds = 10;
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const db = new pg.Client({
     user: 'AlejandroMorales',
@@ -40,61 +41,57 @@ const runPythonScraper = () => {
     });
 };
 
-
 const job = new CronJob('*/5 * * * *', () => {
     console.log('Running Python scraper...');
     runPythonScraper();
 });
 
-
 job.start();
 
-
-app.get("/signup", (req, res)=>{
+app.get("/signup", (req, res) => {
     res.render(__dirname + "/views/signup.ejs")
-})
-app.get("/", (req, res)=>{
-    res.render(__dirname + "/views/login.ejs"); 
-})
+});
 
-
+app.get("/", (req, res) => {
+    const { error } = req.query;
+    res.render(__dirname + "/views/login.ejs", { error });
+});
 
 app.post('/', async (req, res) => {
-    const email = req.body.email;
-    const loginPassword = req.body.password;
+    const { email, password, latitude, longitude } = req.body;
 
-    try{
+    try {
         const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
-        if(checkResult.rows.length > 0){
+        if (checkResult.rows.length > 0) {
             const storedPassword = checkResult.rows[0].password;
-            bcrypt.compare(loginPassword, storedPassword, (err, result) =>{
-                if(err)
-                    console.log("Error comparing passwords: ", err)
-                else{
-                    if(result){
+            bcrypt.compare(password, storedPassword, async (err, result) => {
+                if (err) {
+                    console.log("Error comparing passwords: ", err);
+                    res.redirect('/?error=login_error');
+                } else {
+                    if (result) {
+                        
+                        const updateResult = await db.query("UPDATE users SET lat = $1, log = $2 WHERE email = $3", [latitude, longitude, email]);
+                        console.log("Latitude and longitude updated successfully");
+
                         res.render(__dirname + "/views/home.ejs");
-                    }
-                    else{
-                        res.render(__dirname + "/views/login.ejs", {error: "Invalid Password"});
+                    } else {
+                        res.redirect('/?error=invalid_password');
                     }
                 }
-            })
+            });
+        } else {
+            res.redirect('/?error=no_account');
         }
-        else{
-            res.render(__dirname + "/views/login.ejs", {error: "No Account Associated with that Email"});
-        }
-    }catch(error){
-        console.error("Error occured when trying to login");
+    } catch (error) {
+        console.error("Error occurred when trying to login:", error);
+        res.redirect('/?error=login_error');
     }
 });
 
-
 app.post('/signup', async (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    const first = req.body.first;
-    const last = req.body.last;
+    const { email, password, first, last, latitude, longitude } = req.body;
 
     try {
         const checkResult = await db.query(`SELECT * FROM users WHERE users.email = $1`, [email]);
@@ -102,24 +99,23 @@ app.post('/signup', async (req, res) => {
         if (checkResult.rows.length > 0) {
             res.render(__dirname + "/views/signup.ejs", { error: "This email is already associated with an account" });
         } else {
-            bcrypt.hash(password, saltRounds, async (err, hash) =>{
-                if(err)
+            bcrypt.hash(password, saltRounds, async (err, hash) => {
+                if (err) {
                     console.log("Error hashing: ", err);
-                else{
-                    const result = await db.query('INSERT INTO users VALUES ($1, $2, $3, $4)', [first, last, email, hash]);
+                    res.redirect('/?error=signup_error');
+                } else {
+           
+                    const result = await db.query('INSERT INTO users VALUES ($1, $2, $3, $4, $5, $6)', [first, last, email, hash, latitude, longitude]);
                     console.log(result);
                     res.render(__dirname + "/views/home.ejs");
                 }
-
-            })
-            
+            });
         }
     } catch (error) {
         console.error('Error checking email existence:', error);
-        res.render(__dirname + "/views/login.ejs", { error: "An error occurred. Please try again later." });
+        res.redirect('/?error=signup_error');
     }
-
-    
 });
+
 
 app.listen(3000);
