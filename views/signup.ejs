@@ -1,75 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/signup.css" />
     <title>Sign Up Form</title>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <div class="heading">
-        <div class="title">ParkEasy</div>
-        <img class="logo" src="/logo.jpg" alt="Logo" />
-      </div>
+        <div class="heading">
+            <div class="title">ParkEasy</div>
+            <img class="logo" src="/logo.jpg" alt="Logo" />
+        </div>
 
-      <div class="sign-up-form">
-        <form method="post">
-          <div class="form-group">
-            <label for="first">First Name</label>
-            <input
-              type="text"
-              id="first"
-              name="first"
-              placeholder="First Name"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="last">Last Name</label>
-            <input
-              type="text"
-              id="last"
-              name="last"
-              placeholder="Last Name"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email Address"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="email">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <input type="submit" value="Sign Up" />
-          </div>
-          <div clas="login">
-            <a href="/">Log In</a>
-          </div>
-          <div class="error">
-            <% if(locals.error){ %>
-              <%= error %>
-              <% } %>
-          </div>
-        </form>
-      </div>
+        <div class="sign-up-form">
+            <form id="signupForm" method="post">
+                <div class="form-group">
+                    <label for="first">First Name</label>
+                    <input
+                        type="text"
+                        id="first"
+                        name="first"
+                        placeholder="First Name"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="last">Last Name</label>
+                    <input
+                        type="text"
+                        id="last"
+                        name="last"
+                        placeholder="Last Name"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email Address"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                    />
+                </div>
+                <!-- Hidden fields for latitude and longitude -->
+                <input type="hidden" id="latitude" name="latitude" />
+                <input type="hidden" id="longitude" name="longitude" />
+                <div class="form-group">
+                    <input type="button" value="Sign Up" onclick="getLocationAndSubmit()" />
+                </div>
+                <div class="login">
+                    <a href="/">Log In</a>
+                </div>
+                <div class="error">
+                    <% if(locals.error){ %>
+                        <%= error %>
+                    <% } %>
+                </div>
+            </form>
+        </div>
     </div>
-  </body>
+
+    <script>
+        function getLocationAndSubmit() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    document.getElementById('latitude').value = latitude;
+                    document.getElementById('longitude').value = longitude;
+                    // Submit the form after getting location
+                    document.getElementById('signupForm').submit();
+                }, function(error) {
+                    console.error('Error getting location:', error);
+                    alert('This application requires location access.');
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+    </script>
+</body>
 </html>
 
 

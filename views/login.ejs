@@ -1,44 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/login.css" />
     <title>ParkEasy Log In</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="heading">
-        <div class="title">ParkEasy</div>
-        <img class="logo" src="/logo.jpg" alt="Logo" />
-      </div>
+    <script>
+        function getLocationAndSubmit() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    document.getElementById('latitude').value = latitude;
+                    document.getElementById('longitude').value = longitude;
+       
+                    document.getElementById('loginForm').submit();
+                }, function(error) {
+                    console.error('Error getting location:', error);
 
-      <div class="login-form">
-        <form method="post">
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" name="email" id="email" placeholder="Email Address" />
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <span>
-            <input type="password" name="password" id="password" placeholder="Password" />
-            
-            </span>
-          </div>
-          <div class="form-group">
-            <input type="submit" name="login" id="login" value="Log In"/>
-          </div>
-          <div clas="signup">
-            <a href="/signup">Sign Up</a>
-          </div>
-          <div class="error">
-            <% if(locals.error){ %>
-              <%= error %>
-            <%  }%>
-          </div>
-        </form>
-      </div>
+                    document.getElementById('error').innerText = 'Error: This application requires location access.';
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+
+                document.getElementById('error').innerText = 'Error: Geolocation is not supported by this browser.';
+            }
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+
+                event.preventDefault();
+                getLocationAndSubmit();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">
+            <div class="title">ParkEasy</div>
+            <img class="logo" src="/logo.jpg" alt="Logo" />
+        </div>
+
+        <div class="login-form">
+            <form id="loginForm" method="post">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" id="email" placeholder="Email Address" required />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" required />
+                </div>
+
+                <input type="hidden" name="latitude" id="latitude" />
+                <input type="hidden" name="longitude" id="longitude" />
+                <div class="form-group">
+                    <input type="submit" name="login" id="login" value="Log In" />
+                </div>
+                <div clas="signup">
+                    <a href="/signup">Sign Up</a>
+                </div>
+                <div class="error" id="error">
+                    <% if(locals.error){ %>
+                    <%= error %>
+                    <%  }%>
+                </div>
+            </form>
+        </div>
     </div>
-  </body>
+</body>
 </html>
