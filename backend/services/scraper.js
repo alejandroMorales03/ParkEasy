@@ -1,3 +1,5 @@
+import exec from 'child_process'
+
 const runPythonScraper = () => {
     exec('python3 parkingUpdate.py', (error, stdout, stderr) => {
         if (error) {
@@ -12,9 +14,4 @@ const runPythonScraper = () => {
     });
 };
 
-const job = new CronJob('*/5 * * * *', () => {
-    console.log('Running Python scraper...');
-    runPythonScraper();
-});
-
-job.start();
+module.exports = runPythonScraper;
