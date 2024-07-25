@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import loginStyle from '../Styles/loginStyle';
-import {COLORS} from '../Constants/Constants'
 import { useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import { COLORS } from '../Constants/constants';
 
 
 

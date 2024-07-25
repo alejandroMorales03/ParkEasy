@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import {COLORS, SIZES} from "../Constants/Constants"
+import {COLORS, SIZES} from "../Constants/constants"
 const loginStyle = StyleSheet.create({
     container:{
         flex: 1,
@@ -15,8 +15,8 @@ const loginStyle = StyleSheet.create({
     },
 
     inputConatiner:{
-        flexDirection: 'row', // Arrange items horizontally
-        alignItems: 'center', // Align items vertically in center
+        flexDirection: 'row',
+        alignItems: 'center', 
         marginBottom: 20, 
         
     },
