@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import {COLORS, SIZES} from "../Constants/constants"
+import {COLORS, SIZES} from "../Constants/Constants"
 const loginStyle = StyleSheet.create({
     container:{
         flex: 1,
@@ -14,7 +14,7 @@ const loginStyle = StyleSheet.create({
         width: SIZES.FORM_WIDTH,
     },
 
-    inputConatiner:{
+    inputContainer:{
         flexDirection: 'row',
         alignItems: 'center', 
         marginBottom: 20, 
@@ -28,7 +28,6 @@ const loginStyle = StyleSheet.create({
         color: COLORS.INPUT_FONT_COLOR,
         fontSize: 16,
         paddingHorizontal: 10,
-        borderBottomWidth: 1, 
         borderBottomColor: COLORS.INPUT_FONT_COLOR, 
         marginHorizontal: 20,
         marginTop:10,

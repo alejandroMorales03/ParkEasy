@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import loginStyle from '../Styles/loginStyle';
 import { useState } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
-import { COLORS } from '../Constants/constants';
+import LinearGradient from 'react-native-linear-gradient'; //TODO check this gradient
+// import { COLORS } from '../Constants/Constants';
 
 
 
-
-const LoginForm = () => {
+// send the info to the server (connection between frontend and backend)
+function LoginForm(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -21,7 +21,7 @@ const LoginForm = () => {
   return (
     <LinearGradient colors={['#23443B', '#11665F', '#50DACB', '#BCABAE', '#C9C5CB', '#C8D4EC']} style={loginStyle.container}>
         <View style={loginStyle.form}>
-            <View style={loginStyle.inputConatiner}>
+            <View style={loginStyle.inputContainer}>
                 <TextInput style={loginStyle.input}
                            placeholder='Email Address'
                            keyboardType='email-address'
@@ -33,7 +33,7 @@ const LoginForm = () => {
                             
                 </TextInput>
             </View>
-            <View style={loginStyle.inputConatiner}>
+            <View style={loginStyle.inputContainer}>
                 <TextInput style={loginStyle.input}
                            placeholder='Password'
                            secureTextEntry={true}
@@ -53,7 +53,7 @@ const LoginForm = () => {
         </View>
 
     </LinearGradient>
-    
+
   );
 };
 
