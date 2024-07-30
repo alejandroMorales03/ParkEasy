@@ -7,13 +7,21 @@ import LoginForm from "../Components/LoginForm";
 function App() {
     return (
         <>
-            <Text>This is text</Text>
+            <Text>This not is text</Text>
             <LoginForm />
         </>
 
     );
 }
 
+function LoginBox(){
+    return(
+        <>
+            <div>
 
+            </div>
+        </>
+    )
+}
 
 export default App;
