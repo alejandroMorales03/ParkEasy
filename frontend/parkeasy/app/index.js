@@ -1,8 +1,18 @@
-import LoginForm from "../Components/LoginForm"
+// src/App.js
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import LoginForm from '../Components/LoginForm';
 
-const app = () => {
-    <LoginForm>
-        
-    </LoginForm>
+import { useState } from 'react';
 
+
+const App = () => {
+    return (
+        <View>
+            <Text>Welcome to ParkEasy</Text>
+            <LoginForm />
+        </View>
+    );
 }
+export default App;
+

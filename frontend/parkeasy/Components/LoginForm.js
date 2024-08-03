@@ -1,60 +1,58 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import loginStyle from '../Styles/loginStyle';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView} from 'react-native';
 import { useState } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
-import { COLORS } from '../Constants/constants';
+import LoginStyle from '../Styles/LoginStyle';
+import loginStyle from "../Styles/LoginStyle";
 
+const LoginForm = (props) => {
 
+    const [email, setEmail] = React.useState(''); // this is used to keep the block empty to add emails
+    const [password, setPassword] = React.useState(''); // this is used to keep the password
 
+    // testing with console log
 
-const LoginForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    function handleLogin(){
+        console.log("Email: " ,email);
+        console.log("Password: " ,password);
+    }
 
-    const handleLogin = () => {
-        
-        console.log('Email:', email);
-        console.log('Password:', password);
-      };
-    
-  return (
-    <LinearGradient colors={['#23443B', '#11665F', '#50DACB', '#BCABAE', '#C9C5CB', '#C8D4EC']} style={loginStyle.container}>
-        <View style={loginStyle.form}>
-            <View style={loginStyle.inputConatiner}>
-                <TextInput style={loginStyle.input}
-                           placeholder='Email Address'
-                           keyboardType='email-address'
-                           autoCapitalize='none'
-                           autoCorrect={false}
-                           onChange={setEmail}
-                           value={email}>
-                
-                            
-                </TextInput>
-            </View>
-            <View style={loginStyle.inputConatiner}>
-                <TextInput style={loginStyle.input}
-                           placeholder='Password'
-                           secureTextEntry={true}
-                           onChange={setPassword}
-                           value={password}>
-                    
-                </TextInput>
-            </View>
+    return (
+        <SafeAreaView>
+            <View style={loginStyle.container}>
+                <View style = {loginStyle.loginBoxContainer}>
+                    <Text style={
+                        loginStyle.mainTitleFont
+                    }>Login</Text>
 
-            <View>
-                <TouchableOpacity style={loginStyle.button}>
-                    <Text>Login</Text>
-                </TouchableOpacity>
+                    {/*This is the email input*/}
+                    <TextInput
+                        placeholder="Email"
+                        type="email"
+                        value={email}
+                        // onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                    {/*This is the Password Input*/}
+                    <TextInput
+                        placeholder="Password"
+                        type="password"
+                        value={password}
+                        // onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                </View>
             </View>
 
 
-        </View>
+        </SafeAreaView>
 
-    </LinearGradient>
-    
-  );
-};
+    )
+
+
+}
 
 export default LoginForm;
+
+// send the info to the server (connection between frontend and backend)
+
+
