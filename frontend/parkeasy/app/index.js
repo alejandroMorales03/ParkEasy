@@ -1,27 +1,18 @@
 // src/App.js
 import React from 'react';
-import {Text} from 'react-native';
-import LoginForm from "../Components/LoginForm";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import LoginForm from '../Components/LoginForm';
+
+import { useState } from 'react';
 
 
-function App() {
+const App = () => {
     return (
-        <>
-            <Text>This not is text</Text>
+        <View>
+            <Text>Welcome to ParkEasy</Text>
             <LoginForm />
-        </>
-
+        </View>
     );
 }
-
-function LoginBox(){
-    return(
-        <>
-            <div>
-
-            </div>
-        </>
-    )
-}
-
 export default App;
+

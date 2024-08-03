@@ -1,14 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import loginCSS from '../Styles/loginCSS';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView} from 'react-native';
 import { useState } from 'react';
+import LoginStyle from '../Styles/LoginStyle';
+import loginStyle from "../Styles/LoginStyle";
 
-// import LinearGradient from 'react-native-linear-gradient'; //TODO check this gradient
-// import { COLORS } from '../Constants/Constants';
+const LoginForm = (props) => {
 
-function LoginForm(props) {
-
-    const [email, setEmail] = React.useState(''); // this is used to keep the block empty to add a emails
+    const [email, setEmail] = React.useState(''); // this is used to keep the block empty to add emails
     const [password, setPassword] = React.useState(''); // this is used to keep the password
 
     // testing with console log
@@ -18,15 +16,42 @@ function LoginForm(props) {
         console.log("Password: " ,password);
     }
 
-
     return (
-        <View className ="LoginBox" >
+        <SafeAreaView>
+            <View style={loginStyle.container}>
+                <View style = {loginStyle.loginBoxContainer}>
+                    <Text style={
+                        loginStyle.mainTitleFont
+                    }>Login</Text>
 
-        </View>
+                    {/*This is the email input*/}
+                    <TextInput
+                        placeholder="Email"
+                        type="email"
+                        value={email}
+                        // onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                    {/*This is the Password Input*/}
+                    <TextInput
+                        placeholder="Password"
+                        type="password"
+                        value={password}
+                        // onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                </View>
+            </View>
+
+
+        </SafeAreaView>
+
     )
 
 
 }
+
+export default LoginForm;
 
 // send the info to the server (connection between frontend and backend)
 
