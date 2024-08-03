@@ -7,6 +7,7 @@ export const COLORS =  {
     CaribbeanGreen: '#037171',
     LightSeaGreen: '#00B9AE',
     White: '#FFFFFF',
+    Grey: '#a5a5a5',
     Black: '#000000',
 
     // Primary Color Palette
@@ -24,7 +25,6 @@ export const FONT = {
 
     FontColorPrimaryContainer: COLORS.White,
     FontColorSecondaryContainer: COLORS.Black,
-
 
 }
 

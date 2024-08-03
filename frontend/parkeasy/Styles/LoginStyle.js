@@ -3,14 +3,19 @@ import { COLORS , SIZES, FONT, CONTAINERS } from '../Constants/Constants'
 
 const LoginStyle = StyleSheet.create({
     loginPageContainer: {
+
+        justifyContent: 'center',
+        alignItems: 'center',
         height: '100%',
         width: '100%',
     },
 
     loginBoxContainer: {
-        padding: 60,
+
+        borderRadius: 30,
+        padding: 40,
         width: '75%',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'column',
         backgroundColor: CONTAINERS.PrimaryColorContainer,
@@ -21,17 +26,20 @@ const LoginStyle = StyleSheet.create({
         fontSize: SIZES.medium,
         fontWeight: 'bold',
         color: COLORS.White
-
     },
 
-    loginFontContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        color: COLORS.White,
+    input: {
+        height: 40,
+        width: '100%',
+        borderColor: COLORS.Black,
+        borderWidth: 1,
+        borderRadius: 10,
+        paddingHorizontal: 10,
+        marginVertical: 10,
+        color: COLORS.Black,
+        backgroundColor: COLORS.White,
 
     }
-
 })
 
 export default LoginStyle;

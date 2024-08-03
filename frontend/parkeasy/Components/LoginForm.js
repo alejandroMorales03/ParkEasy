@@ -3,6 +3,7 @@ import {View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView} from 
 import { useState } from 'react';
 import LoginStyle from '../Styles/LoginStyle';
 import loginStyle from "../Styles/LoginStyle";
+import {COLORS} from "../Constants/Constants";
 
 const LoginForm = (props) => {
 
@@ -18,7 +19,7 @@ const LoginForm = (props) => {
 
     return (
         <SafeAreaView>
-            <View style={loginStyle.container}>
+            <View style={loginStyle.loginPageContainer}>
                 <View style = {loginStyle.loginBoxContainer}>
                     <Text style={
                         loginStyle.mainTitleFont
@@ -29,6 +30,9 @@ const LoginForm = (props) => {
                         placeholder="Email"
                         type="email"
                         value={email}
+                        onChangeText={setEmail}
+                        style={loginStyle.input}
+                        placeholderTextColor={COLORS.Grey}
                         // onChange={(e) => setEmail(e.target.value)}
                     />
 
@@ -37,6 +41,9 @@ const LoginForm = (props) => {
                         placeholder="Password"
                         type="password"
                         value={password}
+                        onChangeText={setPassword}
+                        style={loginStyle.input}
+                        placeholderTextColor={COLORS.Grey}
                         // onChange={(e) => setEmail(e.target.value)}
                     />
 
