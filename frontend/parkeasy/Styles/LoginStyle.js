@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { COLORS , SIZES, FONT, CONTAINERS } from '../Constants/Constants'
 
 const LoginStyle = StyleSheet.create({
+    mainTitle:{
+        fontSize: 30,
+    }
     loginPageContainer: {
 
         justifyContent: 'center',
@@ -40,6 +43,7 @@ const LoginStyle = StyleSheet.create({
         backgroundColor: COLORS.White,
 
     }
+
 })
 
 export default LoginStyle;

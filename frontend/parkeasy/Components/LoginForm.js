@@ -20,6 +20,7 @@ const LoginForm = (props) => {
     return (
         <SafeAreaView>
             <View style={loginStyle.loginPageContainer}>
+                <Text style={loginStyle.mainTitle}>ParkEasy</Text>
                 <View style = {loginStyle.loginBoxContainer}>
                     <Text style={
                         loginStyle.mainTitleFont
