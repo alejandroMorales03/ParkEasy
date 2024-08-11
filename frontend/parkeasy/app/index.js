@@ -9,7 +9,6 @@ import { useState } from 'react';
 const App = () => {
     return (
         <View>
-            <Text>Welcome to ParkEasy</Text>
             <LoginForm />
         </View>
     );
