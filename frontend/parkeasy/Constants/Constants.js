@@ -7,6 +7,7 @@ export const COLORS =  {
     CaribbeanGreen: '#037171',
     LightSeaGreen: '#00B9AE',
     White: '#FFFFFF',
+    Grey: '#a5a5a5',
     Black: '#000000',
 
     // Primary Color Palette
@@ -25,19 +26,19 @@ export const FONT = {
     FontColorPrimaryContainer: COLORS.White,
     FontColorSecondaryContainer: COLORS.Black,
 
-
 }
 
 export const SIZES = {
-
 
     FORM_WIDTH: '80%',
 
     // font sizes TODO research for correct sizes in a default app
 
-    small: '10px',
+    extraSmall: '10px',
+    small: '20px',
     medium: '30px',
     large: '50px',
+    extraLarge: '60px',
 
 }
 
@@ -52,6 +53,7 @@ export const CONTAINERS = {
 
 export const BUTTON= {
 
+    ButtonPrimaryBackgroundColor: COLORS.LightSeaGreen,
     BUTTON_COLOR_UNPRESSED: COLORS.DarkGreen
 }
  

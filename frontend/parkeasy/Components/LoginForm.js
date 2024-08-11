@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView} from 'react-native';
-import { useState } from 'react';
-import LoginStyle from '../Styles/LoginStyle';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Image} from 'react-native';
 import loginStyle from "../Styles/LoginStyle";
+import {COLORS} from "../Constants/Constants";
+import imageLogo from "../assets/LogoParkEasyTrans.png";
 
 const LoginForm = (props) => {
 
@@ -12,47 +12,65 @@ const LoginForm = (props) => {
     // testing with console log
 
     function handleLogin(){
-        console.log("Email: " ,email);
-        console.log("Password: " ,password);
+        console.log("Email: ", email);
+        console.log("Password: ", password);
     }
 
     return (
         <SafeAreaView>
-            <View style={loginStyle.container}>
-                <View style = {loginStyle.loginBoxContainer}>
-                    <Text style={
-                        loginStyle.mainTitleFont
-                    }>Login</Text>
+            <View style={loginStyle.loginPageContainer}>
+                {/*<Text style={loginStyle.mainTitle}>ParkEasy</Text>*/}
 
-                    {/*This is the email input*/}
+                <Image source={imageLogo} style={loginStyle.imageLogo} />
+
+
+                <View style={loginStyle.loginBoxContainer}>
+
+                    {/* This is the email input */}
+
                     <TextInput
                         placeholder="Email"
                         type="email"
                         value={email}
-                        // onChange={(e) => setEmail(e.target.value)}
+                        onChangeText={setEmail}
+                        style={loginStyle.input}
+                        placeholderTextColor={COLORS.Grey}
                     />
 
-                    {/*This is the Password Input*/}
+                    {/* This is the Password Input */}
+
                     <TextInput
                         placeholder="Password"
                         type="password"
                         value={password}
-                        // onChange={(e) => setEmail(e.target.value)}
+                        onChangeText={setPassword}
+                        style={loginStyle.input}
+                        placeholderTextColor={COLORS.Grey}
                     />
 
+                    {/* Login Button */}
+
+                    <TouchableOpacity onPress={handleLogin} style={loginStyle.button}>
+                        <Text style={loginStyle.buttonText}>Login</Text>
+                    </TouchableOpacity>
+
+                    {/* Forgot Password and Sign Up Links */}
                 </View>
+
+                {/* Links Container */}
+                <View style={loginStyle.linksContainer}>
+                    <TouchableOpacity>
+                        <Text style={loginStyle.bottomLinks}>Forgot Password</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity>
+                        <Text style={loginStyle.bottomLinks}>Sign Up</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
-
-
         </SafeAreaView>
-
-    )
-
-
-}
+    );
+};
 
 export default LoginForm;
-
-// send the info to the server (connection between frontend and backend)
-
-
