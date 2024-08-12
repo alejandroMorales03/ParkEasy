@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Image} from 'react-native';
-import loginStyle from "../Styles/LoginStyle";
+import Style from "../Styles/CredentialsStyle";
 import {COLORS} from "../Constants/Constants";
 import imageLogo from "../assets/LogoParkEasyTrans.png";
+import ForgetPassForm from "./ForgetPassForm";
 
-const LoginForm = (props) => {
+const LoginForm = ({ navigation }) => {
 
     const [email, setEmail] = React.useState(''); // this is used to keep the block empty to add emails
     const [password, setPassword] = React.useState(''); // this is used to keep the password
@@ -18,13 +19,13 @@ const LoginForm = (props) => {
 
     return (
         <SafeAreaView>
-            <View style={loginStyle.loginPageContainer}>
+            <View style={Style.loginPageContainer}>
                 {/*<Text style={loginStyle.mainTitle}>ParkEasy</Text>*/}
 
-                <Image source={imageLogo} style={loginStyle.imageLogo} />
+                <Image source={imageLogo} style={Style.imageLogo} />
 
 
-                <View style={loginStyle.loginBoxContainer}>
+                <View style={Style.loginBoxContainer}>
 
                     {/* This is the email input */}
 
@@ -33,8 +34,10 @@ const LoginForm = (props) => {
                         type="email"
                         value={email}
                         onChangeText={setEmail}
-                        style={loginStyle.input}
+                        style={Style.input}
                         placeholderTextColor={COLORS.Grey}
+                        autoFocus={true}
+                        autoCapitalize="none"
                     />
 
                     {/* This is the Password Input */}
@@ -44,27 +47,31 @@ const LoginForm = (props) => {
                         type="password"
                         value={password}
                         onChangeText={setPassword}
-                        style={loginStyle.input}
+                        style={Style.input}
                         placeholderTextColor={COLORS.Grey}
+                        secureTextEntry
+                        autoFocus={true}
+                        autoCapitalize="none"
                     />
 
                     {/* Login Button */}
 
-                    <TouchableOpacity onPress={handleLogin} style={loginStyle.button}>
-                        <Text style={loginStyle.buttonText}>Login</Text>
+                    <TouchableOpacity onPress={handleLogin} style={Style.button}>
+                        <Text style={Style.buttonText}>Login</Text>
                     </TouchableOpacity>
 
                     {/* Forgot Password and Sign Up Links */}
                 </View>
 
                 {/* Links Container */}
-                <View style={loginStyle.linksContainer}>
-                    <TouchableOpacity>
-                        <Text style={loginStyle.bottomLinks}>Forgot Password</Text>
+                <View style={Style.linksContainer}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Forget Password')} >
+                        <Text style={Style.bottomLinks}>Forgot Password</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity>
-                        <Text style={loginStyle.bottomLinks}>Sign Up</Text>
+                    {/*TODO once the sign up page is done we can add it to the stack navigation*/}
+                    <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
+                        <Text style={Style.bottomLinks}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
 
