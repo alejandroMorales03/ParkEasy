@@ -1,17 +1,38 @@
-// src/App.js
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import LoginForm from '../Components/LoginForm';
+import ForgetPassForm from '../Components/ForgetPassForm';
+import SignUpForm from "../Components/SignUpForm";
 
-import { useState } from 'react';
+const Stack = createStackNavigator();
 
+// This is used to create the stack navigation
+const CredentialsStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="LoginPage"
+                         screenOptions={{
+                             headerShown: false,
+                             ...TransitionPresets.ModalFadeTransition  // Apply fade transition (selected by method)
+                         }}>
+
+            <Stack.Screen name="Login" component={LoginForm}
+                          options={{ headerShown: false}} />
+            <Stack.Screen name="Forget Password" component={ForgetPassForm}
+                          options={{ headerShown: false}} />
+            <Stack.Screen name="Sign Up" component={SignUpForm}
+                          options={{ headerShown: false}} />
+
+        </Stack.Navigator>
+    );
+};
 
 const App = () => {
     return (
-        <View>
-            <LoginForm />
-        </View>
+        <NavigationContainer independent={true}>
+            <CredentialsStack />
+        </NavigationContainer>
     );
-}
-export default App;
+};
 
+export default App;

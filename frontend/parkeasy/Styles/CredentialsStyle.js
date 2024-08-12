@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { COLORS , SIZES, FONT, CONTAINERS, BUTTON } from '../Constants/Constants'
 
-const LoginStyle= StyleSheet.create({
+const CredentialsStyle= StyleSheet.create({
 
     mainTitle:{
         fontSize: SIZES.extraLarge,
+        textAlign: 'center',
     },
 
     loginPageContainer: {
@@ -65,7 +66,7 @@ const LoginStyle= StyleSheet.create({
 
     bottomLinks: {
         color: COLORS.PersianGreen,
-        marginVertical: 5, // Adjust this value for closer spacing
+        marginVertical: 10, // Adjust this value for closer spacing
     },
 
     imageLogo: {
@@ -76,4 +77,4 @@ const LoginStyle= StyleSheet.create({
 
 })
 
-export default LoginStyle;
+export default CredentialsStyle;
