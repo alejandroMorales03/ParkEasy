@@ -13,7 +13,7 @@ const CredentialsStack = () => {
         <Stack.Navigator initialRouteName="LoginPage"
                          screenOptions={{
                              headerShown: false,
-                             ...TransitionPresets.ModalFadeTransition  // Apply fade transition (selected by method)
+                             ...TransitionPresets.ModalSlideFromBottomIOS  // Apply fade transition (selected by method)
                          }}>
 
             <Stack.Screen name="Login" component={LoginForm}
