@@ -28,11 +28,13 @@ const ForgetPassForm = ({ navigation }) => {
         <SafeAreaView>
             <View style={Style.loginPageContainer}>
                 <Text style={Style.mainTitle}>
+
                     {/*Condition of title when code is sent*/}
+
                     {isCodeSent ? "Enter Verification Code" : "Forgot Password"}
 
                 </Text>
-                <View style={Style.loginBoxContainer}>
+                <View style={Style.credentialsContainer}>
                     {!isCodeSent ? ( // condition for the code sent
                         // Email input and send code button
                         <>
@@ -74,10 +76,13 @@ const ForgetPassForm = ({ navigation }) => {
                         </>
                     )}
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={Style.bottomLinks}>Back</Text>
-                </TouchableOpacity>
-            </View>
+                <View style={Style.linksContainer}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                        <Text style={Style.bottomLinks}>Back</Text>
+                    </TouchableOpacity>
+                </View>
+
+                </View>
         </SafeAreaView>
     );
 };

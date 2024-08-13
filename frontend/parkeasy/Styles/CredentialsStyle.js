@@ -5,24 +5,23 @@ const CredentialsStyle= StyleSheet.create({
 
     mainTitle:{
         fontSize: SIZES.extraLarge,
-        textAlign: 'center',
+        fontWeight:'bold',
     },
 
     loginPageContainer: {
         justifyContent: 'space-evenly',
-        alignItems: 'center',
+        padding: 10,
         height: '100%',
         width: '100%',
     },
 
-    loginBoxContainer: {
+    credentialsContainer: {
         borderRadius: 30,
         padding: 20,
-        width: '75%',
+        width: '100%',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
         flexDirection: 'column',
-        backgroundColor: CONTAINERS.PrimaryColorContainer,
+        // backgroundColor: CONTAINERS.PrimaryColorContainer,
     },
 
     mainTitleFont: {
@@ -32,15 +31,16 @@ const CredentialsStyle= StyleSheet.create({
     },
 
     input: {
+        flex: 1,
         height: 40,
         width: '100%',
-        borderColor: COLORS.Black,
+        borderColor: COLORS.Transparent,
+        borderBottomColor: COLORS.Grey,
         borderWidth: 1,
-        borderRadius: 10,
+        // borderRadius: 10,
         paddingHorizontal: 10,
         marginVertical: 10,
         color: COLORS.Black,
-        backgroundColor: COLORS.White,
 
     },
 
@@ -73,7 +73,22 @@ const CredentialsStyle= StyleSheet.create({
         width: 180, // Adjust size as needed
         height: 180, // Adjust size as needed
         resizeMode: 'contain', // Keeps aspect ratio
+        alignSelf: 'center',
     },
+
+    fieldCredential: {
+        flexDirection: 'row',
+        alignItems: 'center', // Aligns input and icon vertically centered
+        marginVertical: 2, // Adds spacing between input fields
+    },
+
+    icons: {
+        width: 20,
+        height: 20,
+        resizeMode: 'contain',
+        alignItems: 'center',
+        marginLeft: 5,
+    }
 
 })
 

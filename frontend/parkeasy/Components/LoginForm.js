@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Image} from 'react-native';
 import Style from "../Styles/CredentialsStyle";
 import {COLORS} from "../Constants/Constants";
+import { ICONS } from "../Constants/icons";
 import imageLogo from "../assets/LogoParkEasyTrans.png";
 import ForgetPassForm from "./ForgetPassForm";
 
@@ -20,14 +21,16 @@ const LoginForm = ({ navigation }) => {
     return (
         <SafeAreaView>
             <View style={Style.loginPageContainer}>
-                {/*<Text style={loginStyle.mainTitle}>ParkEasy</Text>*/}
 
                 <Image source={imageLogo} style={Style.imageLogo} />
 
+                <View style={Style.credentialsContainer}>
 
-                <View style={Style.loginBoxContainer}>
+                    <Text style={Style.mainTitle}>Login</Text>
 
                     {/* This is the email input */}
+                <View style={Style.fieldCredential}>
+                    <Image source={ICONS.email} style={Style.icons}></Image>
 
                     <TextInput
                         placeholder="Email"
@@ -36,23 +39,28 @@ const LoginForm = ({ navigation }) => {
                         onChangeText={setEmail}
                         style={Style.input}
                         placeholderTextColor={COLORS.Grey}
-                        autoFocus={true}
                         autoCapitalize="none"
                     />
+                </View>
+
 
                     {/* This is the Password Input */}
 
-                    <TextInput
-                        placeholder="Password"
-                        type="password"
-                        value={password}
-                        onChangeText={setPassword}
-                        style={Style.input}
-                        placeholderTextColor={COLORS.Grey}
-                        secureTextEntry
-                        autoFocus={true}
-                        autoCapitalize="none"
-                    />
+                    <View style={Style.fieldCredential}>
+                        <Image source={ICONS.password} style={Style.icons}></Image>
+                        <TextInput
+                            placeholder="Password"
+                            type="password"
+                            value={password}
+                            onChangeText={setPassword}
+                            style={Style.input}
+                            placeholderTextColor={COLORS.Grey}
+                            secureTextEntry
+                            autoCapitalize="none"
+                        />
+                    </View>
+
+
 
                     {/* Login Button */}
 

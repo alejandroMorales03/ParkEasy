@@ -1,3 +1,4 @@
+
 export const COLORS =  {
 
     // Palette Here you can add colors
@@ -9,6 +10,7 @@ export const COLORS =  {
     White: '#FFFFFF',
     Grey: '#a5a5a5',
     Black: '#000000',
+    Transparent: 'rgba(0,0,0,0)',
 
     // Primary Color Palette
 
@@ -56,4 +58,5 @@ export const BUTTON= {
     ButtonPrimaryBackgroundColor: COLORS.LightSeaGreen,
     BUTTON_COLOR_UNPRESSED: COLORS.DarkGreen
 }
- 
+
+
