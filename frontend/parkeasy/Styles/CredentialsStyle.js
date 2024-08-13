@@ -3,25 +3,50 @@ import { COLORS , SIZES, FONT, CONTAINERS, BUTTON } from '../Constants/Constants
 
 const CredentialsStyle= StyleSheet.create({
 
+    fullPageContainer: {
+        flex: 1,
+        backgroundColor: COLORS.White
+    },
+
+    textContainerFB:{
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        marginTop: 20,
+
+    },
+
+    normalText: {
+        fontSize: SIZES.small,
+        fontWeight: "normal",
+        color: COLORS.Grey
+    },
+
     mainTitle:{
         fontSize: SIZES.extraLarge,
         fontWeight:'bold',
     },
 
+    mainTitleAlter: {
+        fontSize: SIZES.medium,
+        fontWeight:'bold',
+    },
+
     loginPageContainer: {
+        flex: 1,
         justifyContent: 'space-evenly',
-        padding: 10,
+        paddingHorizontal: 30,
         height: '100%',
         width: '100%',
+
     },
 
     credentialsContainer: {
-        borderRadius: 30,
-        padding: 20,
         width: '100%',
+        height: '50%',
         justifyContent: 'space-evenly',
         flexDirection: 'column',
-        // backgroundColor: CONTAINERS.PrimaryColorContainer,
+        // borderColor: COLORS.Grey,
+        // borderWidth: 1,
     },
 
     mainTitleFont: {
@@ -37,7 +62,6 @@ const CredentialsStyle= StyleSheet.create({
         borderColor: COLORS.Transparent,
         borderBottomColor: COLORS.Grey,
         borderWidth: 1,
-        // borderRadius: 10,
         paddingHorizontal: 10,
         marginVertical: 10,
         color: COLORS.Black,

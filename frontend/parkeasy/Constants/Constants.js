@@ -37,7 +37,7 @@ export const SIZES = {
     // font sizes TODO research for correct sizes in a default app
 
     extraSmall: '10px',
-    small: '20px',
+    small: '18px',
     medium: '30px',
     large: '50px',
     extraLarge: '60px',

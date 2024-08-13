@@ -19,7 +19,7 @@ const LoginForm = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={Style.fullPageContainer}>
             <View style={Style.loginPageContainer}>
 
                 <Image source={imageLogo} style={Style.imageLogo} />
@@ -74,7 +74,7 @@ const LoginForm = ({ navigation }) => {
                 {/* Links Container */}
                 <View style={Style.linksContainer}>
                     <TouchableOpacity onPress={() => navigation.navigate('Forget Password')} >
-                        <Text style={Style.bottomLinks}>Forgot Password</Text>
+                        <Text style={Style.bottomLinks}>Forgot Password?</Text>
                     </TouchableOpacity>
 
                     {/*TODO once the sign up page is done we can add it to the stack navigation*/}
