@@ -4,6 +4,7 @@ import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import LoginForm from '../Components/LoginForm';
 import ForgetPassForm from '../Components/ForgetPassForm';
 import SignUpForm from "../Components/SignUpForm";
+import MainPage from '../Components/MainPage';
 
 const Stack = createStackNavigator();
 
@@ -29,9 +30,10 @@ const CredentialsStack = () => {
 
 const App = () => {
     return (
-        <NavigationContainer independent={true}>
-            <CredentialsStack />
-        </NavigationContainer>
+        // <NavigationContainer independent={true}>
+        //     <CredentialsStack />
+        // </NavigationContainer>
+        <MainPage />
     );
 };
 

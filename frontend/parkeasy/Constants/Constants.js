@@ -1,4 +1,6 @@
 
+
+
 export const COLORS =  {
 
     // Palette Here you can add colors
@@ -36,11 +38,11 @@ export const SIZES = {
 
     // font sizes TODO research for correct sizes in a default app
 
-    extraSmall: '10px',
-    small: '18px',
+    extraSmall: '16px',
+    small: '20px',
     medium: '30px',
-    large: '50px',
-    extraLarge: '60px',
+    large: '40px',
+    extraLarge: '50px'
 
 }
 

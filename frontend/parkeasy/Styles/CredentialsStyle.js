@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import { COLORS , SIZES, FONT, CONTAINERS, BUTTON } from '../Constants/Constants'
+
+const { width, height } = Dimensions.get('window'); // collects the dimensions of the current window
 
 const CredentialsStyle= StyleSheet.create({
 
@@ -11,14 +13,8 @@ const CredentialsStyle= StyleSheet.create({
     textContainerFB:{
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        marginTop: 20,
+        marginTop: height * 0.03, // 3% of screen height
 
-    },
-
-    normalText: {
-        fontSize: SIZES.small,
-        fontWeight: "normal",
-        color: COLORS.Grey
     },
 
     mainTitle:{
@@ -50,22 +46,9 @@ const CredentialsStyle= StyleSheet.create({
     },
 
     mainTitleFont: {
-        fontSize: SIZES.medium,
+        fontSize: SIZES.medium * (width / 375),
         fontWeight: 'bold',
         color: COLORS.White
-    },
-
-    input: {
-        flex: 1,
-        height: 40,
-        width: '100%',
-        borderColor: COLORS.Transparent,
-        borderBottomColor: COLORS.Grey,
-        borderWidth: 1,
-        paddingHorizontal: 10,
-        marginVertical: 10,
-        color: COLORS.Black,
-
     },
 
     button: {
@@ -105,14 +88,6 @@ const CredentialsStyle= StyleSheet.create({
         alignItems: 'center', // Aligns input and icon vertically centered
         marginVertical: 2, // Adds spacing between input fields
     },
-
-    icons: {
-        width: 20,
-        height: 20,
-        resizeMode: 'contain',
-        alignItems: 'center',
-        marginLeft: 5,
-    }
 
 })
 
