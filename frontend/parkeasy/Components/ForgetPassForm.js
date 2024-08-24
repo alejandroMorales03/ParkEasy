@@ -23,6 +23,8 @@ const ForgetPassForm = ({ navigation }) => {
     const [newPassword, setNewPassword] = React.useState('');
 
     const handleSendCode = () => {
+
+        // TODO make condition that if field is empty display error
         setIsCodeSent(true);
     };
 
