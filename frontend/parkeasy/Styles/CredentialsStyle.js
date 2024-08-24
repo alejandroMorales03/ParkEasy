@@ -1,47 +1,54 @@
-import { StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import { COLORS , SIZES, FONT, CONTAINERS, BUTTON } from '../Constants/Constants'
+
+const { width, height } = Dimensions.get('window'); // collects the dimensions of the current window
 
 const CredentialsStyle= StyleSheet.create({
 
+    fullPageContainer: {
+        flex: 1,
+        backgroundColor: COLORS.White
+    },
+
+    textContainerFB:{
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        marginTop: height * 0.03, // 3% of screen height
+
+    },
+
     mainTitle:{
         fontSize: SIZES.extraLarge,
-        textAlign: 'center',
+        fontWeight:'bold',
+    },
+
+    mainTitleAlter: {
+        fontSize: SIZES.medium,
+        fontWeight:'bold',
     },
 
     loginPageContainer: {
+        flex: 1,
         justifyContent: 'space-evenly',
-        alignItems: 'center',
+        paddingHorizontal: 30,
         height: '100%',
         width: '100%',
+
     },
 
-    loginBoxContainer: {
-        borderRadius: 30,
-        padding: 20,
-        width: '75%',
+    credentialsContainer: {
+        width: '100%',
+        height: '50%',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
         flexDirection: 'column',
-        backgroundColor: CONTAINERS.PrimaryColorContainer,
+        // borderColor: COLORS.Grey,
+        // borderWidth: 1,
     },
 
     mainTitleFont: {
-        fontSize: SIZES.medium,
+        fontSize: SIZES.medium * (width / 375),
         fontWeight: 'bold',
         color: COLORS.White
-    },
-
-    input: {
-        height: 40,
-        width: '100%',
-        borderColor: COLORS.Black,
-        borderWidth: 1,
-        borderRadius: 10,
-        paddingHorizontal: 10,
-        marginVertical: 10,
-        color: COLORS.Black,
-        backgroundColor: COLORS.White,
-
     },
 
     button: {
@@ -61,7 +68,8 @@ const CredentialsStyle= StyleSheet.create({
 
     linksContainer: {
         marginTop: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     bottomLinks: {
@@ -73,6 +81,13 @@ const CredentialsStyle= StyleSheet.create({
         width: 180, // Adjust size as needed
         height: 180, // Adjust size as needed
         resizeMode: 'contain', // Keeps aspect ratio
+        alignSelf: 'center',
+    },
+
+    fieldCredential: {
+        flexDirection: 'row',
+        alignItems: 'center', // Aligns input and icon vertically centered
+        marginVertical: 2, // Adds spacing between input fields
     },
 
 })

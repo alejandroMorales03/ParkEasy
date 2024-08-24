@@ -1,84 +1,117 @@
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity, SafeAreaView} from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    SafeAreaView,
+    Image,
+    Keyboard,
+    TouchableWithoutFeedback
+} from 'react-native';
+import GlobalStyle from "../Styles/GlobalStyle";
 import Style from "../Styles/CredentialsStyle";
 import {COLORS} from "../Constants/Constants";
+import imageLogo from "../assets/LogoParkEasyTrans.png";
+import {ICONS} from "../Constants/icons";
+import globalStyle from "../Styles/GlobalStyle";
 
 const ForgetPassForm = ({ navigation }) => {
-    const [email, setEmail] = React.useState(''); // State for email input
-    const [isCodeSent, setIsCodeSent] = React.useState(false); // State to track if the code has been sent
-    const [code, setCode] = React.useState(''); // State for verification code input
-    const [newPassword, setNewPassword] = React.useState(''); // State for new password input
+    const [email, setEmail] = React.useState('');
+    const [isCodeSent, setIsCodeSent] = React.useState(false);
+    const [code, setCode] = React.useState('');
+    const [newPassword, setNewPassword] = React.useState('');
 
-    // Function to handle sending the code
     const handleSendCode = () => {
-        // TODO: Implement code sending logic
-        setIsCodeSent(true); // Set the state to true to show the verification form
+        setIsCodeSent(true);
     };
 
-    // Function to handle code verification and password reset
     const handleVerifyCodeAndResetPassword = () => {
-        // TODO: Implement code verification and password reset logic
         console.log("Code:", code);
         console.log("New Password:", newPassword);
-        // After successful password reset, navigate back to the login page
         navigation.navigate('Login');
     };
 
     return (
-        <SafeAreaView>
-            <View style={Style.loginPageContainer}>
-                <Text style={Style.mainTitle}>
-                    {/*Condition of title when code is sent*/}
-                    {isCodeSent ? "Enter Verification Code" : "Forgot Password"}
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <SafeAreaView style={Style.fullPageContainer}>
+                <View style={Style.loginPageContainer}>
 
-                </Text>
-                <View style={Style.loginBoxContainer}>
-                    {!isCodeSent ? ( // condition for the code sent
-                        // Email input and send code button
-                        <>
-                            <TextInput
-                                placeholder="Email"
-                                value={email}
-                                onChangeText={setEmail}
-                                style={Style.input}
-                                placeholderTextColor={COLORS.Grey}
-                                autoFocus={true}
-                            />
-                            <TouchableOpacity onPress={handleSendCode} style={Style.button}>
-                                <Text style={Style.buttonText}>Send Code</Text>
-                            </TouchableOpacity>
-                        </>
-                    ) : (
-                        // Code verification and new password form
-                        <>
-                            <TextInput
-                                placeholder="Verification Code"
-                                value={code}
-                                onChangeText={setCode}
-                                style={Style.input}
-                                placeholderTextColor={COLORS.Grey}
-                                autoFocus={true}
-                            />
-                            <TextInput
-                                placeholder="New Password"
-                                value={newPassword}
-                                onChangeText={setNewPassword}
-                                style={Style.input}
-                                placeholderTextColor={COLORS.Grey}
-                                secureTextEntry
-                                autoFocus={true}
-                            />
-                            <TouchableOpacity onPress={handleVerifyCodeAndResetPassword} style={Style.button}>
-                                <Text style={Style.buttonText}>Reset Password</Text>
-                            </TouchableOpacity>
-                        </>
-                    )}
+                    <Image source={imageLogo} style={Style.imageLogo} />
+
+                    {/*Title change condition*/}
+
+                    {/*Credentials */}
+
+                    <View style={Style.credentialsContainer}>
+
+                        <View style={Style.textContainerFB}>
+                            <Text style={Style.mainTitleAlter}>
+                                {isCodeSent ? "Enter Verification Code" : "Forgot Password?"}
+                            </Text>
+                            <Text style={globalStyle.Text}>
+                                {isCodeSent ? "Your code has been sent" : "Dont worry! It happens to all of us. Let's get your account back!" }
+                            </Text>
+                        </View>
+                        {!isCodeSent ? (
+                            <>
+                            <View style={Style.fieldCredential}>
+
+                                <Image source={ICONS.email} style={globalStyle.icons}></Image>
+
+                                    <TextInput
+                                        placeholder="Email"
+                                        value={email}
+                                        onChangeText={setEmail}
+                                        style={GlobalStyle.input}
+                                        placeholderTextColor={COLORS.Grey}
+                                        autoCapitalize={false}
+                                    />
+                            </View>
+                                <TouchableOpacity onPress={handleSendCode} style={Style.button}>
+                                    <Text style={Style.buttonText}>Send Code</Text>
+                                </TouchableOpacity>
+                            </>
+                        ) : (
+                            <>
+                                <View style={Style.fieldCredential}>
+                                    <TextInput
+                                        placeholder="Verification Code"
+                                        value={code}
+                                        onChangeText={setCode}
+                                        style={GlobalStyle.input}
+                                        placeholderTextColor={COLORS.Grey}
+                                        keyboardType="number-pad"
+                                    />
+                                </View>
+
+                                <View style={Style.fieldCredential}>
+                                    <TextInput
+                                        placeholder="New Password"
+                                        value={newPassword}
+                                        onChangeText={setNewPassword}
+                                        style={GlobalStyle.input}
+                                        placeholderTextColor={COLORS.Grey}
+                                        secureTextEntry
+                                    />
+                                </View>
+                                <TouchableOpacity onPress={handleVerifyCodeAndResetPassword} style={Style.button}>
+                                    <Text style={Style.buttonText}>Reset Password</Text>
+                                </TouchableOpacity>
+                            </>
+                        )}
+                    </View>
+
+                    {/*Buttons and Links*/}
+
+                    <View style={Style.linksContainer}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                            <Text style={Style.bottomLinks}>Back</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={Style.bottomLinks}>Back</Text>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 };
 

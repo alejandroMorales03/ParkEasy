@@ -1,3 +1,6 @@
+
+
+
 export const COLORS =  {
 
     // Palette Here you can add colors
@@ -9,6 +12,8 @@ export const COLORS =  {
     White: '#FFFFFF',
     Grey: '#a5a5a5',
     Black: '#000000',
+    Red: '#ff0000',
+    Transparent: 'rgba(0,0,0,0)',
 
     // Primary Color Palette
 
@@ -34,11 +39,11 @@ export const SIZES = {
 
     // font sizes TODO research for correct sizes in a default app
 
-    extraSmall: '10px',
+    extraSmall: '16px',
     small: '20px',
     medium: '30px',
-    large: '50px',
-    extraLarge: '60px',
+    large: '40px',
+    extraLarge: '50px'
 
 }
 
@@ -56,4 +61,5 @@ export const BUTTON= {
     ButtonPrimaryBackgroundColor: COLORS.LightSeaGreen,
     BUTTON_COLOR_UNPRESSED: COLORS.DarkGreen
 }
- 
+
+

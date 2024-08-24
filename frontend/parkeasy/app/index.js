@@ -4,6 +4,7 @@ import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import LoginForm from '../Components/LoginForm';
 import ForgetPassForm from '../Components/ForgetPassForm';
 import SignUpForm from "../Components/SignUpForm";
+import MainPage from '../Components/MainPage';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +14,7 @@ const CredentialsStack = () => {
         <Stack.Navigator initialRouteName="LoginPage"
                          screenOptions={{
                              headerShown: false,
-                             ...TransitionPresets.ModalFadeTransition  // Apply fade transition (selected by method)
+                             ...TransitionPresets.ModalSlideFromBottomIOS  // Apply fade transition (selected by method)
                          }}>
 
             <Stack.Screen name="Login" component={LoginForm}
@@ -32,6 +33,7 @@ const App = () => {
         <NavigationContainer independent={true}>
             <CredentialsStack />
         </NavigationContainer>
+        // <MainPage />
     );
 };
 
