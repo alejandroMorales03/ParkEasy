@@ -19,17 +19,23 @@ const GlobalStyle = StyleSheet.create({
         borderColor: COLORS.Transparent,
         borderBottomColor: COLORS.Grey,
         borderWidth: 1,
-        paddingHorizontal: width * 0.08, // 8% of screen width
+        paddingHorizontal: width * 0.04, // 8% of screen width
         marginVertical: 10,
         color: COLORS.Black,
 
     },
 
     Text: {
-        fontSize: SIZES.small * (width / 375),
+        fontSize: SIZES.small,
         fontWeight: "normal",
         color: COLORS.Grey
     },
+
+    errorText: {
+        fontSize: SIZES.extraSmall,
+        color: COLORS.Red,
+        fontWeight: "normal",
+    }
 })
 
 export default GlobalStyle;

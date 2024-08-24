@@ -34,7 +34,10 @@ const LoginForm = ({ navigation }) => {
             <SafeAreaView style={Style.fullPageContainer}>
                 <View style={Style.loginPageContainer}>
 
+                    {/*This is the logo image*/}
                     <Image source={imageLogo} style={Style.imageLogo} />
+
+                    {/*Credential section*/}
 
                     <View style={Style.credentialsContainer}>
 
@@ -89,7 +92,6 @@ const LoginForm = ({ navigation }) => {
                             <Text style={Style.bottomLinks}>Forgot Password?</Text>
                         </TouchableOpacity>
 
-                        {/*TODO once the sign up page is done we can add it to the stack navigation*/}
                         <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
                             <Text style={Style.bottomLinks}>Sign Up</Text>
                         </TouchableOpacity>

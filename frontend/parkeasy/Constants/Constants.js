@@ -12,6 +12,7 @@ export const COLORS =  {
     White: '#FFFFFF',
     Grey: '#a5a5a5',
     Black: '#000000',
+    Red: '#ff0000',
     Transparent: 'rgba(0,0,0,0)',
 
     // Primary Color Palette

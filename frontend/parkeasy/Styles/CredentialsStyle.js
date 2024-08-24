@@ -68,7 +68,8 @@ const CredentialsStyle= StyleSheet.create({
 
     linksContainer: {
         marginTop: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     bottomLinks: {

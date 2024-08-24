@@ -65,6 +65,7 @@ const ForgetPassForm = ({ navigation }) => {
                                         onChangeText={setEmail}
                                         style={GlobalStyle.input}
                                         placeholderTextColor={COLORS.Grey}
+                                        autoCapitalize={false}
                                     />
                             </View>
                                 <TouchableOpacity onPress={handleSendCode} style={Style.button}>
