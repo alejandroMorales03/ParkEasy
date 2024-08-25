@@ -46,13 +46,20 @@ const SignUpForm = ({ navigation }) => {
     
         try {
             // Send data to the backend
-            const response = await axios.post('http://localhost:8000/api/auth/signup', {
+
+            //Use localhost if running simulator, IP from computer if using external device like your phone
+            const response = await axios.post('http://172.21.13.156:8000/api/auth/signup', {
                 email,
                 firstName,
                 lastName,
                 password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
-    
+            
+
             console.log(response.data);
     
             // If all checks pass, proceed to send code logic
@@ -73,7 +80,8 @@ const SignUpForm = ({ navigation }) => {
     
         try {
             // Send the confirmation code to the backend for verification
-            const response = await axios.post('http://localhost:8000/api/auth/verify-code', {
+            //Use localhost if running simulator, IP from computer if using external device like your phone
+            const response = await axios.post('http://172.21.13.156:8000/api/auth/verify-code', {
                 email,
                 code: confirmCode
             });
