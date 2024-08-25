@@ -1,18 +1,41 @@
-const { Client } = require('pg');
+import pkg from 'pg';
+import config from './config.js'; 
 
 const dbConfig = {
-  user: 'AlejandroMorales',
-  password: 'Ihoenys2024*',
-  host: 'parkeasy.postgres.database.azure.com',
-  port: 5432,
-  database: 'ParkEasyAz',
-  ssl: true
+  user: config.db.user,
+  password: config.db.password,
+  host: config.db.host,
+  port: config.db.port,
+  database: config.db.database,
+  ssl: config.db.ssl, 
 };
 
-const db = new Client(dbConfig);
+const { Pool } = pkg;
 
-db.connect()
-  .then(() => console.log('Connected to PostgreSQL database'))
-  .catch(err => console.error('Error connecting to PostgreSQL database', err));
+const pool = new Pool(dbConfig);
 
-module.exports = db;
+const connectDB = async () => {
+  // No need to explicitly connect with Pool; it's managed automatically
+  console.log('Database pool initialized');
+};
+
+const closeDB = async () => {
+  try {
+    await pool.end();
+    console.log('Database connection pool closed');
+  } catch (err) {
+    console.error('Error closing the database connection pool', err);
+  }
+};
+
+process.on('SIGINT', async () => {
+  await closeDB();
+  process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+  await closeDB();
+  process.exit(0);
+});
+
+export { pool as db, connectDB, closeDB };
