@@ -7,7 +7,9 @@ const dbConfig = {
   host: config.db.host,
   port: config.db.port,
   database: config.db.database,
-  ssl: config.db.ssl, 
+  ssl: {
+    rejectUnauthorized: false
+  }
 };
 
 const { Pool } = pkg;
@@ -15,7 +17,7 @@ const { Pool } = pkg;
 const pool = new Pool(dbConfig);
 
 const connectDB = async () => {
-  // No need to explicitly connect with Pool; it's managed automatically
+
   console.log('Database pool initialized');
 };
 

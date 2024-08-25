@@ -4,8 +4,13 @@ import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 
+//Connect to database
 connectDB();
 
+app.use(express.json());
+
+
+//Handles routes related to credentials 
 app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 8000;

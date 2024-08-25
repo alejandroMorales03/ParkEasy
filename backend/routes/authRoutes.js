@@ -3,6 +3,7 @@ import { handleSignUp, verifyCode } from '../controllers/authController.js';
 
 const router = express.Router();
 
+
 router.post('/signup', handleSignUp);
 router.post('/verify-code', verifyCode);
 

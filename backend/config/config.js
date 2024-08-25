@@ -9,7 +9,9 @@ const config = {
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT, 10),
     database: process.env.DB_DATABASE,
-    ssl: process.env.DB_SSL === 'true',
+    ssl: {
+      rejectUnauthorized: false 
+    }
   },
   server: {
     port: process.env.PORT || 8000,  
