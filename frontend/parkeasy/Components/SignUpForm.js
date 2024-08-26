@@ -48,7 +48,7 @@ const SignUpForm = ({ navigation }) => {
             // Send data to the backend
 
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://172.21.13.156:8000/api/auth/signup', {
+            const response = await axios.post('http://192.168.1.70:8000/api/auth/signup', {
                 email,
                 firstName,
                 lastName,
@@ -66,8 +66,9 @@ const SignUpForm = ({ navigation }) => {
             setIsCodeSent(true);
     
         } catch (err) {
-            console.error('Error during sign-up:', err.response ? err.response.data : err.message);
-            setError('Sign-up failed. Please try again.');
+            // Print and display actual error message from the response
+            console.error('Error during sign-up:', err.response ? err.response.data.message : err.message);
+            setError(err.response ? err.response.data.message : 'Sign-up failed. Please try again.');
         }
     }
 
@@ -81,7 +82,7 @@ const SignUpForm = ({ navigation }) => {
         try {
             // Send the confirmation code to the backend for verification
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://172.21.13.156:8000/api/auth/verify-code', {
+            const response = await axios.post('http://192.168.1.70:8000/api/auth/verify-code', {
                 email,
                 code: confirmCode
             });

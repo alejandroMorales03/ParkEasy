@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 // Method to encyrpt password
 export const hashPassword = async(password, saltRounds = 10) =>{
     try{
-        const hashedPassword = bcrypt.hash(password, saltRounds);
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
         return hashedPassword;
 
     }catch(err){
@@ -16,7 +16,7 @@ export const hashPassword = async(password, saltRounds = 10) =>{
 
 export const comparePasswords = async(password, hashedPassword) =>{
     try{
-        const isMatch = bcrypt.comparePasswords(password, hashedPassword);
+        const isMatch = bcrypt.compare(password, hashedPassword);
         return isMatch;
 
     }catch(err){
