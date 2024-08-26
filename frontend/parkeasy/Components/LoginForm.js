@@ -16,20 +16,43 @@ import { ICONS } from "../Constants/icons";
 import imageLogo from "../assets/LogoParkEasyTrans.png";
 import ForgetPassForm from "./ForgetPassForm";
 import GlobalStyle from "../Styles/GlobalStyle";
+import axios from 'axios'
 
 const LoginForm = ({ navigation }) => {
 
     const [email, setEmail] = React.useState(''); // this is used to keep the block empty to add emails
     const [password, setPassword] = React.useState(''); // this is used to keep the password
+    const [error, setError] = React.useState('');
 
-    // testing with console log
 
-    function handleLogin(){
+    async function handleLogin(){
+        setError('')
+
+        if(!email || !password){
+            setError('Please fill out all fields')
+            return
+        }
         console.log("Email: ", email);
         console.log("Password: ", password);
+
+        try{
+            const response = await axios.post('http://172.21.13.156:8000/api/auth/login',{
+                email,
+                password
+            })
+            navigation.navigate("Sign Up")
+            
+        }catch(err){
+            console.error('Error during login:', err.response ? err.response.data : err.message);
+            setError(err.response ? err.response.data.message : 'Login failed. Please try again.');
+
+        }
+
+        
     }
 
     return (
+        
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={Style.fullPageContainer}>
                 <View style={Style.loginPageContainer}>
@@ -42,6 +65,12 @@ const LoginForm = ({ navigation }) => {
                     <View style={Style.credentialsContainer}>
 
                         <Text style={Style.mainTitle}>Login</Text>
+                        
+                        {error ? (
+                            <Text style={globalStyles.errorText}>
+                                {error}
+                            </Text>
+                        ) : null}
 
                         {/* This is the email input */}
                     <View style={Style.fieldCredential}>

@@ -1,7 +1,7 @@
 
 import { generateVerificationCode, sendVerificationEmail} from '../utils/emailUtils.js'
 import { db } from '../config/db.js';
-import {hashPassword} from "../utils/passwordUtils.js"
+import {comparePasswords, hashPassword} from "../utils/passwordUtils.js"
 
 
 export const handleSignUp = async (req, res) => {
@@ -74,3 +74,53 @@ export const verifyCode = async (req, res) => {
         res.status(500).json({ message: 'Error verifying code', error });
     }
 };
+
+
+
+export const handleLogin = async (req, res) => {
+    const { email, password } = req.body;
+
+    console.log('Request body:', req.body); // Debug log
+
+    // Check if email and password are not undefined or empty
+    if (!email || !password) {
+        console.log('Missing email or password');
+        return res.status(400).json({ message: 'Email and password are required' });
+    }
+
+    try {
+        // Query the database for the user with the provided email
+        const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+
+        if (result.rows.length === 0) {
+            // No user found with that email
+            console.log('No user found with email:', email);
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        const user = result.rows[0];
+        console.log('Retrieved user:', user);
+
+        // Compare the provided password with the hashed password stored in the database
+        const isMatch = await comparePasswords(password, user.password);
+
+        console.log('Password comparison result:', isMatch);
+
+        if (isMatch) {
+            // Password is correct; you might want to generate a token or session here
+            return res.status(200).json({ message: 'Login Successful' });
+        } else {
+            // Password is incorrect
+            console.log('Password does not match');
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+    } catch (err) {
+        // Handle unexpected errors
+        console.error('Unexpected error:', err);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+
+

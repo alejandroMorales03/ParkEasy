@@ -27,6 +27,8 @@ const SignUpForm = ({ navigation }) => {
     const [isCodeSent, setIsCodeSent] = React.useState(false);
     const [confirmCode, setConfirmCode] = React.useState('');
 
+   
+
     // Function to handle sign-up
     async function handleSignUp() {
         // Reset error message
@@ -48,7 +50,7 @@ const SignUpForm = ({ navigation }) => {
             // Send data to the backend
 
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://192.168.1.70:8000/api/auth/signup', {
+            const response = await axios.post('http://172.21.13.156:8000/api/auth/signup', {
                 email,
                 firstName,
                 lastName,
@@ -82,7 +84,7 @@ const SignUpForm = ({ navigation }) => {
         try {
             // Send the confirmation code to the backend for verification
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://192.168.1.70:8000/api/auth/verify-code', {
+            const response = await axios.post('http://172.21.13.156:8000/api/auth/verify-code', {
                 email,
                 code: confirmCode
             });
@@ -90,6 +92,7 @@ const SignUpForm = ({ navigation }) => {
             console.log(response.data);
     
             // Navigate to login or other appropriate screen after successful confirmation
+            cleanState();
             navigation.navigate('Login');
     
         } catch (err) {
