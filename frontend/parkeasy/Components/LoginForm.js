@@ -25,6 +25,10 @@ const LoginForm = ({ navigation }) => {
     // testing with console log
 
     function handleLogin(){
+        if(!email || !password){
+            console.log("please fill all the fields);
+                return;
+                }
         console.log("Email: ", email);
         console.log("Password: ", password);
     }
