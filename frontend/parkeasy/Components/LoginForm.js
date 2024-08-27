@@ -26,7 +26,7 @@ const LoginForm = ({ navigation }) => {
 
     function handleLogin(){
         if(!email || !password){
-            console.log("please fill all the fields);
+            console.log("please fill all the fields");
                 return;
                 }
         console.log("Email: ", email);
