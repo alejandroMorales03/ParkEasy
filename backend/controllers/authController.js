@@ -47,7 +47,6 @@ export const handleSignUp = async (req, res) => {
     }
 };
 
-import { db } from '../config/db.js';
 
 export const verifySignUp = async (req, res) => {
     const { email, code } = req.body;
@@ -86,8 +85,7 @@ export const verifySignUp = async (req, res) => {
     }
 };
 
-import { comparePasswords } from "../utils/passwordUtils.js";
-import { db } from '../config/db.js';
+
 
 export const handleLogin = async (req, res) => {
     const { email, password } = req.body;
@@ -124,8 +122,7 @@ export const handleLogin = async (req, res) => {
     }
 };
 
-import { generateVerificationCode, sendVerificationEmail } from '../utils/emailUtils.js';
-import { db } from '../config/db.js';
+
 
 export const handleForgottenPasswordRequest = async (req, res) => {
     const { email } = req.body;
@@ -167,8 +164,7 @@ export const handleForgottenPasswordRequest = async (req, res) => {
     }
 };
 
-import { hashPassword } from "../utils/passwordUtils.js";
-import { db } from '../config/db.js';
+
 
 export const handleResetPasswordCompletion = async (req, res) => {
     const { code, email, password } = req.body;

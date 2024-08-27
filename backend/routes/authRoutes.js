@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleSignUp,  handleLogin, verifySignUp , handleForgottenPasswordRequest, handleResetPassword, handleResetPasswordCompletion} from '../controllers/authController.js';
+import { handleSignUp,  handleLogin, verifySignUp , handleForgottenPasswordRequest, handleResetPasswordCompletion} from '../controllers/authController.js';
 
 const router = express.Router();
 
