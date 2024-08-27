@@ -50,7 +50,7 @@ const SignUpForm = ({ navigation }) => {
             // Send data to the backend
 
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://172.21.13.156:8000/api/auth/signup', {
+            const response = await axios.post('http://10.108.226.227:8000/api/auth/signup', {
                 email,
                 firstName,
                 lastName,
@@ -84,7 +84,7 @@ const SignUpForm = ({ navigation }) => {
         try {
             // Send the confirmation code to the backend for verification
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://172.21.13.156:8000/api/auth/verify-signup', {
+            const response = await axios.post('http://10.108.226.227:8000/api/auth/verify-signup', {
                 email,
                 code: confirmCode
             });
