@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { db } from '../config/db';
 
 // Method to encrypt password
 export const hashPassword = async (password, saltRounds = 10) => {
@@ -21,3 +22,16 @@ export const comparePasswords = async (plainPassword, hashedPassword) => {
         throw new Error('Error comparing passwords');
     }
 };
+
+
+export const resetPassword = async(email, verification_code, expiresAt) =>{
+
+    const result = await db.query('SELECT * from forgot_password WHERE email = $1 AND reset_code = $2 AND  expires_at > NOW()', [email, verification_code]);
+
+    if(result.rows.length != 0){
+        res.status(500).json({message: "Unexpected error while resetting password"})
+        return;
+    }
+
+    await db.query('UPDATE users SET password = $1 WHERE email = $2', [email])
+}

@@ -84,7 +84,7 @@ const SignUpForm = ({ navigation }) => {
         try {
             // Send the confirmation code to the backend for verification
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://172.21.13.156:8000/api/auth/verify-code', {
+            const response = await axios.post('http://172.21.13.156:8000/api/auth/verify-signup', {
                 email,
                 code: confirmCode
             });
