@@ -36,7 +36,7 @@ const LoginForm = ({ navigation }) => {
         console.log("Password: ", password);
 
         try{
-            const response = await axios.post('http://10.108.226.227:8000/api/auth/login',{
+            const response = await axios.post('http://1192.168.1.70:8000/api/auth/login',{
                 email,
                 password
             })

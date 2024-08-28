@@ -50,7 +50,7 @@ const SignUpForm = ({ navigation }) => {
             // Send data to the backend
 
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://10.108.226.227:8000/api/auth/signup', {
+            const response = await axios.post('http://192.168.1.70:8000/api/auth/signup', {
                 email,
                 firstName,
                 lastName,
@@ -84,7 +84,7 @@ const SignUpForm = ({ navigation }) => {
         try {
             // Send the confirmation code to the backend for verification
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://10.108.226.227:8000/api/auth/verify-signup', {
+            const response = await axios.post('http://192.168.1.70:8000/api/auth/verify-signup', {
                 email,
                 code: confirmCode
             });
@@ -92,7 +92,7 @@ const SignUpForm = ({ navigation }) => {
             console.log(response.data);
     
             // Navigate to login or other appropriate screen after successful confirmation
-            cleanState();
+         
             navigation.navigate('Login');
     
         } catch (err) {
@@ -219,12 +219,22 @@ const SignUpForm = ({ navigation }) => {
                         </>
                     )}
 
+                     {/* Resend Code Button */}
+
+                     <View style={Style.linksContainer}>
+                        <TouchableOpacity onPress={handleSignUp}>
+                            <Text style={Style.bottomLinks}>Resend Code</Text>
+                        </TouchableOpacity>
+                    </View>
+
                     {/* Back Button */}
                     <View style={Style.linksContainer}>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                             <Text style={Style.bottomLinks}>Back</Text>
                         </TouchableOpacity>
                     </View>
+
+                   
 
                 </View>
             </SafeAreaView>
