@@ -92,7 +92,6 @@ const SignUpForm = ({ navigation }) => {
             console.log(response.data);
     
             // Navigate to login or other appropriate screen after successful confirmation
-            cleanState();
             navigation.navigate('Login');
     
         } catch (err) {
