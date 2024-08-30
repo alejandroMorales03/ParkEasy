@@ -24,12 +24,19 @@ const LoginForm = ({ navigation }) => {
     const [password, setPassword] = React.useState(''); // this is used to keep the password
     const [error, setError] = React.useState('');
 
+    // this function is to reset the fields
+
+    function resetField(){
+        setEmail('');
+        setPassword('');
+        setError('');
+    }
 
     async function handleLogin(){
         setError('')
 
         if(!email || !password){
-            setError('Please fill out all fields')
+            setError('Please fill out all fields.')
             return
         }
         console.log("Email: ", email);
@@ -117,11 +124,20 @@ const LoginForm = ({ navigation }) => {
 
                     {/* Links Container */}
                     <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Forget Password')} >
+                        <TouchableOpacity onPress={() =>
+                        {
+                            resetField(); // clear fields
+                            navigation.navigate('Forget Password'); // move to forget password
+
+                        }}>
                             <Text style={Style.bottomLinks}>Forgot Password?</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
+                        <TouchableOpacity onPress={() =>
+                            {
+                                resetField(); // clear fields
+                                navigation.navigate('Sign Up'); // moves to sign up
+                            }}>
                             <Text style={Style.bottomLinks}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
