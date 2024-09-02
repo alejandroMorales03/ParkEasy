@@ -58,7 +58,7 @@ const SignUpForm = ({ navigation }) => {
             // Send data to the backend
 
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://10.108.226.227:8000/api/auth/signup', {
+            const response = await axios.post('http://192.168.1.70:8000/api/auth/signup', {
                 email,
                 firstName,
                 lastName,
@@ -92,13 +92,15 @@ const SignUpForm = ({ navigation }) => {
         try {
             // Send the confirmation code to the backend for verification
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://10.108.226.227:8000/api/auth/verify-signup', {
+            const response = await axios.post('http://192.168.1.70:8000/api/auth/verify-signup', {
                 email,
                 code: confirmCode
             });
     
             console.log(response.data);
     
+
+     
             // Navigate to the Login page or other appropriate screen after successful confirmation
             navigation.navigate('Login');
     
@@ -227,6 +229,14 @@ const SignUpForm = ({ navigation }) => {
                         </>
                     )}
 
+                     {/* Resend Code Button */}
+
+                     <View style={Style.linksContainer}>
+                        <TouchableOpacity onPress={handleSignUp}>
+                            <Text style={Style.bottomLinks}>Resend Code</Text>
+                        </TouchableOpacity>
+                    </View>
+
                     {/* Back Button */}
                     <View style={Style.linksContainer}>
                         <TouchableOpacity onPress={() => {
@@ -236,6 +246,8 @@ const SignUpForm = ({ navigation }) => {
                             <Text style={Style.bottomLinks}>Back</Text>
                         </TouchableOpacity>
                     </View>
+
+                   
 
                 </View>
             </SafeAreaView>

@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { db } from '../config/db';
+import { db } from '../config/db.js';
 
 // Method to encrypt password
 export const hashPassword = async (password, saltRounds = 10) => {

@@ -1,10 +1,11 @@
 import { generateVerificationCode, sendVerificationEmail } from '../utils/emailUtils.js';
 import { db } from '../config/db.js';
-import { hashPassword } from "../utils/passwordUtils.js";
+import { hashPassword, comparePasswords } from '../utils/passwordUtils.js'; 
+import { hash } from 'bcrypt'; 
 
 export const handleSignUp = async (req, res) => {
     const { email, firstName, lastName, password } = req.body;
-    
+
     if (!email || !firstName || !lastName || !password) {
         console.log('Missing email, first name, last name, or password');
         return res.status(400).json({ message: 'Email, first name, last name, and password are required' });
@@ -18,21 +19,23 @@ export const handleSignUp = async (req, res) => {
             return res.status(409).json({ message: 'This email is already associated with an account' });
         }
 
-        // Remove any existing entry with the same email in pending_users
-        await db.query('DELETE FROM pending_users WHERE email = $1', [email]);
-
-        // Hash the password
-        const hashedPassword = await hashPassword(password);
-
-        // Generate a secure verification code and set its expiration
         const code = await generateVerificationCode();
         const expiresAt = new Date(Date.now() + 15 * 60 * 1000).toISOString();
 
-        // Insert the new user into pending_users
-        await db.query(
-            'INSERT INTO pending_users (email, first_name, last_name, password, verification_code, expires_at) VALUES ($1, $2, $3, $4, $5, $6)',
-            [email, firstName, lastName, hashedPassword, code, expiresAt]
-        );
+        // Check for previous attempts in pending_users
+        const result = await db.query('SELECT * FROM pending_users WHERE email = $1', [email]);
+
+        if (result.rows.length > 0) {
+            await db.query('UPDATE pending_users SET verification_code = $2, expires_at = $3 WHERE email = $1', [email, code, expiresAt]);
+        } else {
+            // Hash the password
+            const hashedPassword = await hashPassword(password);
+
+            await db.query(
+                'INSERT INTO pending_users (email, first_name, last_name, password, verification_code, expires_at) VALUES ($1, $2, $3, $4, $5, $6)',
+                [email, firstName, lastName, hashedPassword, code, expiresAt]
+            );
+        }
 
         // Send verification email
         await sendVerificationEmail(email, code);
@@ -46,8 +49,6 @@ export const handleSignUp = async (req, res) => {
         }
     }
 };
-
-import { db } from '../config/db.js';
 
 export const verifySignUp = async (req, res) => {
     const { email, code } = req.body;
@@ -86,9 +87,6 @@ export const verifySignUp = async (req, res) => {
     }
 };
 
-import { comparePasswords } from "../utils/passwordUtils.js";
-import { db } from '../config/db.js';
-
 export const handleLogin = async (req, res) => {
     const { email, password } = req.body;
 
@@ -123,9 +121,6 @@ export const handleLogin = async (req, res) => {
         return res.status(500).json({ message: 'Internal server error', error: error.message });
     }
 };
-
-import { generateVerificationCode, sendVerificationEmail } from '../utils/emailUtils.js';
-import { db } from '../config/db.js';
 
 export const handleForgottenPasswordRequest = async (req, res) => {
     const { email } = req.body;
@@ -167,13 +162,10 @@ export const handleForgottenPasswordRequest = async (req, res) => {
     }
 };
 
-import { hashPassword } from "../utils/passwordUtils.js";
-import { db } from '../config/db.js';
-
 export const handleResetPasswordCompletion = async (req, res) => {
-    const { code, email, password } = req.body;
+    const { code, email, newPassword } = req.body;
 
-    if (!email || !code || !password) {
+    if (!email || !code || !newPassword) {
         console.log('Missing email, reset code, or password');
         return res.status(400).json({ message: 'Email, reset code, and password are required' });
     }
@@ -191,7 +183,7 @@ export const handleResetPasswordCompletion = async (req, res) => {
         }
 
         // Hash the new password
-        const hashedPassword = await hashPassword(password);
+        const hashedPassword = await hashPassword(newPassword);
 
         // Update the user's password
         await db.query('UPDATE users SET password = $1 WHERE email = $2', [hashedPassword, email]);
@@ -205,3 +197,5 @@ export const handleResetPasswordCompletion = async (req, res) => {
         return res.status(500).json({ message: 'Internal server error', error: error.message });
     }
 };
+
+

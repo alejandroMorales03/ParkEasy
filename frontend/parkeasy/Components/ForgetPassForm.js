@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
     View,
     Text,
@@ -17,6 +18,7 @@ import {ICONS} from "../Constants/icons";
 import globalStyle from "../Styles/GlobalStyle";
 
 const ForgetPassForm = ({ navigation }) => {
+    const [error, setError] = React.useState('')
     const [email, setEmail] = React.useState('');
     const [isCodeSent, setIsCodeSent] = React.useState(false);
     const [code, setCode] = React.useState('');
@@ -34,7 +36,7 @@ const ForgetPassForm = ({ navigation }) => {
 
 
         try{
-            const response = await axios.post('http://10.108.226.227:8000/api/auth/reset-password', {
+            const response = await axios.post('http://192.168.1.70:8000/api/auth/reset-password', {
                 email,
             })
             setIsCodeSent(true);
@@ -49,12 +51,13 @@ const ForgetPassForm = ({ navigation }) => {
     async function handleResetPasswordCompletion() {
         console.log("Code:", code);
         console.log("New Password:", newPassword);
+        console.log(email)
 
         try{
-            const response = await axios.post('http://10.108.226.227:8000/api/auth/new-password', {
+            const response = await axios.post('http://192.168.1.70:8000/api/auth/new-password', {
+                code,
                 email,
                 newPassword,
-                code,
             })
             navigation.navigate('Login');
         } catch (err) {
@@ -116,7 +119,7 @@ const ForgetPassForm = ({ navigation }) => {
                                         onChangeText={setCode}
                                         style={GlobalStyle.input}
                                         placeholderTextColor={COLORS.Grey}
-                                        keyboardType="number-pad"
+                                    
                                     />
                                 </View>
 
