@@ -22,16 +22,49 @@ const ForgetPassForm = ({ navigation }) => {
     const [code, setCode] = React.useState('');
     const [newPassword, setNewPassword] = React.useState('');
 
+
     const handleSendCode = () => {
 
-        // TODO make condition that if field is empty display error
-        setIsCodeSent(true);
+    // reset fields
+    function resetField(){
+        setEmail('');
+    }
+
+    async function handleResetPasswordRequest(){
+
+
+        try{
+            const response = await axios.post('http://10.108.226.227:8000/api/auth/reset-password', {
+                email,
+            })
+            setIsCodeSent(true);
+        } catch (err) {
+            // Print and display actual error message from the response
+            console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
+            setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
+        }
+        
     };
 
-    const handleVerifyCodeAndResetPassword = () => {
+    async function handleResetPasswordCompletion() {
         console.log("Code:", code);
         console.log("New Password:", newPassword);
-        navigation.navigate('Login');
+
+        try{
+            const response = await axios.post('http://10.108.226.227:8000/api/auth/new-password', {
+                email,
+                newPassword,
+                code,
+            })
+            navigation.navigate('Login');
+        } catch (err) {
+            // Print and display actual error message from the response
+            console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
+            setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
+        }
+
+
+       
     };
 
     return (
@@ -70,7 +103,7 @@ const ForgetPassForm = ({ navigation }) => {
                                         autoCapitalize={false}
                                     />
                             </View>
-                                <TouchableOpacity onPress={handleSendCode} style={Style.button}>
+                                <TouchableOpacity onPress={handleResetPasswordRequest} style={Style.button}>
                                     <Text style={Style.buttonText}>Send Code</Text>
                                 </TouchableOpacity>
                             </>
@@ -97,7 +130,7 @@ const ForgetPassForm = ({ navigation }) => {
                                         secureTextEntry
                                     />
                                 </View>
-                                <TouchableOpacity onPress={handleVerifyCodeAndResetPassword} style={Style.button}>
+                                <TouchableOpacity onPress={handleResetPasswordCompletion} style={Style.button}>
                                     <Text style={Style.buttonText}>Reset Password</Text>
                                 </TouchableOpacity>
                             </>
@@ -107,7 +140,9 @@ const ForgetPassForm = ({ navigation }) => {
                     {/*Buttons and Links*/}
 
                     <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                        <TouchableOpacity onPress={() => {
+                            resetField();
+                            navigation.navigate('Login');}}>
                             <Text style={Style.bottomLinks}>Back</Text>
                         </TouchableOpacity>
                     </View>

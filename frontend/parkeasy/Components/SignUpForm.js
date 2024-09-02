@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 import {
     View,
     Text,
@@ -15,6 +16,8 @@ import {COLORS} from "../Constants/Constants";
 import GlobalStyle from "../Styles/GlobalStyle";
 
 const SignUpForm = ({ navigation }) => {
+    //TODO: Get users location via longitude and latitude
+
     const [email, setEmail] = React.useState('');
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
@@ -24,47 +27,87 @@ const SignUpForm = ({ navigation }) => {
     const [isCodeSent, setIsCodeSent] = React.useState(false);
     const [confirmCode, setConfirmCode] = React.useState('');
 
+    function resetField(){
+        setEmail('');
+        setPassword('');
+        setFirstName('');
+        setLastName('');
+        setConfirmPassword('');
+    }
+
+   
+
     // Function to handle sign-up
-    function handleSignUp() {
+    async function handleSignUp() {
         // Reset error message
         setError('');
-
+    
         // Check if all fields are filled
         if (!email || !firstName || !lastName || !password || !confirmPassword) {
             setError('Please fill out all fields.');
             return;
         }
-
+    
         // Check if passwords match
         if (password !== confirmPassword) {
             setError('Passwords do not match.');
             return;
         }
+    
+        try {
+            // Send data to the backend
 
-        // If all checks pass, proceed to send code logic
-        setIsCodeSent(true);
+            //Use localhost if running simulator, IP from computer if using external device like your phone
+            const response = await axios.post('http://10.108.226.227:8000/api/auth/signup', {
+                email,
+                firstName,
+                lastName,
+                password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
 
-        console.log("Email: ", email);
-        console.log("Password: ", password);
-        console.log("First Name: ", firstName);
-        console.log("Last Name: ", lastName);
-
-        // Simulate sending the confirmation code
-        console.log("Sending confirmation code to email: ", email);
+            console.log(response.data);
+    
+            // If all checks pass, proceed to send code logic
+            setIsCodeSent(true);
+    
+        } catch (err) {
+            // Print and display actual error message from the response
+            console.error('Error during sign-up:', err.response ? err.response.data.message : err.message);
+            setError(err.response ? err.response.data.message : 'Sign-up failed. Please try again.');
+        }
     }
 
     // Function to handle confirmation code submission
-    function handleConfirmCode() {
+    async function handleConfirmCode() {
         if (!confirmCode) {
             setError('Please enter the confirmation code sent to your email.');
             return;
         }
-
-        console.log("Confirmation Code: ", confirmCode);
-
-        // Navigate to login or other appropriate screen after successful confirmation
-        navigation.navigate('Login');
+    
+        try {
+            // Send the confirmation code to the backend for verification
+            //Use localhost if running simulator, IP from computer if using external device like your phone
+            const response = await axios.post('http://10.108.226.227:8000/api/auth/verify-signup', {
+                email,
+                code: confirmCode
+            });
+    
+            console.log(response.data);
+    
+            // Navigate to the Login page or other appropriate screen after successful confirmation
+            navigation.navigate('Login');
+    
+        } catch (err) {
+            console.error('Error verifying code:', err.response ? err.response.data : err.message);
+            setError('Verification failed. Please try again.');
+        }
     }
+    
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -86,17 +129,6 @@ const SignUpForm = ({ navigation }) => {
                                 </Text>
                             ) : null}
 
-                            {/* Email Input */}
-                            <View style={Style.fieldCredential}>
-                                <TextInput
-                                    placeholder="Email"
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    style={globalStyles.input}
-                                    placeholderTextColor={COLORS.Grey}
-                                    autoCapitalize="none"
-                                />
-                            </View>
 
                             {/* First Name Input */}
                             <View style={Style.fieldCredential}>
@@ -116,6 +148,18 @@ const SignUpForm = ({ navigation }) => {
                                     placeholder="Last Name"
                                     value={lastName}
                                     onChangeText={setLastName}
+                                    style={globalStyles.input}
+                                    placeholderTextColor={COLORS.Grey}
+                                    autoCapitalize="none"
+                                />
+                            </View>
+
+                            {/* Email Input */}
+                            <View style={Style.fieldCredential}>
+                                <TextInput
+                                    placeholder="Email"
+                                    value={email}
+                                    onChangeText={setEmail}
                                     style={globalStyles.input}
                                     placeholderTextColor={COLORS.Grey}
                                     autoCapitalize="none"
@@ -185,7 +229,10 @@ const SignUpForm = ({ navigation }) => {
 
                     {/* Back Button */}
                     <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate('Login');
+                            resetField();
+                        }}>
                             <Text style={Style.bottomLinks}>Back</Text>
                         </TouchableOpacity>
                     </View>

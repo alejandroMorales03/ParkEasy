@@ -1,28 +1,18 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import db from './config/db.js'
-import ScrapingJob from './services/scraper.js';
-import authentication from './Routes/authRoutes.js';
-
-
-dotenv.config();
+import express from 'express';
+import { connectDB } from './config/db.js';
+import authRoutes from './routes/authRoutes.js';
+import './utils/clearExpiredRows.js'
 
 const app = express();
-const port  = process.env.SERVER_PORT
+
+//Connect to database
+connectDB();
 
 app.use(express.json());
 
-ScrapingJob.start();
 
+//Handles routes related to credentials 
+app.use('/api/auth', authRoutes);
 
-app.use('/authentication', authentication)
-
-
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
-
-
-
-
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

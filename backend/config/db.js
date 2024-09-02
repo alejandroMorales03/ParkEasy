@@ -1,21 +1,43 @@
-import pg from 'pg'
-import dotenv from 'dotenv'
-
-dotenv.config();
+import pkg from 'pg';
+import config from './config.js'; 
 
 const dbConfig = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT, 10),
-  database: process.env.DB_DATABASE,
-  ssl: true
+  user: config.db.user,
+  password: config.db.password,
+  host: config.db.host,
+  port: config.db.port,
+  database: config.db.database,
+  ssl: {
+    rejectUnauthorized: false
+  }
 };
 
-const db = new pg.Client(dbConfig);
+const { Pool } = pkg;
 
-db.connect()
-  .then(() => console.log('Connected to PostgreSQL database'))
-  .catch(err => console.error('Error connecting to PostgreSQL database', err));
+const pool = new Pool(dbConfig);
 
-export default db;
+const connectDB = async () => {
+
+  console.log('Database pool initialized');
+};
+
+const closeDB = async () => {
+  try {
+    await pool.end();
+    console.log('Database connection pool closed');
+  } catch (err) {
+    console.error('Error closing the database connection pool', err);
+  }
+};
+
+process.on('SIGINT', async () => {
+  await closeDB();
+  process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+  await closeDB();
+  process.exit(0);
+});
+
+export { pool as db, connectDB, closeDB };
