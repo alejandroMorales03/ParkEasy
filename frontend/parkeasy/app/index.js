@@ -14,7 +14,7 @@ const CredentialsStack = () => {
         <Stack.Navigator initialRouteName="LoginPage"
                          screenOptions={{
                              headerShown: false,
-                             ...TransitionPresets.ModalSlideFromBottomIOS  // Apply fade transition (selected by method)
+                             ...TransitionPresets.ScaleFromCenterAndroid // Apply fade transition (selected by method)
                          }}>
 
             <Stack.Screen name="Login" component={LoginForm}

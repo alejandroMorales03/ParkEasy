@@ -24,9 +24,17 @@ const ForgetPassForm = ({ navigation }) => {
     const [code, setCode] = React.useState('');
     const [newPassword, setNewPassword] = React.useState('');
 
+
+    const handleSendCode = () => {
+
+    // reset fields
+    function resetField(){
+        setEmail('');
+    }
+
     async function handleResetPasswordRequest(){
-        
-    
+
+
         try{
             const response = await axios.post('http://192.168.1.70:8000/api/auth/reset-password', {
                 email,
@@ -135,7 +143,9 @@ const ForgetPassForm = ({ navigation }) => {
                     {/*Buttons and Links*/}
 
                     <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                        <TouchableOpacity onPress={() => {
+                            resetField();
+                            navigation.navigate('Login');}}>
                             <Text style={Style.bottomLinks}>Back</Text>
                         </TouchableOpacity>
                     </View>
