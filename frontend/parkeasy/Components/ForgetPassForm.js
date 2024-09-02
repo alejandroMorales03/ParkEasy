@@ -22,6 +22,9 @@ const ForgetPassForm = ({ navigation }) => {
     const [code, setCode] = React.useState('');
     const [newPassword, setNewPassword] = React.useState('');
 
+
+    const handleSendCode = () => {
+
     // reset fields
     function resetField(){
         setEmail('');

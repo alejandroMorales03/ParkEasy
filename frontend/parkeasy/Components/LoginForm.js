@@ -26,6 +26,8 @@ const LoginForm = ({ navigation }) => {
 
     // this function is to reset the fields
 
+
+ 
     function resetField(){
         setEmail('');
         setPassword('');
@@ -39,6 +41,7 @@ const LoginForm = ({ navigation }) => {
             setError('Please fill out all fields.')
             return
         }
+
         console.log("Email: ", email);
         console.log("Password: ", password);
 
@@ -111,7 +114,7 @@ const LoginForm = ({ navigation }) => {
                             />
                         </View>
 
-
+                        {/*TODO show password feature*/}
 
                         {/* Login Button */}
 
