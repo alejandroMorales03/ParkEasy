@@ -82,6 +82,7 @@ const SignUpForm = ({ navigation }) => {
             // Print and display actual error message from the response
             console.error('Error during sign-up:', err.response ? err.response.data.message : err.message);
             setError(err.response ? err.response.data.message : 'Sign-up failed. Please try again.');
+            resetField(); // cleans fields when there is an error
         }
     }
 

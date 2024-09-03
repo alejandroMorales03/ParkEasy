@@ -64,6 +64,7 @@ const ForgetPassForm = ({ navigation }) => {
                 // Print and display actual error message from the response
                 console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
                 setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
+                resetField();
             }
 
 

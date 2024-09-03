@@ -57,10 +57,7 @@ const LoginForm = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView
-            style={{ flex: 1 }}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
+
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <SafeAreaView style={Style.fullPageContainer}>
                     <View style={Style.loginPageContainer}>
@@ -135,7 +132,6 @@ const LoginForm = ({ navigation }) => {
                     </View>
                 </SafeAreaView>
             </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
     );
 };
 
