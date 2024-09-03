@@ -26,6 +26,7 @@ const LoginForm = ({ navigation }) => {
     const [password, setPassword] = React.useState('');
     const [error, setError] = React.useState('');
 
+    // field clean up
     function resetField(){
         setEmail('');
         setPassword('');

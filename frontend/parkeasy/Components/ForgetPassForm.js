@@ -27,7 +27,7 @@ const ForgetPassForm = ({ navigation }) => {
 
     const handleSendCode = () => {
 
-        // reset fields
+        // field clean up
         function resetField() {
             setEmail('');
         }

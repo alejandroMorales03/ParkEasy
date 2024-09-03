@@ -27,6 +27,9 @@ const SignUpForm = ({ navigation }) => {
     const [isCodeSent, setIsCodeSent] = React.useState(false);
     const [confirmCode, setConfirmCode] = React.useState('');
 
+
+    // field clean up
+
     function resetField(){
         setEmail('');
         setPassword('');
