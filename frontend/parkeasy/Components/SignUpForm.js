@@ -27,6 +27,17 @@ const SignUpForm = ({ navigation }) => {
     const [isCodeSent, setIsCodeSent] = React.useState(false);
     const [confirmCode, setConfirmCode] = React.useState('');
 
+
+    // field clean up
+
+    function resetField(){
+        setEmail('');
+        setPassword('');
+        setFirstName('');
+        setLastName('');
+        setConfirmPassword('');
+    }
+
    
 
     // Function to handle sign-up
@@ -50,7 +61,7 @@ const SignUpForm = ({ navigation }) => {
             // Send data to the backend
 
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://192.168.1.70:8000/api/auth/signup', {
+            const response = await axios.post('http://localhost:8000/api/auth/signup', {
                 email,
                 firstName,
                 lastName,
@@ -84,20 +95,21 @@ const SignUpForm = ({ navigation }) => {
         try {
             // Send the confirmation code to the backend for verification
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://192.168.1.70:8000/api/auth/verify-signup', {
+            const response = await axios.post('http://localhost:8000/api/auth/verify-signup', {
                 email,
                 code: confirmCode
             });
     
             console.log(response.data);
     
-            // Navigate to login or other appropriate screen after successful confirmation
-         
+
+     
+            // Navigate to the Login page or other appropriate screen after successful confirmation
             navigation.navigate('Login');
     
         } catch (err) {
             console.error('Error verifying code:', err.response ? err.response.data : err.message);
-            setError('Verification failed. Please try again.');
+            setError(err.response? err.response.data.message : 'Verification failed. Please try again.');
         }
     }
     
@@ -122,17 +134,6 @@ const SignUpForm = ({ navigation }) => {
                                 </Text>
                             ) : null}
 
-                            {/* Email Input */}
-                            <View style={Style.fieldCredential}>
-                                <TextInput
-                                    placeholder="Email"
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    style={globalStyles.input}
-                                    placeholderTextColor={COLORS.Grey}
-                                    autoCapitalize="none"
-                                />
-                            </View>
 
                             {/* First Name Input */}
                             <View style={Style.fieldCredential}>
@@ -152,6 +153,18 @@ const SignUpForm = ({ navigation }) => {
                                     placeholder="Last Name"
                                     value={lastName}
                                     onChangeText={setLastName}
+                                    style={globalStyles.input}
+                                    placeholderTextColor={COLORS.Grey}
+                                    autoCapitalize="none"
+                                />
+                            </View>
+
+                            {/* Email Input */}
+                            <View style={Style.fieldCredential}>
+                                <TextInput
+                                    placeholder="Email"
+                                    value={email}
+                                    onChangeText={setEmail}
                                     style={globalStyles.input}
                                     placeholderTextColor={COLORS.Grey}
                                     autoCapitalize="none"
@@ -211,30 +224,39 @@ const SignUpForm = ({ navigation }) => {
                                     placeholderTextColor={COLORS.Grey}
                                 />
                             </View>
-
+                            {/*TODO fix the distance of the link buttons*/}
                             {/* Submit Confirmation Code Button */}
                             <TouchableOpacity onPress={handleConfirmCode} style={Style.button}>
                                 <Text style={Style.buttonText}>Submit Code</Text>
                             </TouchableOpacity>
-                        </>
+
+
+
+                            <View style={Style.linksContainer}>
+
+                            {/* Resent Password */}
+
+                            <TouchableOpacity onPress={handleSignUp}>
+                                <Text style={Style.bottomLinks}>Resend Code</Text>
+                            </TouchableOpacity>
+
+                             {/* Back Button */}
+
+                             <TouchableOpacity onPress={() => {
+                                 navigation.navigate('Login');
+                                 resetField();
+                             }}>
+                                 <Text style={Style.bottomLinks}>Back</Text>
+                             </TouchableOpacity>
+                            </View>
+                    </>
+
                     )}
 
                      {/* Resend Code Button */}
 
-                     <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={handleSignUp}>
-                            <Text style={Style.bottomLinks}>Resend Code</Text>
-                        </TouchableOpacity>
-                    </View>
 
-                    {/* Back Button */}
-                    <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={Style.bottomLinks}>Back</Text>
-                        </TouchableOpacity>
-                    </View>
 
-                   
 
                 </View>
             </SafeAreaView>
