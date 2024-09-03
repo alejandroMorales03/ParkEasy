@@ -13,7 +13,7 @@ const deleteExpiredCodes = async () => {
     );
 
     const forgotPasswordUsers = await db.query(
-      'DELETE FROM recovery_password WHERE expires_at < $1'
+      'DELETE FROM forgot_password WHERE expires_at < $1'
     )
     
     console.log(`Deleted ${pendingUsers.rowCount} expired rows from pending_users.`);

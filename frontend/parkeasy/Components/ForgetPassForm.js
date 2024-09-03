@@ -16,144 +16,125 @@ import {COLORS} from "../Constants/Constants";
 import imageLogo from "../assets/LogoParkEasyTrans.png";
 import {ICONS} from "../Constants/icons";
 import globalStyle from "../Styles/GlobalStyle";
+import globalStyles from "../Styles/GlobalStyle";
 
 const ForgetPassForm = ({ navigation }) => {
-    const [error, setError] = React.useState('')
+    const [error, setError] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [isCodeSent, setIsCodeSent] = React.useState(false);
     const [code, setCode] = React.useState('');
     const [newPassword, setNewPassword] = React.useState('');
 
-
-    const handleSendCode = () => {
-
-        // field clean up
-        function resetField() {
-            setEmail('');
+    const handleResetPasswordRequest = async () => {
+        try {
+            const response = await axios.post('http://localhost:8000/api/auth/reset-password', {
+                email,
+            });
+            setIsCodeSent(true);
+        } catch (err) {
+            console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
+            setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
         }
+    };
 
-        async function handleResetPasswordRequest() {
+    const handleResetPasswordCompletion = async () => {
+        try {
+            const response = await axios.post('http://localhost:8000/api/auth/new-password', {
+                code,
+                email,
+                newPassword,
+            });
+            navigation.navigate('Login');
+        } catch (err) {
+            console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
+            setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
+        }
+    };
 
+    const resetField = () => {
+        setEmail('');
+    };
 
-            try {
-                const response = await axios.post('http://192.168.1.70:8000/api/auth/reset-password', {
-                    email,
-                })
-                setIsCodeSent(true);
-            } catch (err) {
-                // Print and display actual error message from the response
-                console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
-                setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
-            }
+    return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <SafeAreaView style={Style.fullPageContainer}>
+                <View style={Style.loginPageContainer}>
+                    <Image source={imageLogo} style={Style.imageLogo} />
 
-        };
-
-        async function handleResetPasswordCompletion() {
-            console.log("Code:", code);
-            console.log("New Password:", newPassword);
-            console.log(email)
-
-            try {
-                const response = await axios.post('http://192.168.1.70:8000/api/auth/new-password', {
-                    code,
-                    email,
-                    newPassword,
-                })
-                navigation.navigate('Login');
-            } catch (err) {
-                // Print and display actual error message from the response
-                console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
-                setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
-            }
-
-
-        };
-
-        return (
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <SafeAreaView style={Style.fullPageContainer}>
-                    <View style={Style.loginPageContainer}>
-
-                        <Image source={imageLogo} style={Style.imageLogo}/>
-
-                        {/*Title change condition*/}
-
-                        {/*Credentials */}
-
-                        <View style={Style.credentialsContainer}>
-
-                            <View style={Style.textContainerFB}>
-                                <Text style={Style.mainTitleAlter}>
-                                    {isCodeSent ? "Enter Verification Code" : "Forgot Password?"}
-                                </Text>
-                                <Text style={globalStyle.Text}>
-                                    {isCodeSent ? "Your code has been sent" : "Dont worry! It happens to all of us. Let's get your account back!"}
-                                </Text>
-                            </View>
-                            {!isCodeSent ? (
-                                <>
-                                    <View style={Style.fieldCredential}>
-
-                                        <Image source={ICONS.email} style={globalStyle.icons}></Image>
-
-                                        <TextInput
-                                            placeholder="Email"
-                                            value={email}
-                                            onChangeText={setEmail}
-                                            style={GlobalStyle.input}
-                                            placeholderTextColor={COLORS.Grey}
-                                            autoCapitalize={false}
-                                        />
-                                    </View>
-                                    <TouchableOpacity onPress={handleResetPasswordRequest} style={Style.button}>
-                                        <Text style={Style.buttonText}>Send Code</Text>
-                                    </TouchableOpacity>
-                                </>
-                            ) : (
-                                <>
-                                    <View style={Style.fieldCredential}>
-                                        <TextInput
-                                            placeholder="Verification Code"
-                                            value={code}
-                                            onChangeText={setCode}
-                                            style={GlobalStyle.input}
-                                            placeholderTextColor={COLORS.Grey}
-
-                                        />
-                                    </View>
-
-                                    <View style={Style.fieldCredential}>
-                                        <TextInput
-                                            placeholder="New Password"
-                                            value={newPassword}
-                                            onChangeText={setNewPassword}
-                                            style={GlobalStyle.input}
-                                            placeholderTextColor={COLORS.Grey}
-                                            secureTextEntry
-                                        />
-                                    </View>
-                                    <TouchableOpacity onPress={handleResetPasswordCompletion} style={Style.button}>
-                                        <Text style={Style.buttonText}>Reset Password</Text>
-                                    </TouchableOpacity>
-                                </>
-                            )}
+                    <View style={Style.credentialsContainer}>
+                        <View style={Style.textContainerFB}>
+                            <Text style={Style.mainTitleAlter}>
+                                {isCodeSent ? "Enter Verification Code" : "Forgot Password?"}
+                            </Text>
+                            <Text style={globalStyle.Text}>
+                                {isCodeSent ? "Your code has been sent" : "Don't worry! It happens to all of us. Let's get your account back!"}
+                            </Text>
                         </View>
 
-                        {/*Buttons and Links*/}
+                        {/* Display error message if any */}
+                        {error ? (
+                            <Text style={globalStyles.errorText}>
+                                {error}
+                            </Text>
+                        ) : null}
 
-                        <View style={Style.linksContainer}>
-                            <TouchableOpacity onPress={() => {
-                                resetField();
-                                navigation.navigate('Login');
-                            }}>
-                                <Text style={Style.bottomLinks}>Back</Text>
-                            </TouchableOpacity>
-                        </View>
+                        {!isCodeSent ? (
+                            <>
+                                <View style={Style.fieldCredential}>
+                                    <Image source={ICONS.email} style={globalStyle.icons} />
+                                    <TextInput
+                                        placeholder="Email"
+                                        value={email}
+                                        onChangeText={setEmail}
+                                        style={GlobalStyle.input}
+                                        placeholderTextColor={COLORS.Grey}
+                                        autoCapitalize={false}
+                                    />
+                                </View>
+                                <TouchableOpacity onPress={handleResetPasswordRequest} style={Style.button}>
+                                    <Text style={Style.buttonText}>Send Code</Text>
+                                </TouchableOpacity>
+                            </>
+                        ) : (
+                            <>
+                                <View style={Style.fieldCredential}>
+                                    <TextInput
+                                        placeholder="Verification Code"
+                                        value={code}
+                                        onChangeText={setCode}
+                                        style={GlobalStyle.input}
+                                        placeholderTextColor={COLORS.Grey}
+                                    />
+                                </View>
+                                <View style={Style.fieldCredential}>
+                                    <TextInput
+                                        placeholder="New Password"
+                                        value={newPassword}
+                                        onChangeText={setNewPassword}
+                                        style={GlobalStyle.input}
+                                        placeholderTextColor={COLORS.Grey}
+                                        secureTextEntry
+                                    />
+                                </View>
+                                <TouchableOpacity onPress={handleResetPasswordCompletion} style={Style.button}>
+                                    <Text style={Style.buttonText}>Reset Password</Text>
+                                </TouchableOpacity>
+                            </>
+                        )}
                     </View>
-                </SafeAreaView>
-            </TouchableWithoutFeedback>
-        );
-    }
+
+                    <View style={Style.linksContainer}>
+                        <TouchableOpacity onPress={() => {
+                            resetField();
+                            navigation.navigate('Login');
+                        }}>
+                            <Text style={Style.bottomLinks}>Back</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
+    );
 };
 
 export default ForgetPassForm;

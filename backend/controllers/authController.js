@@ -135,7 +135,7 @@ export const handleForgottenPasswordRequest = async (req, res) => {
         const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
 
         if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'No account associated with this email address' });
+            return res.status(404).json({ message: 'No account found' });
         }
 
         // Remove any previous reset requests for this email
