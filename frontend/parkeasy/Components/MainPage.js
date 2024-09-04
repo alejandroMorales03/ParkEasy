@@ -16,7 +16,7 @@ import {ICONS} from "../Constants/icons";
 import globalStyles from "../Styles/GlobalStyle";
 import userPagesStyle from "../Styles/UserPagesStyle";
 import GlobalStyle from "../Styles/GlobalStyle";
-
+// this is a test to code from the phone
 const mainPage = () => {
     return (
         <SafeAreaView style={Style.mainPageContainer}>
