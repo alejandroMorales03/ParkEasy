@@ -16,9 +16,10 @@ import {COLORS} from "../Constants/Constants";
 import imageLogo from "../assets/LogoParkEasyTrans.png";
 import {ICONS} from "../Constants/icons";
 import globalStyle from "../Styles/GlobalStyle";
+import globalStyles from "../Styles/GlobalStyle";
 
 const ForgetPassForm = ({ navigation }) => {
-    const [error, setError] = React.useState('')
+    const [error, setError] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [isCodeSent, setIsCodeSent] = React.useState(false);
     const [code, setCode] = React.useState('');
@@ -30,14 +31,12 @@ const ForgetPassForm = ({ navigation }) => {
         try{
             const response = await axios.post('http://127.0.0.1:8000/api/auth/reset-password', {
                 email,
-            })
+            });
             setIsCodeSent(true);
         } catch (err) {
-            // Print and display actual error message from the response
             console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
             setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
         }
-        
     };
 
     async function handleResetPasswordCompletion() {
@@ -50,45 +49,45 @@ const ForgetPassForm = ({ navigation }) => {
                 code,
                 email,
                 newPassword,
-            })
+            });
             navigation.navigate('Login');
         } catch (err) {
-            // Print and display actual error message from the response
             console.error('Error during password reset:', err.response ? err.response.data.message : err.message);
             setError(err.response ? err.response.data.message : 'Password reset failed. Please try again.');
         }
+    };
 
-
-       
+    const resetField = () => {
+        setEmail('');
     };
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={Style.fullPageContainer}>
                 <View style={Style.loginPageContainer}>
-
                     <Image source={imageLogo} style={Style.imageLogo} />
 
-                    {/*Title change condition*/}
-
-                    {/*Credentials */}
-
                     <View style={Style.credentialsContainer}>
-
                         <View style={Style.textContainerFB}>
                             <Text style={Style.mainTitleAlter}>
                                 {isCodeSent ? "Enter Verification Code" : "Forgot Password?"}
                             </Text>
                             <Text style={globalStyle.Text}>
-                                {isCodeSent ? "Your code has been sent" : "Dont worry! It happens to all of us. Let's get your account back!" }
+                                {isCodeSent ? "Your code has been sent" : "Don't worry! It happens to all of us. Let's get your account back!"}
                             </Text>
                         </View>
+
+                        {/* Display error message if any */}
+                        {error ? (
+                            <Text style={globalStyles.errorText}>
+                                {error}
+                            </Text>
+                        ) : null}
+
                         {!isCodeSent ? (
                             <>
-                            <View style={Style.fieldCredential}>
-
-                                <Image source={ICONS.email} style={globalStyle.icons}></Image>
-
+                                <View style={Style.fieldCredential}>
+                                    <Image source={ICONS.email} style={globalStyle.icons} />
                                     <TextInput
                                         placeholder="Email"
                                         value={email}
@@ -97,7 +96,7 @@ const ForgetPassForm = ({ navigation }) => {
                                         placeholderTextColor={COLORS.Grey}
                                         autoCapitalize={false}
                                     />
-                            </View>
+                                </View>
                                 <TouchableOpacity onPress={handleResetPasswordRequest} style={Style.button}>
                                     <Text style={Style.buttonText}>Send Code</Text>
                                 </TouchableOpacity>
@@ -111,10 +110,8 @@ const ForgetPassForm = ({ navigation }) => {
                                         onChangeText={setCode}
                                         style={GlobalStyle.input}
                                         placeholderTextColor={COLORS.Grey}
-                                    
                                     />
                                 </View>
-
                                 <View style={Style.fieldCredential}>
                                     <TextInput
                                         placeholder="New Password"
@@ -132,10 +129,11 @@ const ForgetPassForm = ({ navigation }) => {
                         )}
                     </View>
 
-                    {/*Buttons and Links*/}
-
                     <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                        <TouchableOpacity onPress={() => {
+                            resetField();
+                            navigation.navigate('Login');
+                        }}>
                             <Text style={Style.bottomLinks}>Back</Text>
                         </TouchableOpacity>
                     </View>
