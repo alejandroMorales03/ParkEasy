@@ -36,11 +36,11 @@ const LoginForm = ({ navigation }) => {
         console.log("Password: ", password);
 
         try{
-            const response = await axios.post('http://1192.168.1.70:8000/api/auth/login',{
+            const response = await axios.post('http://' + config.:8000/api/auth/login',{
                 email,
                 password
             })
-            navigation.navigate("Sign Up")
+            navigation.navigate("Home Page")
             
         }catch(err){
             console.error('Error during login:', err.response ? err.response.data : err.message);

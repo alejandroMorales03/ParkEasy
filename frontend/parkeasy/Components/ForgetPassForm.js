@@ -28,7 +28,7 @@ const ForgetPassForm = ({ navigation }) => {
         
     
         try{
-            const response = await axios.post('http://192.168.1.70:8000/api/auth/reset-password', {
+            const response = await axios.post('http://127.0.0.1:8000/api/auth/reset-password', {
                 email,
             })
             setIsCodeSent(true);
@@ -46,7 +46,7 @@ const ForgetPassForm = ({ navigation }) => {
         console.log(email)
 
         try{
-            const response = await axios.post('http://192.168.1.70:8000/api/auth/new-password', {
+            const response = await axios.post('http://127.0.0.1:8000/api/auth/new-password', {
                 code,
                 email,
                 newPassword,

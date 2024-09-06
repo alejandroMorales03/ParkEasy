@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios'
+import config from '../../../backend/config/config';
 import {
     View,
     Text,
@@ -50,7 +51,7 @@ const SignUpForm = ({ navigation }) => {
             // Send data to the backend
 
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://192.168.1.70:8000/api/auth/signup', {
+            const response = await axios.post('http://' + :8000/api/auth/signup', {
                 email,
                 firstName,
                 lastName,
@@ -84,7 +85,7 @@ const SignUpForm = ({ navigation }) => {
         try {
             // Send the confirmation code to the backend for verification
             //Use localhost if running simulator, IP from computer if using external device like your phone
-            const response = await axios.post('http://192.168.1.70:8000/api/auth/verify-signup', {
+            const response = await axios.post('http://127.0.0.1:8000/api/auth/verify-signup', {
                 email,
                 code: confirmCode
             });

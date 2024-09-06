@@ -15,11 +15,13 @@ const config = {
   },
   server: {
     port: process.env.PORT || 8000,  
+    ip: process.env.ip
   },
   notifier:{
     email: process.env.NOTIFICATION_EMAIL,
     password: process.env.NOTIF_EMAIL_PASS,
   }
+
 };
 
 export default config;
