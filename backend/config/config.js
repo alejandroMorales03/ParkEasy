@@ -14,8 +14,8 @@ const config = {
     }
   },
   server: {
-    port: process.env.PORT || 8000,  
-    ip: process.env.ip
+    port: process.env.SERVER_PORT || 8000,  
+    address: process.env.IP_ADDRESS,
   },
   notifier:{
     email: process.env.NOTIFICATION_EMAIL,
