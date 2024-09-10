@@ -17,6 +17,8 @@ import globalStyles from "../Styles/GlobalStyle";
 import userPagesStyle from "../Styles/UserPagesStyle";
 import GlobalStyle from "../Styles/GlobalStyle";
 
+//////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
+
 const mainPage = () => {
     return (
         <SafeAreaView style={Style.mainPageContainer}>

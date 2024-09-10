@@ -2,7 +2,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 import { COLORS , SIZES, FONT, CONTAINERS, BUTTON } from '../Constants/Constants'
 
 const { width, height } = Dimensions.get('window'); // collects the dimensions of the current window
-
+// style={GlobalStyle.icons}
 const GlobalStyle = StyleSheet.create({
     icons: {
         width: 20,
