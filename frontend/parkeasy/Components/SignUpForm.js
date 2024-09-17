@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios'
-import config from '../../../backend/config/config';
+// import config from '../../../backend/config/config';
 import {
     View,
     Text,
@@ -19,14 +19,14 @@ import GlobalStyle from "../Styles/GlobalStyle";
 const SignUpForm = ({ navigation }) => {
     //TODO: Get users location via longitude and latitude
 
-    const [email, setEmail] = React.useState('');
-    const [firstName, setFirstName] = React.useState('');
-    const [lastName, setLastName] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [confirmPassword, setConfirmPassword] = React.useState('');
-    const [error, setError] = React.useState('');
-    const [isCodeSent, setIsCodeSent] = React.useState(false);
-    const [confirmCode, setConfirmCode] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isCodeSent, setIsCodeSent] = useState(false);
+    const [confirmCode, setConfirmCode] = useState('');
 
 
     // field clean up

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {
     View,
@@ -19,17 +19,17 @@ import globalStyle from "../Styles/GlobalStyle";
 import globalStyles from "../Styles/GlobalStyle";
 
 const ForgetPassForm = ({ navigation }) => {
-    const [error, setError] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [isCodeSent, setIsCodeSent] = React.useState(false);
-    const [code, setCode] = React.useState('');
-    const [newPassword, setNewPassword] = React.useState('');
+    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+    const [isCodeSent, setIsCodeSent] = useState(false);
+    const [code, setCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
 
     async function handleResetPasswordRequest(){
         
     
         try{
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/reset-password', {
+            const response = await axios.post('http://localhost:8000/api/auth/reset-password', {
                 email,
             });
             setIsCodeSent(true);
@@ -45,7 +45,7 @@ const ForgetPassForm = ({ navigation }) => {
         console.log(email)
 
         try{
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/new-password', {
+            const response = await axios.post('http://localhost:8000/api/auth/new-password', {
                 code,
                 email,
                 newPassword,

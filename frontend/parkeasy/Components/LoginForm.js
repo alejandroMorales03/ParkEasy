@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     View,
     Text,
@@ -22,9 +22,9 @@ import axios from 'axios';
 
 const LoginForm = ({ navigation }) => {
 
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [error, setError] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     // field clean up
     function resetField(){
@@ -45,7 +45,7 @@ const LoginForm = ({ navigation }) => {
         console.log("Password: ", password);
 
         try{
-            const response = await axios.post('http://1192.168.1.70:8000/api/auth/login', {
+            const response = await axios.post('http://localhost:8000/api/auth/login', {
                 email,
                 password
             });
