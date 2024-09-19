@@ -9,6 +9,12 @@
       "expo-asset"
     ],
     "name": "parkeasy",
-    "slug": "parkeasy"
+    "slug": "parkeasy",
+    "ios": {
+      "bundleIdentifier": "com.parkeasy.app",
+      "config": {
+        "googleMapsApiKey": "AIzaSyCjrFVq2aPfG9AmUg4uNahEm6ZAnvoq0k8" 
+      }
+    }
   }
 }
