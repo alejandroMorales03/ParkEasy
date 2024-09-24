@@ -54,7 +54,7 @@ const ForgetPassForm = ({ navigation }) => {
             console.log(email)
 
             try {
-                const response = await axios.post('http://192.168.1.70:8000/api/auth/new-password', {
+                const response = await axios.post('http://localhost:8000/api/auth/new-password', {
                     code,
                     email,
                     newPassword,
