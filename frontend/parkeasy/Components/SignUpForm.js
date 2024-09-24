@@ -1,11 +1,7 @@
-<<<<<<< HEAD
+
 import React, {useState} from 'react';
 import axios from 'axios'
 // import config from '../../../backend/config/config';
-=======
-import React, { useState } from 'react';
-import axios from 'axios';
->>>>>>> origin/NewNielDev
 import {
     View,
     Text,
@@ -53,16 +49,7 @@ const ErrorMessage = ({ error }) => (
 
 const SignUpForm = ({ navigation }) => {
     // State variables
-    const [email, setEmail] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [confirmCode, setConfirmCode] = useState('');
-    const [error, setError] = useState('');
-    const [isCodeSent, setIsCodeSent] = useState(false);
 
-<<<<<<< HEAD
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -73,13 +60,8 @@ const SignUpForm = ({ navigation }) => {
     const [confirmCode, setConfirmCode] = useState('');
 
 
-    // field clean up
-
-    function resetField(){
-=======
     // Reset all input fields
     const resetFields = () => {
->>>>>>> origin/NewNielDev
         setEmail('');
         setFirstName('');
         setLastName('');
@@ -108,11 +90,9 @@ const SignUpForm = ({ navigation }) => {
             setIsCodeSent(true);
         } catch (err) {
             setError(err.response ? err.response.data.message : 'Sign-up failed. Please try again.');
-<<<<<<< HEAD
-            resetField(); // cleans fields when there is an error
-=======
+            resetFields(); // cleans fields when there is an error
+
             console.error('Error during sign-up:', err.response ? err.response.data.message : err.message);
->>>>>>> origin/NewNielDev
         }
     };
 
