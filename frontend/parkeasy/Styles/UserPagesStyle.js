@@ -12,45 +12,43 @@ const userPagesStyle= StyleSheet.create({
     navigationContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 20,
         alignItems: 'center',
         height: '10%',
-        borderColor: COLORS.Black,
-        borderWidth: 1,
-        backgroundColor: COLORS.LightSeaGreen,
+        backgroundColor: COLORS.DarkGreen,
+        paddingHorizontal: width * 0.08, // 8% of screen width
+        borderRadius: 37,
     },
 
-    menuIcon: {
-        width: 25,
-        height: 25,
-        resizeMode: 'contain',
-        alignItems: 'center',
-    },
-
-    profileIcon: {
+    mediumMenuIcon: {
         width: 40,
         height: 40,
         resizeMode: 'contain',
         alignItems: 'center',
     },
 
-    searchContainer: {
-        fontSize: SIZES.medium,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        height: '15%',
-        padding: 10,
-
+    largeMenuIcon: {
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
+        alignItems: 'center',
     },
 
-    searchInput: {
-        flex: 1,
-        width: '100%',
-        backgroundColor: COLORS.White,
-        borderColor: COLORS.Grey,
-        borderWidth: 1,
-        borderRadius: 15,
-        paddingHorizontal: width * 0.08, // 8% of screen width
+    smallMenuIcon: {
+        width: 35,
+        height: 35,
+        resizeMode: 'contain',
+        alignItems: 'center',
+    },
+
+    contentContainer: {
+        fontSize: SIZES.medium,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        height: 60,  // Set a fixed height for the search bar
+        backgroundColor: COLORS.White,  // Set a background color to differentiate it
+        borderRadius: 27,
+        paddingHorizontal: width * 0.05, // 8% of screen width
+        paddingVertical: width * 0.05,
         color: COLORS.Black,
         shadowOpacity: 1,
         shadowColor: COLORS.Grey,
@@ -58,10 +56,21 @@ const userPagesStyle= StyleSheet.create({
         shadowOffset: 2
     },
 
-    mapContainer: {
-        height: '80%',
+
+    searchInput: {
+        flex: 1,
+        paddingHorizontal: width * 0.05,
         backgroundColor: COLORS.White,
-    }
+
+    },
+
+    mapContainer: {
+        flex: 1,
+        backgroundColor: COLORS.White,
+        paddingHorizontal: 20, // 8% of screen width
+        flexDirection: 'column',  // Ensure vertical stacking
+        justifyContent: 'space-between',  // Start items from the top
+    },
 })
 
 export default userPagesStyle;

@@ -20,6 +20,8 @@ import imageLogo from "../assets/LogoParkEasyTrans.png";
 import GlobalStyle from "../Styles/GlobalStyle";
 import axios from 'axios';
 
+//////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
+
 const LoginForm = ({ navigation }) => {
 
     const [email, setEmail] = useState('');

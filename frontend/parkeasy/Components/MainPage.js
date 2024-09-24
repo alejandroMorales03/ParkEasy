@@ -16,42 +16,120 @@ import {ICONS} from "../Constants/icons";
 import globalStyles from "../Styles/GlobalStyle";
 import userPagesStyle from "../Styles/UserPagesStyle";
 import GlobalStyle from "../Styles/GlobalStyle";
+import axios from "axios";
+
+//////////////////////////////////// API Configuration ////////////////////////////////////
+
+const API = axios.create({
+    baseURL: 'http://localhost:8000/api/auth',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
+
+/////////////////////////////////// COMPONENTS ////////////////////////////////////
+
+const SearchBar = () => {
+    return (
+        <View style = {Style.contentContainer}>
+
+            <Image source={ICONS.searchIcon} style={GlobalStyle.icons}></Image>
+
+            <TextInput style = {userPagesStyle.searchInput}
+                       placeholderStyle = {GlobalStyle.placeHolderText}
+                       placeholder = "Search here"
+            ></TextInput>
+
+        </View>
+    )
+}
+
+
+const MapView = () => {
+    return (
+        <Text>Map View</Text>
+    )
+}
+
+const NavBar = () => {
+    return(
+        <View style = {Style.navigationContainer}>
+            {/*Menu Button*/}
+            <TouchableOpacity
+                activeOpacity={0.25}>
+                <Image source={ICONS.home} style={Style.mediumMenuIcon}></Image>
+            </TouchableOpacity>
+
+            {/*Plus Button*/}
+
+            <TouchableOpacity
+                activeOpacity={0.25}>
+                <Image source={ICONS.plusIcon} style={Style.largeMenuIcon}></Image>
+            </TouchableOpacity>
+
+            {/*Gear Button*/}
+
+            <TouchableOpacity
+                activeOpacity={0.25}>
+                <Image source={ICONS.gearIcon} style={Style.smallMenuIcon}></Image>
+            </TouchableOpacity>
+
+            {/*Profile Button*/}
+
+            <TouchableOpacity
+                activeOpacity={0.25}>
+                <Image source={ICONS.profileSmall} style={Style.smallMenuIcon}></Image>
+            </TouchableOpacity>
+
+        </View>
+    )
+}
+
+const LocationProfile = () => {
+    return (
+        <View>
+            <Image>
+            {/*    Parking Lot Image*/}
+            </Image>
+
+            <Text>
+                {/*Parking Lot Name*/}
+            </Text>
+
+            <Text>
+            {/*  Parking Lot Address*/}
+            </Text>
+
+            <View>
+
+
+            </View>
+
+        </View>
+    )
+}
+//////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
 const mainPage = () => {
     return (
         <SafeAreaView style={Style.mainPageContainer}>
 
-                <View style = {Style.mapContainer}>
-                    <View style = {Style.searchContainer}>
+            <View style = {Style.mapContainer}>
+                <SearchBar />
+                <NavBar/>
+                {/*<MapView />*/}
+            </View>
 
-                        <TextInput style = {userPagesStyle.searchInput}
-                                   placeholderTextColor={COLORS.Grey}
-                                   placeholderStyle = {GlobalStyle.input}
-                                   placeholder = "Address"
-                        ></TextInput>
 
-                    </View>
-                    <Text>Map View</Text>
-                </View>
 
-                <View style = {Style.navigationContainer}>
-                    {/*Menu Button*/}
-                    <TouchableOpacity
-                        activeOpacity={0.25}>
-                        <Image source={ICONS.menuLarge} style={Style.menuIcon}></Image>
-                    </TouchableOpacity>
 
-                    {/*Profile Button*/}
-
-                    <TouchableOpacity
-                        activeOpacity={0.25}>
-                        <Image source={ICONS.profileMedium} style={Style.menuIcon}></Image>
-                    </TouchableOpacity>
-
-                </View>
 
         </SafeAreaView>
     )
 }
 
 export default mainPage;
+
+//////////////////////////////////// COMPONENTS ////////////////////////////////////
+
+

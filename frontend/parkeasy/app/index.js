@@ -36,7 +36,11 @@ const App = () => {
         // <NavigationContainer independent={true}>
         //     <CredentialsStack />
         // </NavigationContainer>
+<<<<<<< HEAD
         <ForgetPassForm />
+=======
+        <MainPage />
+>>>>>>> origin/NewNielDev
     );
 };
 

@@ -13,6 +13,8 @@ export const COLORS =  {
     Grey: '#a5a5a5',
     Black: '#000000',
     Red: '#ff0000',
+    AlternateDarkGreen: '#037A74',
+
     Transparent: 'rgba(0,0,0,0)',
 
     // Primary Color Palette
@@ -24,7 +26,7 @@ export const FONT = {
 
     // Font Colors
 
-    PrimaryColorFont: COLORS.White,
+    PrimaryColorFont: COLORS.AlternateDarkGreen,
     SecondaryColorFont: COLORS.Black,
     TertiaryColorFont: COLORS.Yellow,
 
@@ -50,7 +52,7 @@ export const SIZES = {
 // container Colors
 export const CONTAINERS = {
 
-    PrimaryColorContainer: '#005252',
+    PrimaryColorContainer: COLORS.DarkGreen,
     SecondaryColorContainer: 'rgba(255, 255, 255, 0.20)',
     TertiaryColorContainer: '#f3e8ee',
 
