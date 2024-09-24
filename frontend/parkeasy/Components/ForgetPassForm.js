@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {
     View,
@@ -18,11 +18,11 @@ import {ICONS} from "../Constants/icons";
 import globalStyle from "../Styles/GlobalStyle";
 
 const ForgetPassForm = ({ navigation }) => {
-    const [error, setError] = React.useState('')
-    const [email, setEmail] = React.useState('');
-    const [isCodeSent, setIsCodeSent] = React.useState(false);
-    const [code, setCode] = React.useState('');
-    const [newPassword, setNewPassword] = React.useState('');
+    const [error, setError] = useState('')
+    const [email, setEmail] = useState('');
+    const [isCodeSent, setIsCodeSent] = useState(false);
+    const [code, setCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
 
 
     const handleSendCode = () => {
