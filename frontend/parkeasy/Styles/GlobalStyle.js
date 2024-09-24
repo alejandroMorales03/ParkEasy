@@ -12,6 +12,12 @@ const GlobalStyle = StyleSheet.create({
         marginLeft: 5,
     },
 
+    placeHolderText: {
+        color: COLORS.Grey,
+        fontSize: SIZES.medium,
+        fontWeight: 'bold',
+    },
+
     input: {
         flex: 1,
         height: 40,
