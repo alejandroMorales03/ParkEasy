@@ -89,9 +89,21 @@ const LocationProfile = () => {
     return (
         <View>
             <Image>
-
+            {/*    Parking Lot Image*/}
             </Image>
 
+            <Text>
+                {/*Parking Lot Name*/}
+            </Text>
+
+            <Text>
+            {/*  Parking Lot Address*/}
+            </Text>
+
+            <View>
+
+
+            </View>
 
         </View>
     )
