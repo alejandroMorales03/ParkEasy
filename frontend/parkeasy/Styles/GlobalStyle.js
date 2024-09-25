@@ -2,7 +2,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 import { COLORS , SIZES, FONT, CONTAINERS, BUTTON } from '../Constants/Constants'
 
 const { width, height } = Dimensions.get('window'); // collects the dimensions of the current window
-
+// style={GlobalStyle.icons}
 const GlobalStyle = StyleSheet.create({
     icons: {
         width: 20,
@@ -10,6 +10,12 @@ const GlobalStyle = StyleSheet.create({
         resizeMode: 'contain',
         alignItems: 'center',
         marginLeft: 5,
+    },
+
+    placeHolderText: {
+        color: COLORS.Grey,
+        fontSize: SIZES.medium,
+        fontWeight: 'bold',
     },
 
     input: {

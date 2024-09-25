@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     View,
     Text,
@@ -20,11 +20,13 @@ import imageLogo from "../assets/LogoParkEasyTrans.png";
 import GlobalStyle from "../Styles/GlobalStyle";
 import axios from 'axios';
 
+//////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
+
 const LoginForm = ({ navigation }) => {
 
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [error, setError] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     // field clean up
     function resetField(){
@@ -45,7 +47,7 @@ const LoginForm = ({ navigation }) => {
         console.log("Password: ", password);
 
         try{
-            const response = await axios.post('http://1192.168.1.70:8000/api/auth/login', {
+            const response = await axios.post('http://localhost:8000/api/auth/login', {
                 email,
                 password
             });
@@ -57,10 +59,7 @@ const LoginForm = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView
-            style={{ flex: 1 }}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
+
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <SafeAreaView style={Style.fullPageContainer}>
                     <View style={Style.loginPageContainer}>
@@ -130,12 +129,12 @@ const LoginForm = ({ navigation }) => {
                             }}>
                                 <Text style={Style.bottomLinks}>Sign Up</Text>
                             </TouchableOpacity>
+
                         </View>
 
                     </View>
                 </SafeAreaView>
             </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
     );
 };
 
