@@ -130,13 +130,6 @@ const LoginForm = ({ navigation }) => {
                                 <Text style={Style.bottomLinks}>Sign Up</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => {
-                                resetField(); // clear fields
-                                navigation.navigate('Map Test'); // MAP TEST
-                            }}>
-                                <Text style={Style.bottomLinks}>Map Test</Text>
-                            </TouchableOpacity>
-
                         </View>
 
                     </View>

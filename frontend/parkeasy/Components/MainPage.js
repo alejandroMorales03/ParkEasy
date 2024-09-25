@@ -17,6 +17,7 @@ import globalStyles from "../Styles/GlobalStyle";
 import userPagesStyle from "../Styles/UserPagesStyle";
 import GlobalStyle from "../Styles/GlobalStyle";
 import axios from "axios";
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
@@ -44,11 +45,20 @@ const SearchBar = () => {
     )
 }
 
-
-const MapView = () => {
+const GoogleMap =  () => {
     return (
-        <Text>Map View</Text>
-    )
+            <MapView
+                provider={MapView.PROVIDER_GOOGLE} // remove if not using Google Maps
+                style={userPagesStyle.map}
+                region={{
+                    latitude: 25.756188,
+                    longitude: -80.375563,
+                    latitudeDelta: 0.015,
+                    longitudeDelta: 0.0121,
+                }}
+            >
+            </MapView>
+    );
 }
 
 const NavBar = () => {
@@ -108,22 +118,20 @@ const LocationProfile = () => {
         </View>
     )
 }
+
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
 const mainPage = () => {
     return (
         <SafeAreaView style={Style.mainPageContainer}>
-
             <View style = {Style.mapContainer}>
-                <SearchBar />
-                <NavBar/>
+                <GoogleMap />
+                < SearchBar style={{position: "absolute"}}/>
+                <NavBar style={{position: "absolute"}}/>
+                {/*<SearchBar />*/}
+                {/*<NavBar/>*/}
                 {/*<MapView />*/}
             </View>
-
-
-
-
-
         </SafeAreaView>
     )
 }

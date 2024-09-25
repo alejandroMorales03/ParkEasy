@@ -3,11 +3,27 @@ import { COLORS , SIZES, FONT, CONTAINERS, BUTTON } from '../Constants/Constants
 const { width, height } = Dimensions.get('window'); // collects the dimensions of the current window
 
 const userPagesStyle= StyleSheet.create({
+
      mainPageContainer: {
+         ...StyleSheet.absoluteFillObject,
          flex: 1,
          flexDirection: 'column',
          justifyContent: 'space-evenly',
      },
+
+    googleMapView:{
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+
+
+    },
+
+    map: {
+        ...StyleSheet.absoluteFillObject,
+
+    },
+
 
     navigationContainer: {
         flexDirection: 'row',
@@ -53,7 +69,8 @@ const userPagesStyle= StyleSheet.create({
         shadowOpacity: 1,
         shadowColor: COLORS.Grey,
         shadowRadius: 2,
-        shadowOffset: 2
+        shadowOffset: 2,
+
     },
 
 
@@ -65,9 +82,12 @@ const userPagesStyle= StyleSheet.create({
     },
 
     mapContainer: {
+        ...StyleSheet.absoluteFillObject,
         flex: 1,
         backgroundColor: COLORS.White,
         paddingHorizontal: 20, // 8% of screen width
+        paddingTop: 70,
+        paddingBottom: 30,
         flexDirection: 'column',  // Ensure vertical stacking
         justifyContent: 'space-between',  // Start items from the top
     },
