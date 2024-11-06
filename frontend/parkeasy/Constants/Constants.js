@@ -4,16 +4,28 @@
 export const COLORS =  {
 
     // Palette Here you can add colors
-    PersianGreen: '#009F93',
-    Yellow: '#F5E663',
-    DarkGreen: '#03312E',
-    CaribbeanGreen: '#037171',
-    LightSeaGreen: '#00B9AE',
-    White: '#FFFFFF',
-    Grey: '#a5a5a5',
-    Black: '#000000',
-    Red: '#ff0000',
-    AlternateDarkGreen: '#037A74',
+    GreenMain: '#156760',
+    GreenMainShadow1: '#24453C',
+    GreenMainShadow2: '#283C33',
+    GreenHighlight1: '#C7E5D1',
+    GreenHighlight2: '#DEEFE1',
+    BlueHighlight1: '#CBEAEB',
+    BlueHighlight2: '#04B9AE',
+    PillBody: '#05312F',
+    PillAccent: '#087B75',
+    GreenIndicatorBody: '#14AE5C',
+    GreenIndicatorShadow: '#ECF6EA',
+    YellowIndicatorBody: '#FDE7A2',
+    YellowIndicatorShadow: '#BE6C28',
+    RedIndicatorBody: '#F7A2A4',
+    RedIndicatorShadow: '#ED2224',
+    Error: '#ED2224',
+    ErrorHighlight: '#FDE6E6',
+    Gray1: '#D8D9D8',
+    Gray2: '#ABABAB',
+    Gray3: '#757575',
+    Black: '#3B3D41',
+    White: '#ffffff',
 
     Transparent: 'rgba(0,0,0,0)',
 
@@ -26,9 +38,14 @@ export const FONT = {
 
     // Font Colors
 
-    PrimaryColorFont: COLORS.AlternateDarkGreen,
-    SecondaryColorFont: COLORS.Black,
-    TertiaryColorFont: COLORS.Yellow,
+    PrimaryColorFont: COLORS.Black,
+    SecondaryColorFont: COLORS.White,
+    SubtitleColorFont: COLORS.Gray1,
+    ErrorColorFont: COLORS.Error,
+
+
+
+    InputFieldFont: COLORS.Gray1,
 
     FontColorPrimaryContainer: COLORS.White,
     FontColorSecondaryContainer: COLORS.Black,
