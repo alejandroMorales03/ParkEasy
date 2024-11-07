@@ -13,7 +13,7 @@ const GlobalStyle = StyleSheet.create({
     },
 
     placeHolderText: {
-        color: COLORS.Grey,
+        color: COLORS.Gray1,
         fontSize: SIZES.medium,
         fontWeight: 'bold',
     },
@@ -23,7 +23,7 @@ const GlobalStyle = StyleSheet.create({
         height: 40,
         width: '100%',
         borderColor: COLORS.Transparent,
-        borderBottomColor: COLORS.Grey,
+        borderBottomColor: COLORS.Gray1,
         borderWidth: 1,
         paddingHorizontal: width * 0.04, // 8% of screen width
         marginVertical: 10,
@@ -34,12 +34,12 @@ const GlobalStyle = StyleSheet.create({
     Text: {
         fontSize: SIZES.small,
         fontWeight: "normal",
-        color: COLORS.Grey
+        color: COLORS.Gray1
     },
 
     errorText: {
         fontSize: SIZES.extraSmall,
-        color: COLORS.Red,
+        color: COLORS.Error,
         fontWeight: "normal",
     }
 })

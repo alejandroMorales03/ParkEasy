@@ -13,7 +13,7 @@ import {
 import Style from "../Styles/CredentialsStyle";
 import GlobalStyle from "../Styles/GlobalStyle";
 import { COLORS } from "../Constants/Constants";
-import imageLogo from "../assets/LogoParkEasyTrans.png";
+import imageLogo from "../assets/logos/logo_pin_color.svg";
 import { ICONS } from "../Constants/icons";
 
 //////////////////////////////////// API Configuration ////////////////////////////////////

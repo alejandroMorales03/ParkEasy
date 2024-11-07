@@ -73,7 +73,7 @@ export const SIZES = {
 // container Colors
 export const CONTAINERS = {
 
-    PrimaryColorContainer: COLORS.DarkGreen,
+    PrimaryColorContainer: COLORS.GreenMain,
     SecondaryColorContainer: 'rgba(255, 255, 255, 0.20)',
     TertiaryColorContainer: '#f3e8ee',
 
@@ -81,8 +81,8 @@ export const CONTAINERS = {
 
 export const BUTTON= {
 
-    ButtonPrimaryBackgroundColor: COLORS.LightSeaGreen,
-    BUTTON_COLOR_UNPRESSED: COLORS.DarkGreen
+    ButtonPrimaryBackgroundColor: COLORS.GreenMain,
+    BUTTON_COLOR_UNPRESSED: COLORS.GreenMain
 }
 
 

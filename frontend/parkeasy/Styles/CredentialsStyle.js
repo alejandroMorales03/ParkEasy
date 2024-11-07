@@ -73,7 +73,7 @@ const CredentialsStyle= StyleSheet.create({
     },
 
     bottomLinks: {
-        color: COLORS.PersianGreen,
+        color: COLORS.GreenMain,
         marginVertical: 10, // Adjust this value for closer spacing
     },
 

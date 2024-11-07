@@ -16,7 +16,8 @@ import Style from "../Styles/CredentialsStyle";
 import globalStyles from '../Styles/GlobalStyle';
 import {COLORS} from "../Constants/Constants";
 import { ICONS } from "../Constants/icons";
-import imageLogo from "../assets/LogoParkEasyTrans.png";
+import {LOGOS} from "../Constants/logos";
+import imageLogo from "../assets/logos/logo_pin_color.svg";
 import GlobalStyle from "../Styles/GlobalStyle";
 import axios from 'axios';
 
@@ -65,7 +66,7 @@ const LoginForm = ({ navigation }) => {
                     <View style={Style.loginPageContainer}>
 
                         {/*This is the logo image*/}
-                        <Image source={imageLogo} style={Style.imageLogo} />
+                        <Image source={LOGOS.pin_color} style={Style.imageLogo} />
 
                         {/*Credential section*/}
                         <View style={Style.credentialsContainer}>
@@ -86,7 +87,7 @@ const LoginForm = ({ navigation }) => {
                                     value={email}
                                     onChangeText={setEmail}
                                     style={globalStyles.input}
-                                    placeholderTextColor={COLORS.Grey}
+                                    placeholderTextColor={COLORS.Black}
                                     autoCapitalize="none"
                                 />
                             </View>
@@ -100,7 +101,7 @@ const LoginForm = ({ navigation }) => {
                                     value={password}
                                     onChangeText={setPassword}
                                     style={globalStyles.input}
-                                    placeholderTextColor={COLORS.Grey}
+                                    placeholderTextColor={COLORS.Black}
                                     secureTextEntry
                                     autoCapitalize="none"
                                 />
