@@ -30,6 +30,7 @@ export const COLORS =  {
     Transparent: 'rgba(0,0,0,0)',
 
     // Primary Color Palette
+    //TODO: Dark Mode Swap
 
 }
 
@@ -40,12 +41,15 @@ export const FONT = {
 
     PrimaryColorFont: COLORS.Black,
     SecondaryColorFont: COLORS.White,
-    SubtitleColorFont: COLORS.Gray1,
-    ErrorColorFont: COLORS.Error,
 
+    Subtitle1ColorFont: COLORS.Gray1,
+    Subtitle2ColorFont: COLORS.Gray3,
 
-
+    FooterColorFont: COLORS.BlueHighlight2,
+    Button1ColorFont: COLORS.GreenMain,
     InputFieldFont: COLORS.Gray1,
+    ErrorColorFont: COLORS.Error,
+    
 
     FontColorPrimaryContainer: COLORS.White,
     FontColorSecondaryContainer: COLORS.Black,
