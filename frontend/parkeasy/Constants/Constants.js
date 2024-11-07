@@ -85,4 +85,10 @@ export const BUTTON= {
     BUTTON_COLOR_UNPRESSED: COLORS.GreenMain
 }
 
+export const WEIGHT = {
+    SmallThin: 1,
+    MidThin: 2,
+    LargeThin: 3
+}
+
 

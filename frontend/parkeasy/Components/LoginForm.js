@@ -12,10 +12,11 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
+import InputField from "./BasicComponents/InputField";
 import Style from "../Styles/CredentialsStyle";
 import globalStyles from '../Styles/GlobalStyle';
 import {COLORS} from "../Constants/Constants";
-import { ICONS } from "../Constants/icons";
+import {ICONS} from "../Constants/icons";
 import {LOGOS} from "../Constants/logos";
 import imageLogo from "../assets/logos/logo_pin_color.svg";
 import GlobalStyle from "../Styles/GlobalStyle";
@@ -79,33 +80,13 @@ const LoginForm = ({ navigation }) => {
                             ) : null}
 
                             {/* This is the email input */}
-                            <View style={Style.fieldCredential}>
-                                <Image source={ICONS.email} style={GlobalStyle.icons}></Image>
-                                <TextInput
-                                    placeholder="Email"
-                                    type="email"
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    style={globalStyles.input}
-                                    placeholderTextColor={COLORS.Black}
-                                    autoCapitalize="none"
-                                />
-                            </View>
+
+                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" icon={ICONS.email} />
 
                             {/* This is the Password Input */}
-                            <View style={Style.fieldCredential}>
-                                <Image source={ICONS.password} style={globalStyles.icons}></Image>
-                                <TextInput
-                                    placeholder="Password"
-                                    type="password"
-                                    value={password}
-                                    onChangeText={setPassword}
-                                    style={globalStyles.input}
-                                    placeholderTextColor={COLORS.Black}
-                                    secureTextEntry
-                                    autoCapitalize="none"
-                                />
-                            </View>
+
+                            <InputField placeholder="Password" onChange={setPassword} value={password} hasIcon = "true" icon={ICONS.password} secureTextEntry="true" />
+
 
                             {/* Login Button */}
                             <TouchableOpacity onPress={handleLogin} style={Style.button}>
