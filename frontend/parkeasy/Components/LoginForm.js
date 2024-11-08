@@ -15,11 +15,11 @@ import {
 import Style from "../Styles/CredentialsStyle";
 import globalStyles from '../Styles/GlobalStyle';
 import {COLORS} from "../Constants/Constants";
-import { ICONS } from "../Constants/icons";
+import {ICONS} from "../Constants/icons";
 import {LOGOS} from "../Constants/logos";
-import imageLogo from "../assets/logos/logo_pin_color.svg";
 import GlobalStyle from "../Styles/GlobalStyle";
 import axios from 'axios';
+import LogoPinColor from '../assets/logos/logo_pin_color.svg'; //IMPORT MAIN SVG FILE FROM ASSETS
 
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
@@ -66,8 +66,9 @@ const LoginForm = ({ navigation }) => {
                     <View style={Style.loginPageContainer}>
 
                         {/*This is the logo image*/}
-                        <Image source={LOGOS.pin_color} style={Style.imageLogo} />
-
+                        
+                        <LogoPinColor width={120} height={40}/> 
+                        
                         {/*Credential section*/}
                         <View style={Style.credentialsContainer}>
                             <Text style={Style.mainTitle}>Login</Text>
