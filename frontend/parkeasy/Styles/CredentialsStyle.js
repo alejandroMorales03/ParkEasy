@@ -84,11 +84,13 @@ const CredentialsStyle= StyleSheet.create({
         alignSelf: 'center',
     },
 
-    fieldCredential: {
-        flexDirection: 'row',
-        alignItems: 'center', // Aligns input and icon vertically centered
-        marginVertical: 2, // Adds spacing between input fields
-    },
+    // fieldCredential: {
+    //     flexDirection: 'row',
+    //     alignItems: 'center', // Aligns input and icon vertically centered
+    //     marginVertical: 2, // Adds spacing between input fields
+    // },
+
+
 
 })
 

@@ -18,18 +18,7 @@ const GlobalStyle = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    input: {
-        flex: 1,
-        height: 40,
-        width: '100%',
-        borderColor: COLORS.Transparent,
-        borderBottomColor: COLORS.Gray1,
-        borderWidth: 1,
-        paddingHorizontal: width * 0.04, // 8% of screen width
-        marginVertical: 10,
-        color: COLORS.Black,
 
-    },
 
     Text: {
         fontSize: SIZES.small,
@@ -41,6 +30,18 @@ const GlobalStyle = StyleSheet.create({
         fontSize: SIZES.extraSmall,
         color: COLORS.Error,
         fontWeight: "normal",
+    },
+
+    input: {
+        flex: 1,
+        height: 40,
+        width: '100%',
+        borderColor: COLORS.Transparent,
+        borderBottomColor: COLORS.Gray1,
+        borderWidth: 1,
+        paddingHorizontal: width * 0.04, // 8% of screen width
+        marginVertical: 10,
+        color: COLORS.Black,
     }
 })
 
