@@ -5,8 +5,8 @@ const { width, height } = Dimensions.get('window'); // collects the dimensions o
 // style={GlobalStyle.icons}
 const GlobalStyle = StyleSheet.create({
     icons: {
-        width: 20,
-        height: 20,
+        width: 25,
+        height: 25,
         resizeMode: 'contain',
         alignItems: 'center',
         marginLeft: 5,

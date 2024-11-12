@@ -20,7 +20,10 @@ import {ICONS} from "../Constants/icons";
 import {LOGOS} from "../Constants/logos";
 import GlobalStyle from "../Styles/GlobalStyle";
 import axios from 'axios';
-import LogoPinColor from '../assets/logos/logo_pin_color.svg'; //IMPORT MAIN SVG FILE FROM ASSETS
+import LogoPinColor from '../assets/logos/logo_pin_color.svg';
+import emailIcon from '../assets/icons/input_mail.svg';
+import CredentialsStyle from "../Styles/CredentialsStyle";
+import PrimaryButton from "./BasicComponents/PrimaryButton"; //IMPORT MAIN SVG FILE FROM ASSETS
 
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
@@ -68,7 +71,7 @@ const LoginForm = ({ navigation }) => {
 
                         {/*This is the logo image*/}
                         
-                        <LogoPinColor width={120} height={40}/> 
+                        <LogoPinColor style={CredentialsStyle.imageLogo}/>
                         
                         {/*Credential section*/}
                         <View style={Style.credentialsContainer}>
@@ -82,7 +85,7 @@ const LoginForm = ({ navigation }) => {
 
                             {/* This is the email input */}
 
-                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" icon={ICONS.email} />
+                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" sideIcon ={emailIcon}/>
 
                             {/* This is the Password Input */}
 
@@ -94,6 +97,7 @@ const LoginForm = ({ navigation }) => {
                                 <Text style={Style.buttonText}>Login</Text>
                             </TouchableOpacity>
 
+                            {/*<PrimaryButton onPress={handleLogin()} Inside ="Login"/>*/}
                             {/* Forgot Password and Sign Up Links */}
                         </View>
 

@@ -41,6 +41,7 @@ const CredentialsStyle= StyleSheet.create({
         height: '50%',
         justifyContent: 'space-evenly',
         flexDirection: 'column',
+        marginHorizontal: 3
         // borderColor: COLORS.Grey,
         // borderWidth: 1,
     },

@@ -4,7 +4,8 @@ import { ICONS } from "../../Constants/icons";
 import GlobalStyle from "../../Styles/GlobalStyle";
 import { COLORS, WEIGHT } from "../../Constants/Constants";
 import React, { useState, useRef } from "react";
-
+import EyeIconFieldUnmarked from "../../assets/icons/input_pass_visible.svg"
+import EyeIconFieldMarked from "../../assets/icons/input_pass_hidden.svg"
 const { width } = Dimensions.get('window'); // Collects the dimensions of the current window
 
 /**
@@ -15,7 +16,7 @@ const { width } = Dimensions.get('window'); // Collects the dimensions of the cu
  * @param {string} value - The current value of the input field.
  * @param {function} onChange - Function to handle text changes in the input.
  * @param {boolean} hasIcon - Determines whether to show an icon next to the input field.
- * @param {object} icon - The source for the icon image displayed if hasIcon is true.
+ * @param {object} iconPath - The source for the icon image displayed if hasIcon is true.
  * @param {string} keyboardType - The type of keyboard to display (e.g., "default", "numeric").
  * @param {string} autoCap - Sets capitalization behavior ("none", "sentences", "words", "characters").
  * @param {boolean} secureTextEntry - If true, hides the input for password fields.
@@ -27,11 +28,12 @@ const InputField = ({
                         value,
                         onChange,
                         hasIcon = false,
-                        icon,
+                        // sideIcon: SideIcon, // added a component as a parameter
                         keyboardType = "default",
                         autoCap = "none",
                         secureTextEntry = false
                     }) => {
+
     // State to manage visibility of the password
     const [isSecure, setIsSecure] = useState(secureTextEntry);
     const [isHiddenIcon, setIsHiddenIcon] = useState(true);
@@ -75,12 +77,16 @@ const InputField = ({
     });
 
     return (
+
+
+
         <View style={styles.fieldCredential}>
 
             {/* Conditionally render the icon based on hasIcon */}
-            {hasIcon && (
-                <Image source={icon} style={GlobalStyle.icons} />
-            )}
+            {/*{hasIcon && (*/}
+            {/*    <SideIcon style = {GlobalStyle.icons} />*/}
+
+            {/*)}*/}
 
             <Animated.View style={[styles.animatedInputContainer, { borderBottomColor: borderColor, borderBottomWidth: borderThickness }]}>
                 <TextInput
@@ -100,12 +106,14 @@ const InputField = ({
             {/* Conditionally render the eye icon only if secureTextEntry is true */}
             {secureTextEntry && (
                 <TouchableOpacity onPress={togglePasswordVision} style={styles.eyeIcon}>
-                    <Image
-                        source={isHiddenIcon ? ICONS.eyeCrossed : ICONS.eyeUncrossed}
-                        style={GlobalStyle.icons}
-                    />
+                    {isHiddenIcon ? (
+                    <EyeIconFieldUnmarked  style={GlobalStyle.icons} />
+                    ) : (
+                    <EyeIconFieldMarked style={GlobalStyle.icons}/>
+                    )}
                 </TouchableOpacity>
             )}
+
         </View>
     );
 };
@@ -123,12 +131,10 @@ const styles = StyleSheet.create({
     },
     fieldCredential: {
         flexDirection: 'row',
+        justifyContent: 'space-evenly',
         alignItems: 'center', // Aligns input and icon vertically centered
-        marginVertical: 2, // Adds spacing between input fields
-    },
-    eyeIcon: {
-        paddingHorizontal: 8, // Adds padding around the icon
-    },
+        marginVertical: 3, // Adds spacing between input fields
+    }
 });
 
 export default InputField;
