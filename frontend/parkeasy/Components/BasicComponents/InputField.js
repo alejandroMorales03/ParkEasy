@@ -28,7 +28,7 @@ const InputField = ({
                         placeholder,
                         value,
                         onChange,
-                        SideIcon,
+                        SideIcon = null,
                         hasIcon = false,
                         keyboardType = "default",
                         autoCap = "none",

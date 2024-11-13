@@ -2,7 +2,7 @@ import { Button, StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { BUTTON, COLORS, SIZES } from "../../Constants/Constants";
 import Style from "../../Styles/CredentialsStyle";
 
-const PrimaryButton = ({ onPressButton, InsideText }) => {
+const PrimaryButton = ({ onPressButton, InsideText, hasIcon = "false", SideIcon = null }) => {
     return (
         <TouchableOpacity onPress={onPressButton} style={styles.button}>
             <Text style={styles.buttonText}>{InsideText}</Text>
