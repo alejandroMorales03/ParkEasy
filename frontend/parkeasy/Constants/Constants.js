@@ -37,6 +37,8 @@ export const COLORS =  {
 export const FONT = {
     // Font types TODO look for a way to add fonts as a placeholder for a path to install the font type
 
+
+
     // Font Colors
 
     PrimaryColorFont: COLORS.Black,
@@ -76,6 +78,7 @@ export const CONTAINERS = {
     PrimaryColorContainer: COLORS.GreenMain,
     SecondaryColorContainer: 'rgba(255, 255, 255, 0.20)',
     TertiaryColorContainer: '#f3e8ee',
+    Button1ColorContainer: COLORS.GreenMain,
 
 }
 

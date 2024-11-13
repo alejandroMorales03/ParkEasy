@@ -1,19 +1,14 @@
-import {Button, StyleSheet, TouchableOpacity, View, Text} from "react-native";
-import {BUTTON, COLORS, SIZES} from "../../Constants/Constants";
+import { Button, StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { BUTTON, COLORS, SIZES } from "../../Constants/Constants";
 import Style from "../../Styles/CredentialsStyle";
 
-const PrimaryButton = (
-                        onPressButton,
-                        InsideText
-                        ) => {
-
+const PrimaryButton = ({ onPressButton, InsideText }) => {
     return (
         <TouchableOpacity onPress={onPressButton} style={styles.button}>
             <Text style={styles.buttonText}>{InsideText}</Text>
         </TouchableOpacity>
-
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     button: {
@@ -29,8 +24,6 @@ const styles = StyleSheet.create({
         color: COLORS.White,
         fontSize: SIZES.small,
     },
+});
 
-}
-)
-
-export default PrimaryButton
+export default PrimaryButton;

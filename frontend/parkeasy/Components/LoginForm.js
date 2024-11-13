@@ -21,7 +21,7 @@ import {LOGOS} from "../Constants/logos";
 import GlobalStyle from "../Styles/GlobalStyle";
 import axios from 'axios';
 import LogoPinColor from '../assets/logos/logo_pin_color.svg';
-import emailIcon from '../assets/icons/input_mail.svg';
+import EmailIcon from '../assets/icons/input_mail.svg';
 import CredentialsStyle from "../Styles/CredentialsStyle";
 import PrimaryButton from "./BasicComponents/PrimaryButton"; //IMPORT MAIN SVG FILE FROM ASSETS
 
@@ -31,7 +31,7 @@ const LoginForm = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState(''); // this will hold the error use this as a parameter for the message
 
     // field clean up
     function resetField(){
@@ -72,6 +72,7 @@ const LoginForm = ({ navigation }) => {
                         {/*This is the logo image*/}
                         
                         <LogoPinColor style={CredentialsStyle.imageLogo}/>
+                        {/*<EmailIcon style={CredentialsStyle.imageLogo}/>*/}
                         
                         {/*Credential section*/}
                         <View style={Style.credentialsContainer}>
@@ -85,19 +86,17 @@ const LoginForm = ({ navigation }) => {
 
                             {/* This is the email input */}
 
-                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" sideIcon ={emailIcon}/>
+                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" sideIcon = {EmailIcon} />
 
                             {/* This is the Password Input */}
 
-                            <InputField placeholder="Password" onChange={setPassword} value={password} hasIcon = "true" icon={ICONS.password} secureTextEntry="true" />
+                            <InputField placeholder="Password" onChange={setPassword} value={password} hasIcon = "true" secureTextEntry="true" />
 
 
                             {/* Login Button */}
-                            <TouchableOpacity onPress={handleLogin} style={Style.button}>
-                                <Text style={Style.buttonText}>Login</Text>
-                            </TouchableOpacity>
 
-                            {/*<PrimaryButton onPress={handleLogin()} Inside ="Login"/>*/}
+                            <PrimaryButton onPressButton ={handleLogin} InsideText ="Login"/>
+
                             {/* Forgot Password and Sign Up Links */}
                         </View>
 

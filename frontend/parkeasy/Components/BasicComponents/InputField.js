@@ -2,7 +2,7 @@ import { Animated, Dimensions, Image, StyleSheet, TextInput, View, TouchableOpac
 import Style from "../../Styles/CredentialsStyle";
 import { ICONS } from "../../Constants/icons";
 import GlobalStyle from "../../Styles/GlobalStyle";
-import { COLORS, WEIGHT } from "../../Constants/Constants";
+import {COLORS, SIZES, WEIGHT} from "../../Constants/Constants";
 import React, { useState, useRef } from "react";
 import EyeIconFieldUnmarked from "../../assets/icons/input_pass_visible.svg"
 import EyeIconFieldMarked from "../../assets/icons/input_pass_hidden.svg"
@@ -23,12 +23,13 @@ const { width } = Dimensions.get('window'); // Collects the dimensions of the cu
  */
 
 
+
 const InputField = ({
                         placeholder,
                         value,
                         onChange,
+                        SideIcon,
                         hasIcon = false,
-                        // sideIcon: SideIcon, // added a component as a parameter
                         keyboardType = "default",
                         autoCap = "none",
                         secureTextEntry = false
@@ -46,6 +47,8 @@ const InputField = ({
         setIsSecure(!isSecure);
         setIsHiddenIcon(!isHiddenIcon);
     };
+
+    //TODO trigger a clear in the function
 
     // Function to start the animation on focus
     const handleFocus = () => {
@@ -81,12 +84,13 @@ const InputField = ({
 
 
         <View style={styles.fieldCredential}>
+            {/*TODO figure out a way to add the path of the icon into the function*/}
 
-            {/* Conditionally render the icon based on hasIcon */}
-            {/*{hasIcon && (*/}
-            {/*    <SideIcon style = {GlobalStyle.icons} />*/}
+            {/* Conditionally render the icon based on hasIcon*/}
+            {hasIcon && ( // condition of Icon
+                <SideIcon style = {GlobalStyle.icons} />
 
-            {/*)}*/}
+            )}
 
             <Animated.View style={[styles.animatedInputContainer, { borderBottomColor: borderColor, borderBottomWidth: borderThickness }]}>
                 <TextInput
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center', // Aligns input and icon vertically centered
         marginVertical: 3, // Adds spacing between input fields
-    }
+    },
 });
 
 export default InputField;
