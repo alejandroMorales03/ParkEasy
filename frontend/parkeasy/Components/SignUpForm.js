@@ -16,6 +16,7 @@ import InputField from "./BasicComponents/InputField";
 import Style from "../Styles/CredentialsStyle";
 import globalStyles from '../Styles/GlobalStyle';
 import { COLORS } from "../Constants/Constants";
+import PrimaryButton from "./BasicComponents/PrimaryButton";
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
@@ -110,7 +111,18 @@ const SignUpForm = ({ navigation }) => {
                         // page view when code is not sent!
 
                         <SignUpFormNotCodeSent
-                            {...{ email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, confirmPassword, setConfirmPassword, handleSignUp, error }}
+                            {...{ email,
+                                setEmail,
+                                firstName,
+                                setFirstName,
+                                lastName,
+                                setLastName,
+                                password,
+                                setPassword,
+                                confirmPassword,
+                                setConfirmPassword,
+                                handleSignUp,
+                                error }}
                         />
 
                     ) : (
@@ -156,9 +168,7 @@ const SignUpFormNotCodeSent = ({
         <InputField placeholder="Password" value={password} onChange={setPassword} secureTextEntry/>
         <InputField placeholder="Confirm Password" value={confirmPassword} onChange={setConfirmPassword} secureTextEntry />
 
-        <TouchableOpacity onPress={handleSignUp} style={Style.button}>
-            <Text style={Style.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
+        <PrimaryButton onPressButton ={handleSignUp} InsideText ="Sign Up"/>
     </>
 );
 

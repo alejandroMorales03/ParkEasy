@@ -81,18 +81,17 @@ const InputField = ({
 
     return (
 
-
-
         <View style={styles.fieldCredential}>
             {/*TODO figure out a way to add the path of the icon into the function*/}
 
             {/* Conditionally render the icon based on hasIcon*/}
+
             {hasIcon && SideIcon && ( // condition of Icon
                 <SideIcon style = {GlobalStyle.icons} />
 
             )}
+            <Animated.View style={[styles.animatedInputContainer, {borderBottomColor: borderColor, borderBottomWidth: borderThickness }]}>
 
-            <Animated.View style={[styles.animatedInputContainer, { borderBottomColor: borderColor, borderBottomWidth: borderThickness }]}>
                 <TextInput
                     placeholder={placeholder}
                     keyboardType={keyboardType}
@@ -105,15 +104,15 @@ const InputField = ({
                     onFocus={handleFocus}   // Start animation on focus
                     onBlur={handleBlur}     // Reverse animation on blur
                 />
-            </Animated.View>
 
+            </Animated.View>
             {/* Conditionally render the eye icon only if secureTextEntry is true */}
             {secureTextEntry && (
                 <TouchableOpacity onPress={togglePasswordVision} style={styles.eyeIcon}>
                     {isHiddenIcon ? (
-                    <EyeIconFieldUnmarked  style={GlobalStyle.icons} />
+                    <EyeIconFieldUnmarked  style={styles.eyeIcon} />
                     ) : (
-                    <EyeIconFieldMarked style={GlobalStyle.icons}/>
+                    <EyeIconFieldMarked style={styles.eyeIcon}/>
                     )}
                 </TouchableOpacity>
             )}
@@ -126,6 +125,8 @@ const styles = StyleSheet.create({
     animatedInputContainer: {
         flex: 1,
         borderBottomWidth: 1,
+        flexDirection: "row",
+        justifyContent: "space-between",
     },
     input: {
         height: 20,
@@ -139,6 +140,13 @@ const styles = StyleSheet.create({
         alignItems: 'center', // Aligns input and icon vertically centered
         marginVertical: 3, // Adds spacing between input fields
     },
+
+    eyeIcon: {
+        width: 25,
+        height: 25,
+        resizeMode: 'contain',
+
+    }
 });
 
 export default InputField;

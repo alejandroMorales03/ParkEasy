@@ -21,6 +21,7 @@ import CredentialsStyle from "../Styles/CredentialsStyle";
 import InputField from "./BasicComponents/InputField";
 import PrimaryButton from "./BasicComponents/PrimaryButton";
 import BottomLink from "./BasicComponents/BottomLink";
+import ErrorDialog from "./BasicComponents/ErrorDialog";
 
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
@@ -75,11 +76,8 @@ const LoginForm = ({ navigation }) => {
                         <View style={Style.credentialsContainer}>
                             <Text style={Style.mainTitle}>Login</Text>
 
-                            {error ? (
-                                <Text style={globalStyles.errorText}>
-                                    {error}
-                                </Text>
-                            ) : null}
+                            {/*component to display errors*/}
+                            <ErrorDialog error={error}/>
 
                             {/* This is the email input */}
                             <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" SideIcon = {EmailIcon} />
@@ -97,6 +95,7 @@ const LoginForm = ({ navigation }) => {
                             <BottomLink navigation = {navigation} text="Forget Password?" navigateTo= "ForgetPassword" resetField={resetField}/>
                             {/* Link for Sign Up Page*/}
                             <BottomLink navigation = {navigation} text="Sign Up" navigateTo= "Sign Up" resetField={resetField}/>
+
                         </View>
 
                     </View>

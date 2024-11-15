@@ -42,29 +42,12 @@ const CredentialsStyle= StyleSheet.create({
         justifyContent: 'space-evenly',
         flexDirection: 'column',
         marginHorizontal: 3
-        // borderColor: COLORS.Grey,
-        // borderWidth: 1,
     },
 
     mainTitleFont: {
         fontSize: SIZES.medium * (width / 375),
         fontWeight: 'bold',
         color: COLORS.White
-    },
-
-    button: {
-        backgroundColor: BUTTON.ButtonPrimaryBackgroundColor,
-        padding: 15,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        marginTop: 20,
-    },
-
-    buttonText: {
-        color: COLORS.White,
-        fontSize: SIZES.small,
     },
 
     linksContainer: {

@@ -12,6 +12,9 @@ const Stack = createStackNavigator();
 // This is used to create the stack navigation
 const CredentialsStack = () => {
     return (
+
+        // this stack navigator is only for the credentials
+
         <Stack.Navigator initialRouteName="Login"
                          screenOptions={{
                              headerShown: false,
@@ -24,17 +27,16 @@ const CredentialsStack = () => {
                           options={{ headerShown: false}} />
             <Stack.Screen name="Sign Up" component={SignUpForm}
                           options={{ headerShown: false}} />
-
         </Stack.Navigator>
     );
 };
 
 const App = () => {
     return (
-        <NavigationContainer independent={true}>
-            <CredentialsStack />
-        </NavigationContainer>
-        // <Splash/>
+        // <NavigationContainer independent={true}>
+        //     <CredentialsStack />
+        // </NavigationContainer>
+        <Splash/>
     );
 };
 

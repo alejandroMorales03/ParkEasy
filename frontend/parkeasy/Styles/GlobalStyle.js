@@ -26,11 +26,6 @@ const GlobalStyle = StyleSheet.create({
         color: COLORS.Gray1
     },
 
-    errorText: {
-        fontSize: SIZES.extraSmall,
-        color: COLORS.Error,
-        fontWeight: "normal",
-    },
 
     input: {
         flex: 1,
