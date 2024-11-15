@@ -87,7 +87,7 @@ const InputField = ({
             {/*TODO figure out a way to add the path of the icon into the function*/}
 
             {/* Conditionally render the icon based on hasIcon*/}
-            {hasIcon && ( // condition of Icon
+            {hasIcon && SideIcon && ( // condition of Icon
                 <SideIcon style = {GlobalStyle.icons} />
 
             )}

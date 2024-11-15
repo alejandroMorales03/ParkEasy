@@ -20,7 +20,7 @@ const CredentialsStack = () => {
 
             <Stack.Screen name="Login" component={LoginForm}
                           options={{ headerShown: false}} />
-            <Stack.Screen name="Forget Password" component={ForgetPassForm}
+            <Stack.Screen name="ForgetPassword" component={ForgetPassForm}
                           options={{ headerShown: false}} />
             <Stack.Screen name="Sign Up" component={SignUpForm}
                           options={{ headerShown: false}} />
