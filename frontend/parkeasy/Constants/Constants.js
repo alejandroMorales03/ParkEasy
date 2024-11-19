@@ -4,31 +4,54 @@
 export const COLORS =  {
 
     // Palette Here you can add colors
-    PersianGreen: '#009F93',
-    Yellow: '#F5E663',
-    DarkGreen: '#03312E',
-    CaribbeanGreen: '#037171',
-    LightSeaGreen: '#00B9AE',
-    White: '#FFFFFF',
-    Grey: '#a5a5a5',
-    Black: '#000000',
-    Red: '#ff0000',
-    AlternateDarkGreen: '#037A74',
+    GreenMain: '#156760',
+    GreenMainShadow1: '#24453C',
+    GreenMainShadow2: '#283C33',
+    GreenHighlight1: '#C7E5D1',
+    GreenHighlight2: '#DEEFE1',
+    BlueHighlight1: '#CBEAEB',
+    BlueHighlight2: '#04B9AE',
+    PillBody: '#05312F',
+    PillAccent: '#087B75',
+    GreenIndicatorBody: '#14AE5C',
+    GreenIndicatorShadow: '#ECF6EA',
+    YellowIndicatorBody: '#FDE7A2',
+    YellowIndicatorShadow: '#BE6C28',
+    RedIndicatorBody: '#F7A2A4',
+    RedIndicatorShadow: '#ED2224',
+    Error: '#ED2224',
+    ErrorHighlight: '#FDE6E6',
+    Gray1: '#D8D9D8',
+    Gray2: '#ABABAB',
+    Gray3: '#757575',
+    Black: '#3B3D41',
+    White: '#ffffff',
 
     Transparent: 'rgba(0,0,0,0)',
 
     // Primary Color Palette
+    //TODO: Dark Mode Swap
 
 }
 
 export const FONT = {
     // Font types TODO look for a way to add fonts as a placeholder for a path to install the font type
 
+
+
     // Font Colors
 
-    PrimaryColorFont: COLORS.AlternateDarkGreen,
-    SecondaryColorFont: COLORS.Black,
-    TertiaryColorFont: COLORS.Yellow,
+    PrimaryColorFont: COLORS.Black,
+    SecondaryColorFont: COLORS.White,
+
+    Subtitle1ColorFont: COLORS.Gray1,
+    Subtitle2ColorFont: COLORS.Gray3,
+
+    FooterColorFont: COLORS.BlueHighlight2,
+    Button1ColorFont: COLORS.GreenMain,
+    InputFieldFont: COLORS.Gray1,
+    ErrorColorFont: COLORS.Error,
+    
 
     FontColorPrimaryContainer: COLORS.White,
     FontColorSecondaryContainer: COLORS.Black,
@@ -52,16 +75,23 @@ export const SIZES = {
 // container Colors
 export const CONTAINERS = {
 
-    PrimaryColorContainer: COLORS.DarkGreen,
+    PrimaryColorContainer: COLORS.GreenMain,
     SecondaryColorContainer: 'rgba(255, 255, 255, 0.20)',
     TertiaryColorContainer: '#f3e8ee',
+    Button1ColorContainer: COLORS.GreenMain,
 
 }
 
 export const BUTTON= {
 
-    ButtonPrimaryBackgroundColor: COLORS.LightSeaGreen,
-    BUTTON_COLOR_UNPRESSED: COLORS.DarkGreen
+    ButtonPrimaryBackgroundColor: COLORS.GreenMain,
+    BUTTON_COLOR_UNPRESSED: COLORS.GreenMain
+}
+
+export const WEIGHT = {
+    SmallThin: 1,
+    MidThin: 2,
+    LargeThin: 3
 }
 
 

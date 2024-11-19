@@ -41,29 +41,13 @@ const CredentialsStyle= StyleSheet.create({
         height: '50%',
         justifyContent: 'space-evenly',
         flexDirection: 'column',
-        // borderColor: COLORS.Grey,
-        // borderWidth: 1,
+        marginHorizontal: 3
     },
 
     mainTitleFont: {
         fontSize: SIZES.medium * (width / 375),
         fontWeight: 'bold',
         color: COLORS.White
-    },
-
-    button: {
-        backgroundColor: BUTTON.ButtonPrimaryBackgroundColor,
-        padding: 15,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        marginTop: 20,
-    },
-
-    buttonText: {
-        color: COLORS.White,
-        fontSize: SIZES.small,
     },
 
     linksContainer: {
@@ -73,7 +57,7 @@ const CredentialsStyle= StyleSheet.create({
     },
 
     bottomLinks: {
-        color: COLORS.PersianGreen,
+        color: COLORS.GreenMain,
         marginVertical: 10, // Adjust this value for closer spacing
     },
 
@@ -84,11 +68,13 @@ const CredentialsStyle= StyleSheet.create({
         alignSelf: 'center',
     },
 
-    fieldCredential: {
-        flexDirection: 'row',
-        alignItems: 'center', // Aligns input and icon vertically centered
-        marginVertical: 2, // Adds spacing between input fields
-    },
+    // fieldCredential: {
+    //     flexDirection: 'row',
+    //     alignItems: 'center', // Aligns input and icon vertically centered
+    //     marginVertical: 2, // Adds spacing between input fields
+    // },
+
+
 
 })
 

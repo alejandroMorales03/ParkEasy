@@ -2,23 +2,26 @@ import React, {useState} from 'react';
 import {
     View,
     Text,
-    TextInput,
     TouchableOpacity,
-    StyleSheet,
     SafeAreaView,
-    Image,
     TouchableWithoutFeedback,
     Keyboard,
-    KeyboardAvoidingView,
-    Platform
 } from 'react-native';
 import Style from "../Styles/CredentialsStyle";
 import globalStyles from '../Styles/GlobalStyle';
-import {COLORS} from "../Constants/Constants";
-import { ICONS } from "../Constants/icons";
-import imageLogo from "../assets/LogoParkEasyTrans.png";
-import GlobalStyle from "../Styles/GlobalStyle";
+// import {COLORS} from "../Constants/Constants";
+// import {ICONS} from "../Constants/icons";
+// import {LOGOS} from "../Constants/logos";
 import axios from 'axios';
+import LogoPinColor from '../assets/logos/logo_pin_color.svg';
+import EmailIcon from '../assets/icons/input_mail.svg';
+import PasswordIcon from '../assets/icons/pass.svg';
+import CredentialsStyle from "../Styles/CredentialsStyle";
+
+import InputField from "./BasicComponents/InputField";
+import PrimaryButton from "./BasicComponents/PrimaryButton";
+import BottomLink from "./BasicComponents/BottomLink";
+import ErrorDialog from "./BasicComponents/ErrorDialog";
 
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
@@ -26,7 +29,7 @@ const LoginForm = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState(''); // this will hold the error use this as a parameter for the message
 
     // field clean up
     function resetField(){
@@ -65,70 +68,33 @@ const LoginForm = ({ navigation }) => {
                     <View style={Style.loginPageContainer}>
 
                         {/*This is the logo image*/}
-                        <Image source={imageLogo} style={Style.imageLogo} />
-
+                        
+                        <LogoPinColor style={CredentialsStyle.imageLogo}/>
+                        {/*<EmailIcon style={CredentialsStyle.imageLogo}/>*/}
+                        
                         {/*Credential section*/}
                         <View style={Style.credentialsContainer}>
                             <Text style={Style.mainTitle}>Login</Text>
 
-                            {error ? (
-                                <Text style={globalStyles.errorText}>
-                                    {error}
-                                </Text>
-                            ) : null}
+                            {/*component to display errors*/}
+                            <ErrorDialog error={error}/>
 
                             {/* This is the email input */}
-                            <View style={Style.fieldCredential}>
-                                <Image source={ICONS.email} style={GlobalStyle.icons}></Image>
-                                <TextInput
-                                    placeholder="Email"
-                                    type="email"
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    style={globalStyles.input}
-                                    placeholderTextColor={COLORS.Grey}
-                                    autoCapitalize="none"
-                                />
-                            </View>
-
+                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" SideIcon = {EmailIcon} />
                             {/* This is the Password Input */}
-                            <View style={Style.fieldCredential}>
-                                <Image source={ICONS.password} style={globalStyles.icons}></Image>
-                                <TextInput
-                                    placeholder="Password"
-                                    type="password"
-                                    value={password}
-                                    onChangeText={setPassword}
-                                    style={globalStyles.input}
-                                    placeholderTextColor={COLORS.Grey}
-                                    secureTextEntry
-                                    autoCapitalize="none"
-                                />
-                            </View>
-
+                            <InputField placeholder="Password" onChange={setPassword} value={password}  hasIcon= "true" SideIcon = {PasswordIcon} secureTextEntry="true" />
                             {/* Login Button */}
-                            <TouchableOpacity onPress={handleLogin} style={Style.button}>
-                                <Text style={Style.buttonText}>Login</Text>
-                            </TouchableOpacity>
+                            <PrimaryButton onPressButton ={handleLogin} InsideText ="Login"/>
 
-                            {/* Forgot Password and Sign Up Links */}
                         </View>
 
-                        {/* Links Container */}
+                            {/* Forgot Password and Sign Up Links */}
                         <View style={Style.linksContainer}>
-                            <TouchableOpacity onPress={() => {
-                                resetField(); // clear fields
-                                navigation.navigate('Forget Password'); // move to forget password
-                            }}>
-                                <Text style={Style.bottomLinks}>Forgot Password?</Text>
-                            </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => {
-                                resetField(); // clear fields
-                                navigation.navigate('Sign Up'); // moves to sign up
-                            }}>
-                                <Text style={Style.bottomLinks}>Sign Up</Text>
-                            </TouchableOpacity>
+                            {/* Link to Forget Password Page */}
+                            <BottomLink navigation = {navigation} text="Forget Password?" navigateTo= "ForgetPassword" resetField={resetField}/>
+                            {/* Link for Sign Up Page*/}
+                            <BottomLink navigation = {navigation} text="Sign Up" navigateTo= "Sign Up" resetField={resetField}/>
 
                         </View>
 

@@ -12,9 +12,19 @@ import {
 } from 'react-native';
 import Style from "../Styles/CredentialsStyle";
 import GlobalStyle from "../Styles/GlobalStyle";
+import CredentialsStyle from "../Styles/CredentialsStyle";
 import { COLORS } from "../Constants/Constants";
-import imageLogo from "../assets/LogoParkEasyTrans.png";
+import imageLogo from "../assets/logos/logo_pin_color.svg";
 import { ICONS } from "../Constants/icons";
+
+import LogoPinColor from '../assets/logos/logo_pin_color.svg';
+import EmailIcon from "../assets/icons/input_mail.svg";
+
+import PrimaryButton from "./BasicComponents/PrimaryButton";
+import BottomLink from "./BasicComponents/BottomLink";
+import ErrorDialog from "./BasicComponents/ErrorDialog";
+import InputField from "./BasicComponents/InputField";
+
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
@@ -24,27 +34,6 @@ const API = axios.create({
         'Content-Type': 'application/json',
     },
 });
-
-//////////////////////////////////// COMPONENTS ////////////////////////////////////
-
-const InputField = ({ placeholder, value, onChangeText, secureTextEntry = false, icon }) => (
-    <View style={Style.fieldCredential}>
-        {icon && <Image source={icon} style={GlobalStyle.icons} />}
-        <TextInput
-            placeholder={placeholder}
-            value={value}
-            onChangeText={onChangeText}
-            style={GlobalStyle.input}
-            placeholderTextColor={COLORS.Grey}
-            secureTextEntry={secureTextEntry}
-            autoCapitalize="none"
-        />
-    </View>
-);
-
-const ErrorMessage = ({ error }) => (
-    error ? <Text style={GlobalStyle.errorText}>{error}</Text> : null
-);
 
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
@@ -90,7 +79,7 @@ const ForgetPassForm = ({ navigation }) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={Style.fullPageContainer}>
                 <View style={Style.loginPageContainer}>
-                    <Image source={imageLogo} style={Style.imageLogo} />
+                   <LogoPinColor style={CredentialsStyle.imageLogo} />
 
                     <View style={Style.credentialsContainer}>
                         <View style={Style.textContainerFB}>
@@ -102,7 +91,7 @@ const ForgetPassForm = ({ navigation }) => {
                             </Text>
                         </View>
 
-                        <ErrorMessage error={error} />
+                        <ErrorDialog error={error} />
 
                         {!isCodeSent ? (
                             <ForgotPasswordRequest
@@ -128,6 +117,8 @@ const ForgetPassForm = ({ navigation }) => {
                         }}>
                             <Text style={Style.bottomLinks}>Back</Text>
                         </TouchableOpacity>
+
+
                     </View>
                 </View>
             </SafeAreaView>
@@ -139,15 +130,9 @@ const ForgetPassForm = ({ navigation }) => {
 
 const ForgotPasswordRequest = ({ email, setEmail, handleResetPasswordRequest }) => (
     <>
-        <InputField
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            icon={ICONS.email}
-        />
-        <TouchableOpacity onPress={handleResetPasswordRequest} style={Style.button}>
-            <Text style={Style.buttonText}>Send Code</Text>
-        </TouchableOpacity>
+        <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" SideIcon = {EmailIcon} />
+
+        <PrimaryButton onPressButton ={handleResetPasswordRequest} InsideText ="Send Code"/>
     </>
 );
 
@@ -168,9 +153,10 @@ const ForgotPasswordCompletion = ({
             onChangeText={setNewPassword}
             secureTextEntry
         />
-        <TouchableOpacity onPress={handleResetPasswordCompletion} style={Style.button}>
-            <Text style={Style.buttonText}>Reset Password</Text>
-        </TouchableOpacity>
+
+        <PrimaryButton onPressButton ={handleResetPasswordCompletion} InsideText ="Reset Paswword"/>
+
+
     </>
 );
 

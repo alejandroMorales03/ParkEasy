@@ -12,9 +12,11 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
 } from 'react-native';
+import InputField from "./BasicComponents/InputField";
 import Style from "../Styles/CredentialsStyle";
 import globalStyles from '../Styles/GlobalStyle';
 import { COLORS } from "../Constants/Constants";
+import PrimaryButton from "./BasicComponents/PrimaryButton";
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
@@ -26,20 +28,6 @@ const API = axios.create({
 });
 
 //////////////////////////////////// COMPONENTS ////////////////////////////////////
-
-const InputField = ({ placeholder, value, onChangeText, secureTextEntry = false }) => (
-    <View style={Style.fieldCredential}>
-        <TextInput
-            placeholder={placeholder}
-            value={value}
-            onChangeText={onChangeText}
-            style={globalStyles.input}
-            placeholderTextColor={COLORS.Grey}
-            secureTextEntry={secureTextEntry}
-            autoCapitalize="none"
-        />
-    </View>
-);
 
 const ErrorMessage = ({ error }) => (
     error ? <Text style={globalStyles.errorText}>{error}</Text> : null
@@ -123,7 +111,18 @@ const SignUpForm = ({ navigation }) => {
                         // page view when code is not sent!
 
                         <SignUpFormNotCodeSent
-                            {...{ email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, confirmPassword, setConfirmPassword, handleSignUp, error }}
+                            {...{ email,
+                                setEmail,
+                                firstName,
+                                setFirstName,
+                                lastName,
+                                setLastName,
+                                password,
+                                setPassword,
+                                confirmPassword,
+                                setConfirmPassword,
+                                handleSignUp,
+                                error }}
                         />
 
                     ) : (
@@ -163,15 +162,13 @@ const SignUpFormNotCodeSent = ({
         <ErrorMessage error={error} />
 
         {/*Setting input fields for each variable*/}
-        <InputField placeholder="First Name" value={firstName} onChangeText={setFirstName} />
-        <InputField placeholder="Last Name" value={lastName} onChangeText={setLastName} />
-        <InputField placeholder="Email" value={email} onChangeText={setEmail} />
-        <InputField placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
-        <InputField placeholder="Confirm Password" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
+        <InputField placeholder="First Name"  onChange={setFirstName} value={firstName} />
+        <InputField placeholder="Last Name" value={lastName} onChange={setLastName} />
+        <InputField placeholder="Email" value={email} onChange={setEmail} />
+        <InputField placeholder="Password" value={password} onChange={setPassword} secureTextEntry/>
+        <InputField placeholder="Confirm Password" value={confirmPassword} onChange={setConfirmPassword} secureTextEntry />
 
-        <TouchableOpacity onPress={handleSignUp} style={Style.button}>
-            <Text style={Style.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
+        <PrimaryButton onPressButton ={handleSignUp} InsideText ="Sign Up"/>
     </>
 );
 
