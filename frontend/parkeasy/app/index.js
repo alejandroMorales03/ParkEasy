@@ -33,10 +33,10 @@ const CredentialsStack = () => {
 
 const App = () => {
     return (
-        // <NavigationContainer independent={true}>
-        //     <CredentialsStack />
-        // </NavigationContainer>
-        <Splash/>
+        <NavigationContainer independent={true}>
+            <CredentialsStack />
+        </NavigationContainer>
+        // <Splash/>
     );
 };
 
