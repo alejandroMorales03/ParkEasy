@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import {COLORS, SIZES} from "../../../Constants/Constants";
+import {COLORS, SIZES} from "../../Constants/Constants";
 
 const App = () => {
     // hooks

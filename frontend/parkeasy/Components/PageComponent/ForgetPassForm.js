@@ -10,20 +10,20 @@ import {
     Keyboard,
     TouchableWithoutFeedback
 } from 'react-native';
-import Style from "../Styles/CredentialsStyle";
-import GlobalStyle from "../Styles/GlobalStyle";
-import CredentialsStyle from "../Styles/CredentialsStyle";
-import { COLORS } from "../Constants/Constants";
-import imageLogo from "../assets/logos/logo_pin_color.svg";
-import { ICONS } from "../Constants/icons";
+import Style from "../../Styles/CredentialsStyle";
+import GlobalStyle from "../../Styles/GlobalStyle";
+import CredentialsStyle from "../../Styles/CredentialsStyle";
+import { COLORS } from "../../Constants/Constants";
+import imageLogo from "../../assets/logos/logo_pin_color.svg";
+import { ICONS } from "../../Constants/icons";
 
-import LogoPinColor from '../assets/logos/logo_pin_color.svg';
-import EmailIcon from "../assets/icons/input_mail.svg";
+import LogoPinColor from '../../assets/logos/logo_pin_color.svg';
+import EmailIcon from "../../assets/icons/input_mail.svg";
 
-import PrimaryButton from "./BasicComponents/PrimaryButton";
-import BottomLink from "./BasicComponents/BottomLink";
-import ErrorDialog from "./BasicComponents/ErrorDialog";
-import InputField from "./BasicComponents/InputField";
+import PrimaryButton from "../BasicComponents/PrimaryButton";
+import BottomLink from "../BasicComponents/BottomLink";
+import ErrorDialog from "../BasicComponents/ErrorDialog";
+import InputField from "../BasicComponents/InputField";
 
 
 //////////////////////////////////// API Configuration ////////////////////////////////////

@@ -52,10 +52,14 @@ export const handleSignUp = async (req, res) => {
 
 export const verifySignUp = async (req, res) => {
     const { email, code } = req.body;
-
-    if (!email || !code) {
+    
+    if (!email) {
         console.log('Missing email or confirmation code');
-        return res.status(400).json({ message: 'Email and confirmation code are required' });
+       // return res.status(400).json({ message: 'Email and confirmation code are required' });
+    }
+
+    if(!code){
+
     }
 
     try {
