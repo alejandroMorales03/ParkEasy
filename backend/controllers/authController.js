@@ -1,6 +1,6 @@
 import { generateVerificationCode, sendVerificationEmail } from '../utils/emailUtils.js';
 import { db } from '../config/db.js';
-import { hashPassword, comparePasswords } from '../utils/passwordUtils.js'; 
+import { hashPassword, comparePasswords } from '../utils/password_utils.js'; 
 import { hash } from 'bcrypt'; 
 
 export const handleSignUp = async (req, res) => {

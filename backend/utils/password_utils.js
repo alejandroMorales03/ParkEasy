@@ -2,6 +2,45 @@ import bcrypt from 'bcrypt';
 import { db } from '../config/db.js';
 
 // Method to encrypt password
+
+
+export const validatePassword = async (password_value) => {
+    const password_error = {};
+
+    // Check password length
+    if (password_value.length < 16) {
+        password_error.length = "Password must be at least 16 characters long.";
+    }
+
+    // Check for uppercase letter
+    if (!/[A-Z]/.test(password_value)) {
+        password_error.uppercase = "Password must contain at least one uppercase letter.";
+    }
+
+    // Check for lowercase letter
+    if (!/[a-z]/.test(password_value)) {
+        password_error.lowercase = "Password must contain at least one lowercase letter.";
+    }
+
+    // Check for a digit
+    if (!/\d/.test(password_value)) {
+        password_error.digit = "Password must contain at least one digit.";
+    }
+
+    // Check for special character
+    if (!/[#*_]/.test(password_value)) {
+        password_error.special = "Password must contain at least one special character (*, #, or _).";
+    }
+
+    // Check for unsupported characters
+    if (/[^A-Za-z0-9#*_]/.test(password_value)) {
+        password_error.unsupported = "Password must only contain letters, numbers, and the special characters (#, *, or _).";
+    }
+
+    
+    return password_error;
+};
+
 export const hashPassword = async (password, saltRounds = 10) => {
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -35,3 +74,4 @@ export const resetPassword = async(email, verification_code, expiresAt) =>{
 
     await db.query('UPDATE users SET password = $1 WHERE email = $2', [email])
 }
+
