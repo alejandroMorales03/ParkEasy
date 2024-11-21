@@ -1,32 +1,31 @@
 import { sequelize } from "../config/db";
 import { DataTypes, DATE, NOW } from "sequelize";
 
-const USER = sequelize.define("USER", {
-    first_name:{
-        type: DataTypes.STRING(50),
-        allowNull: false,
-    },
-    last_name:{
-        type: DataTypes.STRING(50),
-        allowNull: false,
-    },
+
+const PENDING_USER = sequelize.define('PENDING_USER',{
     email:{
         type: DataTypes.STRING(255),
         unique: true,
         validate: true,
         allowNull: false,
         primaryKey: true,
-
     },
-    password:{
-        type: DataTypes.STRING(255),
+    verification_code: {
+        type: DataTypes.STRING(6),
+        allowNull: false,
+    },
+    expires_at:{
+        type: DataTypes.DATE,
         allowNull: false,
     }
 
+    
+
 },{
     timestamps: true,
-    tableName: 'users',
+    tableName: 'pending_users',
 
 })
 
-export default USER;
+export default PENDING_USER;
+

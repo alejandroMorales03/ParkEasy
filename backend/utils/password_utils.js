@@ -1,46 +1,79 @@
 import bcrypt from 'bcrypt';
 import { db } from '../config/db.js';
+import {ERROR_CODE} from '../Constants/error_code.js'
 
 // Method to encrypt password
 
 
-export const validatePassword = async (password_value) => {
+export const isValidPassword = async (password_value) => {
     const password_error = {};
 
     // Check password length
     if (password_value.length < 16) {
         password_error.length = "Password must be at least 16 characters long.";
     }
-
     // Check for uppercase letter
     if (!/[A-Z]/.test(password_value)) {
         password_error.uppercase = "Password must contain at least one uppercase letter.";
     }
-
     // Check for lowercase letter
     if (!/[a-z]/.test(password_value)) {
         password_error.lowercase = "Password must contain at least one lowercase letter.";
     }
-
     // Check for a digit
     if (!/\d/.test(password_value)) {
         password_error.digit = "Password must contain at least one digit.";
     }
-
     // Check for special character
     if (!/[#*_]/.test(password_value)) {
         password_error.special = "Password must contain at least one special character (*, #, or _).";
     }
-
     // Check for unsupported characters
     if (/[^A-Za-z0-9#*_]/.test(password_value)) {
         password_error.unsupported = "Password must only contain letters, numbers, and the special characters (#, *, or _).";
     }
 
-    
     return password_error;
 };
 
+
+export const setPasswordError = async(password, error) =>{
+    if(!password){
+        error.password = {
+            code: ERROR_CODE.BAD_REQUEST,
+            message: "Password field is required",
+        }
+    }
+    else{
+        // Checks for password validation properties (uppercase, lowercase, digit, special char, unsupported char)
+        const password_error = await isPasswordValid(password);
+        
+        if(Object.keys(password_error).length > 0){
+            error.password = {
+                code: ERROR_CODE.UNPROCESSABLE_ENTITY,
+                message: {}
+
+            }
+
+            // For each key in the password_error object add the corresponding error message to the message object
+            for(let key in password_error){
+                if(password_error.hasOwnProperty(key))
+                error.password.message[key] = password_error[key];
+            }
+            
+        }
+    }
+}
+
+export const setConfirmPasswordError = async(password, confirmed_password, error) =>{
+    if(confirmed_password !== password){
+        error.confirmed_password ={
+            error: ERROR_CODE.BAD_REQUEST,
+            message: "Passwords do not match/"
+        }
+    }
+
+}
 export const hashPassword = async (password, saltRounds = 10) => {
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);

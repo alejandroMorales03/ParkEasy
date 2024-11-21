@@ -1,4 +1,4 @@
-import { generateVerificationCode, sendVerificationEmail } from '../utils/emailUtils.js';
+import { generateVerificationCode, sendVerificationEmail } from '../utils/email_utils.js';
 import { db } from '../config/db.js';
 import { hashPassword, comparePasswords } from '../utils/password_utils.js'; 
 import { hash } from 'bcrypt'; 
