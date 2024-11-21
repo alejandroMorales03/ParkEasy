@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { db } from '../config/db.js';
-import {ERROR_CODE} from '../Constants/error_code.js'
+import {ERROR_CODE} from '../Constants/constants.js'
 
 // Method to encrypt password
 

@@ -1,4 +1,4 @@
-import { ERROR_CODE, SUCCESS } from "../../Constants/error_code";
+import { ERROR_CODE, SUCCESS, UNEXPECTED_ERROR_MESSAGE} from "../../Constants/constants";
 import { generateVerificationCode, sendVerificationEmail, setEmailError } from "../../utils/email_utils";
 import { setPasswordError, setConfirmPasswordError } from "../../utils/password_utils";
 import USER from "../../models/user_model";
@@ -40,14 +40,14 @@ const signUp = async (req, res) => {
 
     try {
         // Check if email already exists in the USER model
-        const userRecords = await USER.findAll({
+        const user_records = await USER.findAll({
             where: {
                 email: email,
             },
         });
 
         // Early exit if the email is already in use
-        if (userRecords.length > 0) {
+        if (user_records.length > 0) {
             response_status_code = ERROR_CODE.BAD_REQUEST;
             error.code = ERROR_CODE.BAD_REQUEST;
             error.message = "This email is already associated with an account.";
@@ -60,13 +60,13 @@ const signUp = async (req, res) => {
         const expiration_time = new Date(Date.now() + 15 * 60 * 1000).toISOString();
 
         // Check if there's an existing pending sign-up attempt for the email
-        const pendingUserRecords = await PENDING_USER.findAll({
+        const pending_user_records = await PENDING_USER.findAll({
             where: {
                 email: email,
             },
         });
 
-        if (pendingUserRecords.length > 0) {
+        if (pending_user_records.length > 0) {
             // Update the existing pending user with new verification code and expiration
             await PENDING_USER.update(
                 {
@@ -96,9 +96,13 @@ const signUp = async (req, res) => {
             message: `Successful sign-up operation with ${email}.`
         });
 
-    } catch (error) {
+    } catch (err) {
+        error.code = ERROR_CODE.SERVER_ERROR,
+        error.message = SERVER_ERROR_MESSAGE
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong. Please try again later!" });
+        return res.status(response_status_code).json({error: error});
+
+       
     }
 };
 
