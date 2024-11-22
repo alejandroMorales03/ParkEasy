@@ -13,4 +13,4 @@ const EXPIRATION_MINUTES_FOR_CODE = 15;
 
 const SERVER_ERROR_MESSAGE = "Something went wrong. Please try again later."
 
-export default {ERROR_CODE, SUCCESS};
+export default {ERROR_CODE, SUCCESS, SALT_ROUNDS, EXPIRATION_MINUTES_FOR_CODE, SERVER_ERROR_MESSAGE};

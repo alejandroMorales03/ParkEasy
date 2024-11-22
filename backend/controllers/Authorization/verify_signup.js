@@ -2,7 +2,8 @@ import { ERROR_CODE, SUCCESS, SALT_ROUNDS, SERVER_ERROR_MESSAGE } from '../../Co
 import PENDING_USER from '../../models/pending_user_model.js';
 import { Op } from 'sequelize';
 import USER from '../../models/user_model.js';
-import { hashPassword } from '../../utils/password_utils.js';
+import { hashPassword, setPasswordError } from '../../utils/password_utils.js';
+import { setEmailError } from '../../utils/email_utils.js';
 
 const verify_signup = async (req, res) => {
     let response_status_code = SUCCESS;
@@ -17,6 +18,18 @@ const verify_signup = async (req, res) => {
         console.log(error);
         return res.status(response_status_code).json({ error: error });
     }
+
+    // Check for missing required data that was not transfered during naviagation.
+
+    if(!(last_name && first_name && email && password)){
+        response_status_code = ERROR_CODE.BAD_REQUEST;
+        error.code = ERROR_CODE.BAD_REQUEST,
+        error.message = "One or more required fields were not passed during navigation.";
+        console.log(error);
+        return res.status(response_status_code).json({error: error });
+    }
+    
+    
 
     try {
         // Find a pending user record with a matching email and valid verification code

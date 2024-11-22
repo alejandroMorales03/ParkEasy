@@ -1,4 +1,4 @@
-import { generateVerificationCode, sendVerificationEmail, setEmailError } from "../../utils/email_utils";
+import { generateVerificationCode, sendVerificationEmail, setEmailError } from "../../utils/email_utils.js";
 import {SUCCESS, ERROR_CODE, EXPIRATION_MINUTES_FOR_CODE} from '../../Constants/constants.js'
 import USER from "../../models/user_model.js";
 import PASSWORD_RECOVERY from "../../models/password_recovery_model.js";
@@ -74,7 +74,7 @@ const reset_password = async(req, res) =>{
 
         // Successful response is sent indicating no errors were encountered
 
-        return res.status(response_status_code).json({message: `Successful password recovery request operation with email ${email}.`})
+        return res.status(response_status_code).json({message: `Successful password recovery request operation with email ${email}. `})
 
     }catch(err){
 
