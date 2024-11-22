@@ -80,3 +80,4 @@ const reset_password = async(req, res) =>{
 
     }
 }
+export default reset_password;

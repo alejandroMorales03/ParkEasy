@@ -1,7 +1,7 @@
 import {ERROR_CODE, SUCCESS} from '../../Constants/constants.js'
 import USER from '../../models/user_model.js';
-import { isEmailValid, setEmailError } from '../../utils/email_utils';
-import { comparePasswords, setPasswordError } from '../../utils/password_utils';
+import { isEmailValid, setEmailError } from '../../utils/email_utils.js';
+import { comparePasswords, setPasswordError } from '../../utils/password_utils.js';
 const login = async(req, res) =>{
     
     const {email, password} = req.body;

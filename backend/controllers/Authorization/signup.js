@@ -1,21 +1,20 @@
-import { ERROR_CODE, SUCCESS, UNEXPECTED_ERROR_MESSAGE} from "../../Constants/constants";
-import { generateVerificationCode, sendVerificationEmail, setEmailError } from "../../utils/email_utils";
-import { setPasswordError, setConfirmPasswordError } from "../../utils/password_utils";
-import USER from "../../models/user_model";
-import PENDING_USER from "../../models/pending_user_model";
+import { ERROR_CODE, SUCCESS, SERVER_ERROR_MESSAGE } from "../../Constants/constants.js";
+import { generateVerificationCode, sendVerificationEmail, setEmailError } from "../../utils/email_utils.js";
+import { setPasswordError, setConfirmPasswordError } from "../../utils/password_utils.js";
+import USER from "../../models/user_model.js";
+import PENDING_USER from "../../models/pending_user_model.js";
 
-const signUp = async (req, res) => {
-    // Default empty error object
-    const error = {};
+const sign_up = async (req, res) => {
+    const error = {}; // Default empty error object
     let response_status_code = SUCCESS;
     const { email, first_name, last_name, password, confirmed_password } = req.body;
 
-    // Validate input fields
+    // Validate input fields asynchronously
     await setEmailError(email, error);
     await setPasswordError(password, error);
     await setConfirmPasswordError(password, confirmed_password, error);
 
-    // Check for missing first name and last name
+    // Check for missing first name and last name synchronously
     if (!first_name) {
         error.first_name = {
             code: ERROR_CODE.BAD_REQUEST,
@@ -33,17 +32,13 @@ const signUp = async (req, res) => {
     if (Object.keys(error).length > 0) {
         response_status_code = ERROR_CODE.BAD_REQUEST;
         console.log(error);
-        return res.status(response_status_code).json({
-            error: error
-        });
+        return res.status(response_status_code).json({ error: error });
     }
 
     try {
         // Check if email already exists in the USER model
         const user_records = await USER.findAll({
-            where: {
-                email: email,
-            },
+            where: { email: email },
         });
 
         // Early exit if the email is already in use
@@ -61,23 +56,14 @@ const signUp = async (req, res) => {
 
         // Check if there's an existing pending sign-up attempt for the email
         const pending_user_records = await PENDING_USER.findAll({
-            where: {
-                email: email,
-            },
+            where: { email: email },
         });
 
         if (pending_user_records.length > 0) {
             // Update the existing pending user with new verification code and expiration
             await PENDING_USER.update(
-                {
-                    verification_code: code,
-                    expires_at: expiration_time,
-                },
-                {
-                    where: {
-                        email: email,
-                    },
-                }
+                { verification_code: code, expires_at: expiration_time },
+                { where: { email: email } }
             );
         } else {
             // Create a new pending user record
@@ -93,17 +79,16 @@ const signUp = async (req, res) => {
 
         // Return success response after all operations
         res.status(response_status_code).json({
-            message: `Successful sign-up operation with ${email}.`
+            message: `Successful sign-up operation with ${email}. Please check your email for the verification code.`,
         });
 
     } catch (err) {
-        error.code = ERROR_CODE.SERVER_ERROR,
-        error.message = SERVER_ERROR_MESSAGE
-        console.log(error);
-        return res.status(response_status_code).json({error: error});
-
-       
+        // Handle server-side errors
+        error.code = ERROR_CODE.SERVER_ERROR;
+        error.message = SERVER_ERROR_MESSAGE;
+        console.error("Server Error:", err);
+        return res.status(response_status_code).json({ error: error });
     }
 };
 
-export default signUp;
+export default sign_up;

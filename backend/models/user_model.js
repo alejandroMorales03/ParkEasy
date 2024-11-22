@@ -1,4 +1,4 @@
-import { sequelize } from "../config/db";
+import { sequelize } from "../config/db.js";
 import { DataTypes, DATE, NOW } from "sequelize";
 
 const USER = sequelize.define("USER", {

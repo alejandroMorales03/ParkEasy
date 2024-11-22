@@ -2,24 +2,18 @@ import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import config from '../config/config.js';
 
-
-
 // Takes an email and checks if it follows the appropriate format
-const isEmailValid = async (email_value) => {
+export const isEmailValid = (email_value) => {
     // Updated regular expression for validating email format
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     // Check if the email matches the pattern
-    if (!emailPattern.test(email_value)) {
-        return false;  // Invalid email format
-    }
-    return true;  // Valid email format
+    return emailPattern.test(email_value);  // Synchronous check
 };
 
 // Takes an error object and validates an email. If there is an error in the email object,
 // the error object is modified.
-
-const setEmailError = async (email, error) => {
+export const setEmailError = async (email, error) => {
     if (!email) {
         // If email is not provided, set the "Email field is required" error
         error.email = {
@@ -28,7 +22,7 @@ const setEmailError = async (email, error) => {
         };
     } else {
         // Check if email follows appropriate format
-        const isValid = await isEmailValid(email);  
+        const isValid = isEmailValid(email);  // Synchronous check
 
         if (!isValid) {
             error.email = {
@@ -39,18 +33,11 @@ const setEmailError = async (email, error) => {
     }
 };
 
+// Generate a verification code (Synchronous)
+export const generateVerificationCode = () => crypto.randomBytes(3).toString('hex').toUpperCase();
 
-
-
-
-
-
-// Generate a verification code
-const generateVerificationCode = () => crypto.randomBytes(3).toString('hex').toUpperCase();
-
-// Send verification email
-const sendVerificationEmail = async (email, code) => {
-   
+// Send verification email (Asynchronous)
+export const sendVerificationEmail = async (email, code) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail', // Use 'gmail' for Gmail service
         auth: {
@@ -59,7 +46,6 @@ const sendVerificationEmail = async (email, code) => {
         }
     });
 
-    
     const mailOptions = {
         from: config.notifier.email, // Sender's email address
         to: email, // Recipient's email address
@@ -68,14 +54,10 @@ const sendVerificationEmail = async (email, code) => {
     };
 
     try {
-        
-        await transporter.sendMail(mailOptions);
+        await transporter.sendMail(mailOptions);  // Async I/O operation
         console.log('Verification email sent successfully');
     } catch (error) {
-        
         console.error('Error sending verification email:', error);
         throw error;
     }
 };
-
-export {setEmailError, isEmailValid, generateVerificationCode, sendVerificationEmail };

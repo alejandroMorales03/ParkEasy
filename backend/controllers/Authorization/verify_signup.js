@@ -25,7 +25,7 @@ const verify_signup = async (req, res) => {
         response_status_code = ERROR_CODE.BAD_REQUEST;
         error.code = ERROR_CODE.BAD_REQUEST,
         error.message = "One or more required fields were not passed during navigation.";
-        console.log(error);
+        console.log(error)
         return res.status(response_status_code).json({error: error });
     }
     

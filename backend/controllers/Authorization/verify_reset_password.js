@@ -1,6 +1,6 @@
-import { setEmailError } from "../../utils/email_utils";
-import { hashPassword, setPasswordError } from "../../utils/password_utils";
-import PASSWORD_RECOVERY from "../../models/password_recovery_model";
+import { setEmailError } from "../../utils/email_utils.js";
+import { hashPassword, setPasswordError } from "../../utils/password_utils.js";
+import PASSWORD_RECOVERY from "../../models/password_recovery_model.js";
 import {ERROR_CODE, SALT_ROUNDS} from '../../Constants/constants.js'
 import USER from "../../models/user_model.js";
 
@@ -77,3 +77,5 @@ const verify_reset_password = async(req, res) =>{
 
 
 }
+
+export default verify_reset_password;

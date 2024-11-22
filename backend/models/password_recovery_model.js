@@ -1,4 +1,4 @@
-import { sequelize } from "../config/db";
+import { sequelize } from "../config/db.js";
 import { DataTypes, DATE } from "sequelize";
 
 const PASSWORD_RECOVERY = sequelize.define("forgot_password", {
