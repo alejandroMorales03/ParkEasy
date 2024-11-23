@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+//TEST TEST TEST
 import {
     View,
     Text,
@@ -7,21 +8,18 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
 } from 'react-native';
-import Style from "../Styles/CredentialsStyle";
-import globalStyles from '../Styles/GlobalStyle';
-// import {COLORS} from "../Constants/Constants";
-// import {ICONS} from "../Constants/icons";
-// import {LOGOS} from "../Constants/logos";
+import Style from "../../Styles/CredentialsStyle";
+import globalStyles from '../../Styles/GlobalStyle';
 import axios from 'axios';
-import LogoPinColor from '../assets/logos/logo_pin_color.svg';
-import EmailIcon from '../assets/icons/input_mail.svg';
-import PasswordIcon from '../assets/icons/pass.svg';
-import CredentialsStyle from "../Styles/CredentialsStyle";
+import LogoPinColor from '../../assets/logos/logo_pin_color.svg';
+import EmailIcon from '../../assets/icons/input_mail.svg';
+import PasswordIcon from '../../assets/icons/pass.svg';
+import CredentialsStyle from "../../Styles/CredentialsStyle";
 
-import InputField from "./BasicComponents/InputField";
-import PrimaryButton from "./BasicComponents/PrimaryButton";
-import BottomLink from "./BasicComponents/BottomLink";
-import ErrorDialog from "./BasicComponents/ErrorDialog";
+import InputField from "../BasicComponents/InputField";
+import PrimaryButton from "../BasicComponents/PrimaryButton";
+import BottomLink from "../BasicComponents/BottomLink";
+import ErrorDialog from "../BasicComponents/ErrorDialog";
 
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
@@ -56,7 +54,7 @@ const LoginForm = ({ navigation }) => {
             });
             navigation.navigate("Sign Up");
         }catch(err){
-            console.error('Error during login:', err.response ? err.response.data : err.message);
+            console.log('Error during login:', err.response ? err.response.data.message : err.message);
             setError(err.response ? err.response.data.message : 'Login failed. Please try again.');
         }
     }
@@ -94,7 +92,7 @@ const LoginForm = ({ navigation }) => {
                             {/* Link to Forget Password Page */}
                             <BottomLink navigation = {navigation} text="Forget Password?" navigateTo= "ForgetPassword" resetField={resetField}/>
                             {/* Link for Sign Up Page*/}
-                            <BottomLink navigation = {navigation} text="Sign Up" navigateTo= "Sign Up" resetField={resetField}/>
+                            <BottomLink navigation = {navigation} text="Sign Up" navigateTo= "Sign Up" resetField={resetField} fontWeight='bold'/>
 
                         </View>
 

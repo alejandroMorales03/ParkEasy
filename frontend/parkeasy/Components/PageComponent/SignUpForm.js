@@ -12,11 +12,11 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
 } from 'react-native';
-import InputField from "./BasicComponents/InputField";
-import Style from "../Styles/CredentialsStyle";
-import globalStyles from '../Styles/GlobalStyle';
-import { COLORS } from "../Constants/Constants";
-import PrimaryButton from "./BasicComponents/PrimaryButton";
+import InputField from "../BasicComponents/InputField";
+import Style from "../../Styles/CredentialsStyle";
+import globalStyles from '../../Styles/GlobalStyle';
+import { COLORS } from "../../Constants/Constants";
+import PrimaryButton from "../BasicComponents/PrimaryButton";
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 

@@ -3,26 +3,23 @@ import {Text, StyleSheet} from "react-native";
 import React from "react";
 import {COLORS, SIZES} from "../../Constants/Constants";
 
-const ErrorDialog = ({error}) => {
-    return(
-       <>
+const ErrorDialog = ({ error, size = SIZES.extraSmall, }) => {
+    return (
+        <>
             {error ? (
-                    <Text style={styles.errorText}>
-                        {error}
-                    </Text>
-                ) : null}
-       </>
-
-    )
-}
+                <Text style={[styles.errorText, {fontSize: size }]}>
+                    {error}
+                </Text>
+            ) : null}
+        </>
+    );
+};
 
 const styles = StyleSheet.create({
     errorText: {
-        fontSize: SIZES.extraSmall,
         color: COLORS.Error,
-        fontWeight: "normal",
+        fontWeight: 'normal',
     },
-
-})
+});
 
 export default ErrorDialog;
