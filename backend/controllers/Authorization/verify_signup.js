@@ -2,8 +2,8 @@ import { ERROR_CODE, SUCCESS, SALT_ROUNDS, SERVER_ERROR_MESSAGE } from '../../Co
 import PENDING_USER from '../../models/pending_user_model.js';
 import { Op } from 'sequelize';
 import USER from '../../models/user_model.js';
-import { hashPassword, setPasswordError } from '../../utils/password_utils.js';
-import { setEmailError } from '../../utils/email_utils.js';
+import { hashPassword,  } from '../../utils/password_utils.js';
+
 
 const verify_signup = async (req, res) => {
     let response_status_code = SUCCESS;
@@ -12,8 +12,8 @@ const verify_signup = async (req, res) => {
 
     // Check for missing verification code
     if (!code) {
-        error.code = ERROR_CODE.BAD_REQUEST;
-        error.message = 'Verification code field is required.';
+        error.code.code = ERROR_CODE.BAD_REQUEST;
+        error.code.message = 'Verification code field is required.';
         response_status_code = ERROR_CODE.BAD_REQUEST;
         console.log(error);
         return res.status(response_status_code).json({ error: error });
@@ -38,7 +38,7 @@ const verify_signup = async (req, res) => {
                 email: email,
                 verification_code: code,
                 expires_at: {
-                    [Op.gt]: new Date(),
+                    [Op.gt]: Date.now(),
                 },
             },
         });

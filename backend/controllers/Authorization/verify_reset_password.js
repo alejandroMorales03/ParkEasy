@@ -9,12 +9,13 @@ const verify_reset_password = async(req, res) =>{
     const error = {}
     const {email, code, new_password} = req.body;
 
-    await setEmailError(email, error);
+    //await setEmailError(email, error);
+    // TODO: Check for email being passed 
     await setPasswordError(new_password, error);
 
     if (!code) {
-        error.code = ERROR_CODE.BAD_REQUEST;
-        error.message = 'Verification code field is required.';
+        error.code.code = ERROR_CODE.BAD_REQUEST;
+        error.code.message = 'Verification code field is required.';
         response_status_code = ERROR_CODE.BAD_REQUEST;
         console.log(error);
         return res.status(response_status_code).json({ error: error });
@@ -41,6 +42,7 @@ const verify_reset_password = async(req, res) =>{
             error.code = ERROR_CODE.UNAUTHORIZED;
             error.message = "The error provided is invalid or expired.";
             response_status_code = ERROR_CODE.UNAUTHORIZED;
+            console.log(error);
             return res.status(response_status_code).json({error: error});
         }
 
@@ -71,6 +73,7 @@ const verify_reset_password = async(req, res) =>{
         response_status_code = ERROR_CODE.BAD_REQUEST;
         error.code = ERROR_CODE.SERVER_ERROR;
         error.message = SERVER_ERROR_MESSAGE;
+        console.log(error);
         return res.status(response_status_code).json({error: error});
     }
 

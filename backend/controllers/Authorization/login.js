@@ -14,6 +14,7 @@ const login = async(req, res) =>{
     // Early exit if there is an error in the form
     if(Object.keys(error).length > 0){
         response_status_code = ERROR_CODE.BAD_REQUEST;
+        console.log(error);
         return res.status(response_status_code).json({error: error});
     }
 
@@ -29,6 +30,7 @@ const login = async(req, res) =>{
             response_status_code = ERROR_CODE.UNAUTHORIZED;
             error.code = ERROR_CODE.UNAUTHORIZED;
             error.message = "Email and password combination is invalid.";
+            console.log(error);
             return res.status(response_status_code).json({error: error});
         }
         
@@ -42,10 +44,9 @@ const login = async(req, res) =>{
             response_status_code = ERROR_CODE.UNAUTHORIZED;
             error.code = ERROR_CODE.UNAUTHORIZED,
             error.message = "Email and password combination is invalid.";
+            console.log(error);
             return res.status(response_status_code).json({error: error});
-        }
-        
-            
+        }   
 
     }catch(err){
         error.code = ERROR_CODE.SERVER_ERROR;
