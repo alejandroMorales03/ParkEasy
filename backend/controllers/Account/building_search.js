@@ -16,6 +16,7 @@ const building_search = async(req, res) =>{
 
     try{
         const building_records = await BUILDINGS.findAll({
+            attributes: ['building', 'building_code'], // Specific columns to retrieve
             where: {
                 [Sequelize.Op.or]: [
                     {
@@ -24,13 +25,14 @@ const building_search = async(req, res) =>{
                         }
                     },
                     {
-                        code: {
+                        building_code: {
                             [Sequelize.Op.iLike]: `%${query}%`  // Case-insensitive search for 'code'
                         }
                     }
                 ]
             }
         });
+        
 
         if(building_records.length > 0){
             return res.status(response_status_code).json({
