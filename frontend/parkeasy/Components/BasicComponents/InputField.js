@@ -43,6 +43,7 @@ const InputField = ({
     // State to manage visibility of the password
     const [isSecure, setIsSecure] = useState(secureTextEntry);
     const [isHiddenIcon, setIsHiddenIcon] = useState(true);
+    console.log(errorTray + 3);
 
     // Animated value for border color
     const borderAnim = useRef(new Animated.Value(0)).current;

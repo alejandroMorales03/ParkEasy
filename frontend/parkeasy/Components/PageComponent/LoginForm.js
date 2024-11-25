@@ -27,36 +27,30 @@ const LoginForm = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(''); // this will hold the error use this as a parameter for the message
+    const [error, setError] = useState({}); // this will hold the error use this as a parameter for the message
 
     // field clean up
     function resetField(){
         setEmail('');
         setPassword('');
-        setError('');
+        setError({});
     }
 
     async function handleLogin(){
-        setError('');
-
-        if(!email || !password){
-            setError('Please fill out all fields.');
-            return;
-        }
-
-        console.log("Email: ", email);
-        console.log("Password: ", password);
-
+        
         try{
-            const response = await axios.post('http://localhost:8000/api/auth/login', {
+            const response = await axios.post('http://192.168.1.211:8000/api/auth/login', {
                 email,
                 password
             });
             navigation.navigate("Sign Up");
-        }catch(err){
-            console.log('Error during login:', err.response ? err.response.data.message : err.message);
-            setError(err.response ? err.response.data.message : 'Login failed. Please try again.');
-        }
+        }catch (err) {
+                
+                console.log(err.response.data.error); // Display the message from the error object
+                setError(err.response.data.error);
+
+                
+            }
     }
 
     return (
@@ -75,10 +69,11 @@ const LoginForm = ({ navigation }) => {
                             <Text style={Style.mainTitle}>Login</Text>
 
                             {/*component to display errors*/}
-                            <ErrorDialog error={error}/>
+                            <ErrorDialog error={error.message? error.message: null}/>
+                           
 
                             {/* This is the email input */}
-                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" SideIcon = {EmailIcon} />
+                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" SideIcon = {EmailIcon} errorTray = {error.email? error.email.message : null}/>
                             {/* This is the Password Input */}
                             <InputField placeholder="Password" onChange={setPassword} value={password}  hasIcon= "true" SideIcon = {PasswordIcon} secureTextEntry="true" />
                             {/* Login Button */}

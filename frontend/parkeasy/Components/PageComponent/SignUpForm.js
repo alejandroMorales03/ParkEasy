@@ -60,17 +60,7 @@ const SignUpForm = ({ navigation }) => {
 
     // Handle sign-up submission
     const handleSignUp = async () => {
-        setError('');
-
-        // Validate input fields
-        if (!email || !firstName || !lastName || !password || !confirmPassword) {
-            setError('Please fill out all fields.');
-            return;
-        }
-        if (password !== confirmPassword) {
-            setError('Passwords do not match.');
-            return;
-        }
+       
 
         try {
             const response = await API.post('/signup', { email, firstName, lastName, password });
