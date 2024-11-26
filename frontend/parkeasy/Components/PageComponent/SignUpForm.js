@@ -43,7 +43,7 @@ const SignUpForm = ({ navigation }) => {
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState({})
     const [isCodeSent, setIsCodeSent] = useState(false);
     const [confirmCode, setConfirmCode] = useState('');
 
@@ -56,6 +56,7 @@ const SignUpForm = ({ navigation }) => {
         setPassword('');
         setConfirmPassword('');
         setConfirmCode('');
+        setError({});
     };
 
     // Handle sign-up submission
@@ -67,10 +68,8 @@ const SignUpForm = ({ navigation }) => {
             console.log(response.data);
             setIsCodeSent(true);
         } catch (err) {
-            setError(err.response ? err.response.data.message : 'Sign-up failed. Please try again.');
-            resetFields(); // cleans fields when there is an error
-
-            console.error('Error during sign-up:', err.response ? err.response.data.message : err.message);
+            setError(err.response.data.error);
+            console.log(err.response.data.error);
         }
     };
 
@@ -148,12 +147,17 @@ const SignUpFormNotCodeSent = ({
         <Text style={globalStyles.Text}>Let's make you part of this!</Text>
 
         {/*This is the error space */}
-        <ErrorMessage error={error} />
+        <ErrorMessage error={error} /> {/* Niel esto no va a functionar recuerda */}
 
         {/*Setting input fields for each variable*/}
         <InputField placeholder="First Name"  onChange={setFirstName} value={firstName} />
         <InputField placeholder="Last Name" value={lastName} onChange={setLastName} />
         <InputField placeholder="Email" value={email} onChange={setEmail} />
+
+        {/** For this one (the password) you need to extract the message list because there is way more than one message so you can't 
+         *   pass the string. Do  this Object.values(error.password.message) so u can pass a full array but in the case of this field u need to handle a way of printing the contents
+         * 
+         */}
         <InputField placeholder="Password" value={password} onChange={setPassword} secureTextEntry/>
         <InputField placeholder="Confirm Password" value={confirmPassword} onChange={setConfirmPassword} secureTextEntry />
 
