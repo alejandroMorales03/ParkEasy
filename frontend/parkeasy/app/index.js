@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import LoginForm from '../Components/LoginForm';
-import ForgetPassForm from '../Components/ForgetPassForm';
-import SignUpForm from "../Components/SignUpForm";
-import MainPage from '../Components/MainPage';
-import MapView from '../Components/MapTest';
-import Splash from '../Components/Splash';
+import LoginForm from '../Components/PageComponent/LoginForm';
+import ForgetPassForm from '../Components/PageComponent/ForgetPassForm';
+import SignUpForm from "../Components/PageComponent/SignUpForm";
+import MainPage from '../Components/PageComponent/MainPage';
+import MapView from '../Components/PageComponent/MapTest';
+import Splash from '../Components/PageComponent/SplashPage';
 const Stack = createStackNavigator();
 
 // This is used to create the stack navigation
@@ -33,10 +33,10 @@ const CredentialsStack = () => {
 
 const App = () => {
     return (
-        // <NavigationContainer independent={true}>
-        //     <CredentialsStack />
-        // </NavigationContainer>
-        <Splash/>
+        <NavigationContainer independent={true}>
+            <CredentialsStack />
+        </NavigationContainer>
+        // <Splash/>
     );
 };
 

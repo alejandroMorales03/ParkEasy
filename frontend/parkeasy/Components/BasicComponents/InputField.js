@@ -1,11 +1,14 @@
 import { Animated, Dimensions, Image, StyleSheet, TextInput, View, TouchableOpacity } from "react-native";
-import Style from "../../Styles/CredentialsStyle";
-import { ICONS } from "../../Constants/icons";
 import GlobalStyle from "../../Styles/GlobalStyle";
 import {COLORS, SIZES, WEIGHT} from "../../Constants/Constants";
 import React, { useState, useRef } from "react";
+
+
 import EyeIconFieldUnmarked from "../../assets/icons/input_pass_visible.svg"
 import EyeIconFieldMarked from "../../assets/icons/input_pass_hidden.svg"
+
+import ErrorDialog from "../BasicComponents/ErrorDialog"
+
 const { width } = Dimensions.get('window'); // Collects the dimensions of the current window
 
 /**
@@ -20,6 +23,7 @@ const { width } = Dimensions.get('window'); // Collects the dimensions of the cu
  * @param {string} keyboardType - The type of keyboard to display (e.g., "default", "numeric").
  * @param {string} autoCap - Sets capitalization behavior ("none", "sentences", "words", "characters").
  * @param {boolean} secureTextEntry - If true, hides the input for password fields.
+ * @param {string} errorTray - Brings the error message if existent
  */
 
 
@@ -32,12 +36,14 @@ const InputField = ({
                         hasIcon = false,
                         keyboardType = "default",
                         autoCap = "none",
-                        secureTextEntry = false
+                        secureTextEntry = false,
+                        errorTray
                     }) => {
 
     // State to manage visibility of the password
     const [isSecure, setIsSecure] = useState(secureTextEntry);
     const [isHiddenIcon, setIsHiddenIcon] = useState(true);
+    
 
     // Animated value for border color
     const borderAnim = useRef(new Animated.Value(0)).current;
@@ -69,10 +75,11 @@ const InputField = ({
     };
 
     // Interpolate the border color based on focus
-    const borderColor = borderAnim.interpolate({
+    // Condition if erroTray exist omit the animation of color and leave it on red until error non existent
+    const borderColor = !errorTray ? borderAnim.interpolate({
         inputRange: [0, 1],
         outputRange: [COLORS.Gray1, COLORS.Black] // Colors for unfocused and focused states
-    });
+    }) : COLORS.Error;
 
     const borderThickness = borderAnim.interpolate({
         inputRange: [0, 1],
@@ -80,44 +87,61 @@ const InputField = ({
     });
 
     return (
+      
+        <View style= {styles.fieldContainer}>
+            <View style={styles.fieldCredential}>
+                {/*TODO figure out a way to add the path of the icon into the function*/}
 
-        <View style={styles.fieldCredential}>
-            {/*TODO figure out a way to add the path of the icon into the function*/}
+                {/* Conditionally render the icon based on hasIcon*/}
 
-            {/* Conditionally render the icon based on hasIcon*/}
+                {hasIcon && SideIcon && ( // condition of Icon
+                    <SideIcon style = {GlobalStyle.icons} />
 
-            {hasIcon && SideIcon && ( // condition of Icon
-                <SideIcon style = {GlobalStyle.icons} />
+                )}
+                <Animated.View style={[styles.animatedInputContainer, {borderBottomColor: borderColor, borderBottomWidth: borderThickness }]}>
 
-            )}
-            <Animated.View style={[styles.animatedInputContainer, {borderBottomColor: borderColor, borderBottomWidth: borderThickness }]}>
+                    <TextInput
+                        placeholder={placeholder}
+                        keyboardType={keyboardType}
+                        value={value}
+                        onChangeText={onChange}
+                        style={styles.input}
+                        placeholderTextColor={COLORS.Gray1}
+                        autoCapitalize={autoCap}
+                        secureTextEntry={isSecure}
+                        onFocus={handleFocus}   // Start animation on focus
+                        onBlur={handleBlur}     // Reverse animation on blur
+                    />
+                    
+                
 
-                <TextInput
-                    placeholder={placeholder}
-                    keyboardType={keyboardType}
-                    value={value}
-                    onChangeText={onChange}
-                    style={styles.input}
-                    placeholderTextColor={COLORS.Gray1}
-                    autoCapitalize={autoCap}
-                    secureTextEntry={isSecure}
-                    onFocus={handleFocus}   // Start animation on focus
-                    onBlur={handleBlur}     // Reverse animation on blur
-                />
+                {/* Conditionally render the eye icon only if secureTextEntry is true */}
+                {secureTextEntry && (
+                    <TouchableOpacity 
+                    onPress={togglePasswordVision} // execusion in touch
+                    style={[styles.eyeIcon,{paddingTop: 8}]} // aligment
+                    hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 } // touchable area expansion
+                    }>  
+
+                        {isHiddenIcon ? (
+                            <EyeIconFieldUnmarked  style={styles.eyeIcon} />
+                        ) : (
+                            <EyeIconFieldMarked style={styles.eyeIcon}/>
+                        )}
+                    </TouchableOpacity>
+                    
+                )}
 
             </Animated.View>
-            {/* Conditionally render the eye icon only if secureTextEntry is true */}
-            {secureTextEntry && (
-                <TouchableOpacity onPress={togglePasswordVision} style={styles.eyeIcon}>
-                    {isHiddenIcon ? (
-                    <EyeIconFieldUnmarked  style={styles.eyeIcon} />
-                    ) : (
-                    <EyeIconFieldMarked style={styles.eyeIcon}/>
-                    )}
-                </TouchableOpacity>
-            )}
 
-        </View>
+            </View>
+                {// condition if error exist display message below
+                    errorTray && (
+                        <View style= {{alignItems: 'flex-end', marginEnd: 10}}>
+                            <ErrorDialog error = {errorTray} size = {SIZES.superExtraSmall}/>
+                        </View>
+                    )}
+        </View>    
     );
 };
 
@@ -129,6 +153,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     input: {
+        flex: 1,
         height: 20,
         paddingHorizontal: width * 0.04, // 8% of screen width
         marginVertical: 10,
@@ -139,6 +164,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center', // Aligns input and icon vertically centered
         marginVertical: 3, // Adds spacing between input fields
+    },
+
+    fieldContainer : {
+        flexDirection: 'column'
+
     },
 
     eyeIcon: {

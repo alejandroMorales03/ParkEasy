@@ -2,14 +2,14 @@ import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { COLORS } from "../../Constants/Constants";
 
-const BottomLink = ({ navigation, text, navigateTo, resetField }) => {
+const BottomLink = ({ navigation, text, navigateTo, resetField, fontWeight = "normal" }) => {
     const handlePress = () => {
         resetField(); // clear fields
         navigation.navigate(navigateTo) // navigate to specified route
     }
     return (
         <TouchableOpacity onPress={handlePress}>
-            <Text style={styles.bottomLink}>{text}</Text>
+            <Text style={[styles.bottomLink, {fontWeight: fontWeight}]}>{text}</Text>
         </TouchableOpacity>
     );
 };

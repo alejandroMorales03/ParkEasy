@@ -9,13 +9,13 @@ import {
     Image,
     TouchableWithoutFeedback, Keyboard, SafeAreaViewBase
 } from 'react-native';
-import Style from '../Styles/UserPagesStyle'
-import {COLORS} from "../Constants/Constants";
+import Style from '../../Styles/UserPagesStyle'
+import {COLORS} from "../../Constants/Constants";
 import {ImageBackground} from "react-native-web";
-import {ICONS} from "../Constants/icons";
-import globalStyles from "../Styles/GlobalStyle";
-import userPagesStyle from "../Styles/UserPagesStyle";
-import GlobalStyle from "../Styles/GlobalStyle";
+import {ICONS} from "../../Constants/icons";
+import globalStyles from "../../Styles/GlobalStyle";
+import userPagesStyle from "../../Styles/UserPagesStyle";
+import GlobalStyle from "../../Styles/GlobalStyle";
 import axios from "axios";
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 

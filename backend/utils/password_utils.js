@@ -40,12 +40,12 @@ export const setPasswordError = async(password, error) =>{
     if(!password){
         error.password = {
             code: ERROR_CODE.BAD_REQUEST,
-            message: "Password field is required",
+            message: "Password field is required.",
         }
     }
     else{
         // Checks for password validation properties (uppercase, lowercase, digit, special char, unsupported char)
-        const password_error = await isPasswordValid(password);
+        const password_error = await isValidPassword(password);
         
         if(Object.keys(password_error).length > 0){
             error.password = {
@@ -67,8 +67,8 @@ export const setPasswordError = async(password, error) =>{
 export const setConfirmPasswordError = async(password, confirmed_password, error) =>{
     if(confirmed_password !== password){
         error.confirmed_password ={
-            error: ERROR_CODE.BAD_REQUEST,
-            message: "Passwords do not match/"
+            code: ERROR_CODE.BAD_REQUEST,
+            message: "Passwords do not match."
         }
     }
 

@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import config from '../config/config.js';
-
+import { ERROR_CODE } from '../Constants/constants.js';
 // Takes an email and checks if it follows the appropriate format
 export const isEmailValid = (email_value) => {
     // Updated regular expression for validating email format

@@ -12,11 +12,11 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
 } from 'react-native';
-import InputField from "./BasicComponents/InputField";
-import Style from "../Styles/CredentialsStyle";
-import globalStyles from '../Styles/GlobalStyle';
-import { COLORS } from "../Constants/Constants";
-import PrimaryButton from "./BasicComponents/PrimaryButton";
+import InputField from "../BasicComponents/InputField";
+import Style from "../../Styles/CredentialsStyle";
+import globalStyles from '../../Styles/GlobalStyle';
+import { COLORS } from "../../Constants/Constants";
+import PrimaryButton from "../BasicComponents/PrimaryButton";
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
@@ -60,17 +60,7 @@ const SignUpForm = ({ navigation }) => {
 
     // Handle sign-up submission
     const handleSignUp = async () => {
-        setError('');
-
-        // Validate input fields
-        if (!email || !firstName || !lastName || !password || !confirmPassword) {
-            setError('Please fill out all fields.');
-            return;
-        }
-        if (password !== confirmPassword) {
-            setError('Passwords do not match.');
-            return;
-        }
+       
 
         try {
             const response = await API.post('/signup', { email, firstName, lastName, password });

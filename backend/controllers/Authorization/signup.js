@@ -1,4 +1,4 @@
-import { ERROR_CODE, SUCCESS, SERVER_ERROR_MESSAGE } from "../../Constants/constants.js";
+import { ERROR_CODE, SUCCESS, SERVER_ERROR_MESSAGE, EXPIRATION_MINUTES_FOR_CODE } from "../../Constants/constants.js";
 import { generateVerificationCode, sendVerificationEmail, setEmailError } from "../../utils/email_utils.js";
 import { setPasswordError, setConfirmPasswordError } from "../../utils/password_utils.js";
 import USER from "../../models/user_model.js";
@@ -8,7 +8,7 @@ const sign_up = async (req, res) => {
     const error = {}; // Default empty error object
     let response_status_code = SUCCESS;
     const { email, first_name, last_name, password, confirmed_password } = req.body;
-
+    
     // Validate input fields asynchronously
     await setEmailError(email, error);
     await setPasswordError(password, error);
@@ -52,7 +52,7 @@ const sign_up = async (req, res) => {
 
         // Generate verification code and expiration time
         const code = generateVerificationCode();
-        const expiration_time = new Date(Date.now() + 15 * 60 * 1000).toISOString();
+        const expiration_time = new Date(Date.now() + EXPIRATION_MINUTES_FOR_CODE * 60 * 1000).toISOString();
 
         // Check if there's an existing pending sign-up attempt for the email
         const pending_user_records = await PENDING_USER.findAll({

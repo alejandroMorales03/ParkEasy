@@ -15,9 +15,11 @@ const reset_password = async(req, res) =>{
 
     if(Object.keys(error).length > 0){
         response_status_code = ERROR_CODE.UNPROCESSABLE_ENTITY;
+        console.log(error);
         return res.response_status_code(response_status_code).json({error: error});
 
     }
+
 
     try{
 
@@ -33,6 +35,8 @@ const reset_password = async(req, res) =>{
             response_status_code = ERROR_CODE.BAD_REQUEST,
             error.code = ERROR_CODE.BAD_REQUEST,
             error.message = "There is no account associated with that email. Please sign up."
+            console.log(error);
+            return res.status(response_status_code).json({error: error});
         }
 
         // If there is no ongoing recover password attempt create a new one, otherwise update the existing one
