@@ -96,8 +96,7 @@ const SignUpForm = ({ navigation }) => {
             console.log(response.data);
             navigation.navigate('Login');
         } catch (err) {
-            setError(err.response ? err.response.data.message : 'Verification failed. Please try again.');
-            console.error('Error verifying code:', err.response ? err.response.data.message : err.message);
+            setError(err.response.data)
         }
     };
 
