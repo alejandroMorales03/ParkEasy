@@ -1,15 +1,21 @@
-import {ERROR_CODE, SUCCESS} from '../../Constants/constants.js'
+import {ERROR_CODE, SUCCESS, SERVER_ERROR_MESSAGE} from '../../Constants/constants.js'
 import USER from '../../models/user_model.js';
-import { isEmailValid, setEmailError } from '../../utils/email_utils.js';
-import { comparePasswords, setPasswordError } from '../../utils/password_utils.js';
+import {setEmailError } from '../../utils/email_utils.js';
+import { comparePasswords } from '../../utils/password_utils.js';
 const login = async(req, res) =>{
     
     const {email, password} = req.body;
     let response_status_code = SUCCESS;
     const error = {};
-
+    console.log(1);
     await setEmailError(email, error);
-    await setPasswordError(password, error);
+    if(!password){
+        error.password = {
+            code: ERROR_CODE.BAD_REQUEST,
+            message: "Password field is required.",
+        }
+    }
+    console.log(2);
 
     // Early exit if there is an error in the form
     if(Object.keys(error).length > 0){
@@ -17,14 +23,15 @@ const login = async(req, res) =>{
         console.log(error);
         return res.status(response_status_code).json({error: error});
     }
-
+    console.log(4);
     try{
         const user_records = await USER.findAll({
             where:{
-                email: email
-            }
+                email: email,
+            },
+            logging: console.log,
         })
-
+        console.log(5);
         // Early exit if email is not present in the database
         if(user_records.length === 0){
             response_status_code = ERROR_CODE.UNAUTHORIZED;
@@ -33,10 +40,11 @@ const login = async(req, res) =>{
             console.log(error);
             return res.status(response_status_code).json({error: error});
         }
+        console.log(6);
         
 
         // Exit if the entered password does not match the stored password
-        const passwords_match = await comparePasswords(password, user_records.password);
+        const passwords_match = await comparePasswords(password, user_records[0].password);
         if(passwords_match){
             return res.status(response_status_code).json({message: `Successful login operation with ${email} and ${password}.`})
 
