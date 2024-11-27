@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 
 dotenv.config();
-
+// this is the setting sof the database and server to access it with the corresponding credentials
 const config = {
   db: {
     user: process.env.DB_USER,

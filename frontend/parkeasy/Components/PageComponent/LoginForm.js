@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-//TEST TEST TEST
 import {
     View,
     Text,
@@ -39,14 +38,14 @@ const LoginForm = ({ navigation }) => {
     async function handleLogin(){
         
         try{
-            const response = await axios.post('http://192.168.0.18:8000/api/auth/login', {
+            const response = await axios.post('http://10.108.135.132:8000/api/auth/login', {
                 email,
                 password
             });
             navigation.navigate("Sign Up");
         }catch (err) {
                 
-                setError(err.response.data.error);
+                setError(err);
                 console.log(err.response.data.error);
 
                 

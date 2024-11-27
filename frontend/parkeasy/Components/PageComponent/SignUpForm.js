@@ -17,6 +17,7 @@ import Style from "../../Styles/CredentialsStyle";
 import globalStyles from '../../Styles/GlobalStyle';
 import { COLORS } from "../../Constants/Constants";
 import PrimaryButton from "../BasicComponents/PrimaryButton";
+import ErrorDialog from "../BasicComponents/ErrorDialog";
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
@@ -27,11 +28,6 @@ const API = axios.create({
     },
 });
 
-//////////////////////////////////// COMPONENTS ////////////////////////////////////
-
-const ErrorMessage = ({ error }) => (
-    error ? <Text style={globalStyles.errorText}>{error}</Text> : null
-);
 
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
@@ -147,7 +143,7 @@ const SignUpFormNotCodeSent = ({
         <Text style={globalStyles.Text}>Let's make you part of this!</Text>
 
         {/*This is the error space */}
-        <ErrorMessage error={error} /> {/* Niel esto no va a functionar recuerda */}
+        <ErrorDialog error={error.message} /> {/* Niel esto no va a function recuerda */}
 
         {/*Setting input fields for each variable*/}
         <InputField placeholder="First Name"  onChange={setFirstName} value={firstName} />
@@ -170,7 +166,7 @@ const SignUpFormCodeSent = ({ confirmCode, setConfirmCode, handleConfirmCode, er
     <>
         <Text style={globalStyles.Text}>Your code has been sent! Please check your email.</Text>
         {/*This is the error space */}
-        <ErrorMessage error={error} />
+        <ErrorDialog error={error} />
 
         {/*Setup Input Fields*/}
         <InputField placeholder="Enter confirmation code" value={confirmCode} onChangeText={setConfirmCode} />

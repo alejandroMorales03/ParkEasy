@@ -1,7 +1,7 @@
 import { Animated, Dimensions, Image, StyleSheet, TextInput, View, TouchableOpacity } from "react-native";
 import GlobalStyle from "../../Styles/GlobalStyle";
 import {COLORS, SIZES, WEIGHT} from "../../Constants/Constants";
-import React, { useState, useRef } from "react";
+import React, {useState, useRef, Component} from "react";
 
 
 import EyeIconFieldUnmarked from "../../assets/icons/input_pass_visible.svg"
@@ -118,8 +118,8 @@ const InputField = ({
                 {/* Conditionally render the eye icon only if secureTextEntry is true */}
                 {secureTextEntry && (
                     <TouchableOpacity 
-                    onPress={togglePasswordVision} // execusion in touch
-                    style={[styles.eyeIcon,{paddingTop: 8}]} // aligment
+                    onPress={togglePasswordVision} // execution in touch
+                    style={[styles.eyeIcon,{paddingTop: 8}]} // alignment
                     hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 } // touchable area expansion
                     }>  
 
@@ -180,3 +180,4 @@ const styles = StyleSheet.create({
 });
 
 export default InputField;
+

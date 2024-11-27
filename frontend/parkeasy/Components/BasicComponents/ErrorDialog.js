@@ -8,7 +8,7 @@ const ErrorDialog = ({ error, size = SIZES.extraSmall, }) => {
         <>
             {error ? (
                 <Text style={[styles.errorText, {fontSize: size }]}>
-                    {error}
+                    {error.message}
                 </Text>
             ) : null}
         </>
