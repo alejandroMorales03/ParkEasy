@@ -39,7 +39,7 @@ const LoginForm = ({ navigation }) => {
     async function handleLogin(){
         
         try{
-            const response = await axios.post('http://192.168.0.18:8000/api/auth/login', {
+            const response = await axios.post('http://192.168.0.24:8000/api/auth/login', {
                 email,
                 password
             });
@@ -48,8 +48,6 @@ const LoginForm = ({ navigation }) => {
                 
                 setError(err.response.data.error);
                 console.log(err.response.data.error);
-
-                
             }
     }
 

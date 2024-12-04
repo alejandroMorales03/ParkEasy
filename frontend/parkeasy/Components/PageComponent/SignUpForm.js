@@ -17,11 +17,12 @@ import Style from "../../Styles/CredentialsStyle";
 import globalStyles from '../../Styles/GlobalStyle';
 import { COLORS } from "../../Constants/Constants";
 import PrimaryButton from "../BasicComponents/PrimaryButton";
+import ErrorDialog from '../BasicComponents/ErrorDialog';
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
 const API = axios.create({
-    baseURL: 'http://localhost:8000/api/auth',
+    baseURL: 'http://192.168.0.24:8000/api/auth',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -29,9 +30,6 @@ const API = axios.create({
 
 //////////////////////////////////// COMPONENTS ////////////////////////////////////
 
-const ErrorMessage = ({ error }) => (
-    error ? <Text style={globalStyles.errorText}>{error}</Text> : null
-);
 
 //////////////////////////////////// MAIN COMPONENT ////////////////////////////////////
 
@@ -85,7 +83,8 @@ const SignUpForm = ({ navigation }) => {
             console.log(response.data);
             navigation.navigate('Login');
         } catch (err) {
-            setError(err.response.data)
+            setError(err.response.data.error);
+            console.log(err.response.data.error);
         }
     };
 
@@ -147,19 +146,19 @@ const SignUpFormNotCodeSent = ({
         <Text style={globalStyles.Text}>Let's make you part of this!</Text>
 
         {/*This is the error space */}
-        <ErrorMessage error={error} /> {/* Niel esto no va a functionar recuerda */}
+        <ErrorDialog error={error.message? error.message : null} /> 
 
         {/*Setting input fields for each variable*/}
-        <InputField placeholder="First Name"  onChange={setFirstName} value={firstName} />
-        <InputField placeholder="Last Name" value={lastName} onChange={setLastName} />
-        <InputField placeholder="Email" value={email} onChange={setEmail} />
+        <InputField placeholder="First Name"  onChange={setFirstName} value={firstName} errorTray ={error.first_name? error.first_name.message : null} />
+        <InputField placeholder="Last Name" value={lastName} onChange={setLastName} errorTray ={error.last_name? error.last_name.message : null}/>
+        <InputField placeholder="Email" value={email} onChange={setEmail} errorTray ={error.email? error.email.message : null}/>
 
         {/** For this one (the password) you need to extract the message list because there is way more than one message so you can't 
          *   pass the string. Do  this Object.values(error.password.message) so u can pass a full array but in the case of this field u need to handle a way of printing the contents
          * 
          */}
-        <InputField placeholder="Password" value={password} onChange={setPassword} secureTextEntry/>
-        <InputField placeholder="Confirm Password" value={confirmPassword} onChange={setConfirmPassword} secureTextEntry />
+        <InputField placeholder="Password" value={password} onChange={setPassword} secureTextEntry errorTray={error.password? Object.values(error.password.message) : null} password_input = {true}/>
+        <InputField placeholder="Confirm Password" value={confirmPassword} onChange={setConfirmPassword} secureTextEntry  errorTray={error.confirmed_password? error.confirmed_password.message: null}/>
 
         <PrimaryButton onPressButton ={handleSignUp} InsideText ="Sign Up"/>
     </>
@@ -188,3 +187,4 @@ const SignUpFormCodeSent = ({ confirmCode, setConfirmCode, handleConfirmCode, er
 );
 
 export default SignUpForm;
+
