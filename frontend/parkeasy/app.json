@@ -13,7 +13,15 @@
     "ios": {
       "bundleIdentifier": "com.parkeasy.app",
       "config": {
-        "googleMapsApiKey": "AIzaSyCjrFVq2aPfG9AmUg4uNahEm6ZAnvoq0k8" 
+        "googleMapsApiKey": "AIzaSyCjrFVq2aPfG9AmUg4uNahEm6ZAnvoq0k8"
+      }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "dc2b58c8-fea4-408a-b733-629728a1b9ad"
       }
     }
   }
