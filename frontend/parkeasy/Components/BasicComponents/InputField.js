@@ -40,9 +40,7 @@ const InputField = ({
                         errorTray,
                         password_input = false
                     }) => {
-
-    console.log(password_input && errorTray? errorTray : null)
-
+                        
     // State to manage visibility of the password
     const [isSecure, setIsSecure] = useState(secureTextEntry);
     const [isHiddenIcon, setIsHiddenIcon] = useState(true);

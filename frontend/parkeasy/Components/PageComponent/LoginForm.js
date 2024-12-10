@@ -39,7 +39,8 @@ const LoginForm = ({ navigation }) => {
     async function handleLogin(){
         
         try{
-            const response = await axios.post('http://192.168.0.24:8000/api/auth/login', {
+            // TODO dont forget to change to your local IP address with terminal
+            const response = await axios.post('http://127.0.0.1:8000/api/auth/login', {
                 email,
                 password
             });
