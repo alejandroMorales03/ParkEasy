@@ -154,7 +154,7 @@ const ForgotPasswordCompletion = ({
             secureTextEntry
         />
 
-        <PrimaryButton onPressButton ={handleResetPasswordCompletion} InsideText ="Reset Paswword"/>
+        <PrimaryButton onPressButton ={handleResetPasswordCompletion} InsideText ="Reset Password"/>
 
 
     </>
