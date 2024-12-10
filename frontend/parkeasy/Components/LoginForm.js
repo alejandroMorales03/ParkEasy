@@ -82,11 +82,11 @@ const LoginForm = ({ navigation }) => {
 
                             {/* This is the email input */}
 
-                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= "true" icon={ICONS.email} />
+                            <InputField placeholder="Email" keyboardType="email-address" onChange={setEmail} value={email} hasIcon= {true} icon={ICONS.email} />
 
                             {/* This is the Password Input */}
 
-                            <InputField placeholder="Password" onChange={setPassword} value={password} hasIcon = "true" icon={ICONS.password} secureTextEntry="true" />
+                            <InputField placeholder="Password" onChange={setPassword} value={password} hasIcon = {true} icon={ICONS.password} secureTextEntry={true} />
 
 
                             {/* Login Button */}
