@@ -111,14 +111,9 @@ const ForgetPassForm = ({ navigation }) => {
                     </View>
 
                     <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => {
-                            resetFields();
-                            navigation.navigate('Login');
-                        }}>
-                            <Text style={Style.bottomLinks}>Back</Text>
-                        </TouchableOpacity>
 
-
+                        <BottomLink navigation = {navigation} text="Back" navigateTo= "Login" resetField={resetFields} fontWeight='normal'/>
+                        
                     </View>
                 </View>
             </SafeAreaView>
