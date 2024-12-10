@@ -61,12 +61,21 @@ export const SIZES = {
     FORM_WIDTH: '80%',
 
     // font sizes TODO research for correct sizes in a default app
+<<<<<<< Updated upstream
 
     extraSmall: '16px',
     small: '20px',
     medium: '30px',
     large: '40px',
     extraLarge: '50px'
+=======
+    superExtraSmall: 14,
+    extraSmall: 16,
+    small: 20,
+    medium: 30,
+    large: 40,
+    extraLarge: 50
+>>>>>>> Stashed changes
 
 }
 
