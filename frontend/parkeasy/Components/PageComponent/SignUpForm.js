@@ -18,6 +18,7 @@ import globalStyles from '../../Styles/GlobalStyle';
 import { COLORS } from "../../Constants/Constants";
 import PrimaryButton from "../BasicComponents/PrimaryButton";
 import ErrorDialog from '../BasicComponents/ErrorDialog';
+import BottomLink from '../BasicComponents/BottomLink';
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
@@ -42,7 +43,7 @@ const SignUpForm = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState({})
-    const [isCodeSent, setIsCodeSent] = useState(false);
+    const [isCodeSent, setIsCodeSent] = useState(true);
     const [confirmCode, setConfirmCode] = useState('');
 
 
@@ -121,9 +122,11 @@ const SignUpForm = ({ navigation }) => {
                     )}
 
                     <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => { navigation.navigate('Login'); resetFields(); }}>
-                            <Text style={Style.bottomLinks}>Back</Text>
-                        </TouchableOpacity>
+                            {isCodeSent && (
+                                <BottomLink text="Resend Code" resetField={handleConfirmCode} fontWeight='bold'/>
+                            )}
+
+                             <BottomLink navigation = {navigation} text="Back" navigateTo= "Login" resetField={resetFields} fontWeight='normal'/>
                     </View>
                 </View>
             </SafeAreaView>
@@ -169,19 +172,15 @@ const SignUpFormCodeSent = ({ confirmCode, setConfirmCode, handleConfirmCode, er
     <>
         <Text style={globalStyles.Text}>Your code has been sent! Please check your email.</Text>
         {/*This is the error space */}
-        <ErrorMessage error={error} />
+        <ErrorDialog error={error.message ? error.message : null} />
 
         {/*Setup Input Fields*/}
         <InputField placeholder="Enter confirmation code" value={confirmCode} onChangeText={setConfirmCode} />
 
-        <TouchableOpacity onPress={handleConfirmCode} style={Style.button}>
-            <Text style={Style.buttonText}>Submit Code</Text>
-        </TouchableOpacity>
+        <PrimaryButton onPressButton ={handleConfirmCode} InsideText ="Submit Code"/>
 
         <View style={Style.linksContainer}>
-            <TouchableOpacity onPress={handleConfirmCode}>
-                <Text style={Style.bottomLinks}>Resend Code</Text>
-            </TouchableOpacity>
+            
         </View>
     </>
 );
