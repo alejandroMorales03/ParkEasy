@@ -17,7 +17,7 @@ const BUILDINGS = sequelize.define('BUILDINGS', {
     }
 
 },{
-    timestamps: true,
+    timestamps: false,
     tableName: 'buildings',
 })
 

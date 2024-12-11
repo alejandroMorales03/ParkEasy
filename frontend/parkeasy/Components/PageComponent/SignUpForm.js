@@ -23,7 +23,7 @@ import BottomLink from '../BasicComponents/BottomLink';
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
 const API = axios.create({
-    baseURL: 'http://192.168.0.24:8000/api/auth',
+    baseURL: 'http://192.168.1.211:8000/api/auth',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -38,13 +38,13 @@ const SignUpForm = ({ navigation }) => {
     // State variables
 
     const [email, setEmail] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmed_password, setConfirmPassword] = useState('');
     const [error, setError] = useState({})
-    const [isCodeSent, setIsCodeSent] = useState(true);
-    const [confirmCode, setConfirmCode] = useState('');
+    const [isCodeSent, setIsCodeSent] = useState(false);
+    const [code, setConfirmCode] = useState('');
 
 
     // Reset all input fields
@@ -63,7 +63,7 @@ const SignUpForm = ({ navigation }) => {
        
 
         try {
-            const response = await API.post('/signup', { email, firstName, lastName, password });
+            const response = await API.post('/signup', { email, first_name, last_name, password, confirmed_password});
             console.log(response.data);
             setIsCodeSent(true);
         } catch (err) {
@@ -74,13 +74,13 @@ const SignUpForm = ({ navigation }) => {
 
     // Handle confirmation code submission
     const handleConfirmCode = async () => {
-        if (!confirmCode) {
+        if (!code) {
             setError('Please enter the confirmation code sent to your email.');
             return;
         }
 
         try {
-            const response = await API.post('/verify-signup', { email, code: confirmCode });
+            const response = await API.post('/verify-signup', { email, code, first_name, last_name, password });
             console.log(response.data);
             navigation.navigate('Login');
         } catch (err) {
@@ -101,13 +101,13 @@ const SignUpForm = ({ navigation }) => {
                         <SignUpFormNotCodeSent
                             {...{ email,
                                 setEmail,
-                                firstName,
+                                firstName: first_name,
                                 setFirstName,
-                                lastName,
+                                lastName: last_name,
                                 setLastName,
                                 password,
                                 setPassword,
-                                confirmPassword,
+                                confirmed_password,
                                 setConfirmPassword,
                                 handleSignUp,
                                 error }}
@@ -117,7 +117,7 @@ const SignUpForm = ({ navigation }) => {
                         // page view when code is sent!
 
                         <SignUpFormCodeSent
-                            {...{ confirmCode, setConfirmCode, handleConfirmCode, error }}
+                            {...{ confirmCode: code, setConfirmCode, handleConfirmCode, error }}
                         />
                     )}
 
@@ -175,7 +175,7 @@ const SignUpFormCodeSent = ({ confirmCode, setConfirmCode, handleConfirmCode, er
         <ErrorDialog error={error.message ? error.message : null} />
 
         {/*Setup Input Fields*/}
-        <InputField placeholder="Enter confirmation code" value={confirmCode} onChangeText={setConfirmCode} />
+        <InputField placeholder="Enter confirmation code" value={confirmCode} onChange={setConfirmCode} />
 
         <PrimaryButton onPressButton ={handleConfirmCode} InsideText ="Submit Code"/>
 
