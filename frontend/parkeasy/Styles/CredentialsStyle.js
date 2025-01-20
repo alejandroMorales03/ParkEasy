@@ -5,9 +5,13 @@ const { width, height } = Dimensions.get('window'); // collects the dimensions o
 
 const CredentialsStyle= StyleSheet.create({
 
-    fullPageContainer: {
-        flex: 1,
-        backgroundColor: COLORS.White
+
+    ///CONTAINERS
+
+    topContainer: {
+        height: 110,
+        textAlign: "left",
+        justifyContent: 'space-between',
     },
 
     textContainerFB:{
@@ -17,14 +21,9 @@ const CredentialsStyle= StyleSheet.create({
 
     },
 
-    mainTitle:{
-        fontSize: SIZES.extraLarge,
-        fontWeight:'bold',
-    },
-
-    mainTitleAlter: {
-        fontSize: SIZES.medium,
-        fontWeight:'bold',
+    fullPageContainer: {
+        flex: 1,
+        backgroundColor: COLORS.White
     },
 
     loginPageContainer: {
@@ -44,16 +43,28 @@ const CredentialsStyle= StyleSheet.create({
         marginHorizontal: 3
     },
 
-    mainTitleFont: {
-        fontSize: SIZES.medium * (width / 375),
-        fontWeight: 'bold',
-        color: COLORS.White
-    },
-
     linksContainer: {
         marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+
+    ///TEXT FORMATS
+
+    mainTitle:{
+        fontSize: SIZES.extraLarge,
+        fontWeight:'bold',
+    },
+
+    mainTitleAlter: {
+        fontSize: SIZES.medium,
+        fontWeight:'bold',
+    },
+
+    mainTitleFont: {
+        fontSize: SIZES.medium * (width / 375),
+        fontWeight: 'bold',
+        color: COLORS.White
     },
 
     bottomLinks: {
@@ -68,11 +79,6 @@ const CredentialsStyle= StyleSheet.create({
         alignSelf: 'center',
     },
 
-    // fieldCredential: {
-    //     flexDirection: 'row',
-    //     alignItems: 'center', // Aligns input and icon vertically centered
-    //     marginVertical: 2, // Adds spacing between input fields
-    // },
 
 
 

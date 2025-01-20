@@ -2,8 +2,6 @@ import { Animated, Dimensions, Image, StyleSheet, TextInput, View, TouchableOpac
 import GlobalStyle from "../../Styles/GlobalStyle";
 import {COLORS, SIZES, WEIGHT} from "../../Constants/Constants";
 import React, { useState, useRef } from "react";
-
-
 import EyeIconFieldUnmarked from "../../assets/icons/input_pass_visible.svg"
 import EyeIconFieldMarked from "../../assets/icons/input_pass_hidden.svg"
 

@@ -93,7 +93,15 @@ const SignUpForm = ({ navigation }) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={Style.fullPageContainer}>
                 <View style={Style.loginPageContainer}>
-                    <Text style={Style.mainTitle}>Sign Up</Text>
+                    <View style={Style.topContainer}>
+                        <Text style={Style.mainTitle}>Sign Up</Text>
+                        {!isCodeSent ? (
+                            <Text style={globalStyles.Text}>Let's make you part of this!</Text>
+                        ) : (
+                            <Text style={globalStyles.Text}>Your code has been sent! Please check your email.</Text>
+                            )}
+
+                    </View>
 
                     {!isCodeSent ? (
                         // page view when code is not sent!
@@ -146,8 +154,6 @@ const SignUpFormNotCodeSent = ({
                                    error
                                }) => (
     <>
-        <Text style={globalStyles.Text}>Let's make you part of this!</Text>
-
         {/*This is the error space */}
         <ErrorDialog error={error.message? error.message : null} /> 
 
@@ -170,7 +176,7 @@ const SignUpFormNotCodeSent = ({
 
 const SignUpFormCodeSent = ({ confirmCode, setConfirmCode, handleConfirmCode, error }) => (
     <>
-        <Text style={globalStyles.Text}>Your code has been sent! Please check your email.</Text>
+
         {/*This is the error space */}
         <ErrorDialog error={error.message ? error.message : null} />
 
