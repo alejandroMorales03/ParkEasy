@@ -1,5 +1,6 @@
 import { ERROR_CODE, SUCCESS } from "../../Constants/constants.js";
 import BUILDINGS from "../../models/building_model.js";
+import { Op } from 'sequelize'; // Import Op from Sequelize for condition handling
 
 const building_selection = async (req, res) => {
     const error = {};
@@ -32,8 +33,12 @@ const building_selection = async (req, res) => {
         const building_records = await BUILDINGS.findOne({
             attributes: ['building', 'building_code', 'plus_code'], // Columns to retrieve
             where: {
-                building: building,      // Search by building name
-                building_code: code      // Search by building code (like AHC34)
+                building: {
+                    [Op.iLike]: building  // Case-insensitive search for building name
+                },
+                building_code: {
+                    [Op.iLike]: code  // Case-insensitive search for building code
+                }
             }
         });
 

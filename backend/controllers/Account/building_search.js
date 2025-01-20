@@ -7,6 +7,8 @@ const building_search = async (req, res) => {
     const { search_value } = req.query;
     let response_status_code = SUCCESS;
 
+    console.log(search_value)
+
     // Check if search_value is provided
     if (!search_value) {
         error.search_value = {
@@ -17,6 +19,7 @@ const building_search = async (req, res) => {
         console.log(error);
         return res.status(response_status_code).json({ error: error });
     }
+
 
     try {
         // Search buildings based on building name or code
