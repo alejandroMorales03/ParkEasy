@@ -39,7 +39,7 @@ const LoginForm = ({ navigation }) => {
         
         try{
             // TODO dont forget to change to your local IP address with terminal
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/login', {
+            const response = await axios.post('http://192.168.1.211:8000/api/auth/login', {
                 email,
                 password
             });
