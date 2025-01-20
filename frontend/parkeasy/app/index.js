@@ -37,7 +37,7 @@ const App = () => {
         <NavigationContainer independent={true}>
             <CredentialsStack />
         </NavigationContainer>
-        
+
         //TESTING PAGES
 
         // <MenuPill />

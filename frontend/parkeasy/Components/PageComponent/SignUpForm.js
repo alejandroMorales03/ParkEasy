@@ -43,7 +43,7 @@ const SignUpForm = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState({})
-    const [isCodeSent, setIsCodeSent] = useState(true);
+    const [isCodeSent, setIsCodeSent] = useState(false);
     const [confirmCode, setConfirmCode] = useState('');
 
 
