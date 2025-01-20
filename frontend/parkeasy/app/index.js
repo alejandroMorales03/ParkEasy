@@ -34,11 +34,13 @@ const CredentialsStack = () => {
 
 const App = () => {
     return (
-        // <NavigationContainer independent={true}>
-        //     <CredentialsStack />
-        // </NavigationContainer>
+        <NavigationContainer independent={true}>
+            <CredentialsStack />
+        </NavigationContainer>
+        
+        //TESTING PAGES
 
-        <MenuPill />
+        // <MenuPill />
         // <Splash/>
     );
 };
