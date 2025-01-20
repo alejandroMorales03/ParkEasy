@@ -10,7 +10,9 @@ const { width } = Dimensions.get('window');
 
 const MenuPill = () => {
     const animationScaling = useRef(new Animated.Value(1)).current; // Default scale is 1
+    const animationHeight = useRef(new Animated.Value(75)).current;
     const [isScaled, setScaled] = useState(false);
+
 
     // Function to handle scaling on press
     const handleIconPress = (iconName) => {
@@ -18,10 +20,11 @@ const MenuPill = () => {
             toValue: isScaled ? 1 : 1.5, // Scale up to 1.5x and go back
             duration: 300, // Duration of animation
             useNativeDriver: true, // Use native driver for performance
-        }).start();
-        setScaled(!isScaled);
-        console.log("Button " + iconName + " Pressed!");
-        return null;
+        }).start(() => {
+            setScaled(!isScaled);
+        })
+            console.log("Button " + iconName + " Pressed!");
+            return null;
     };
 
     return (
@@ -31,7 +34,7 @@ const MenuPill = () => {
             <Animated.View
                 style={[
                     pillStyle.PillContainer, // adds animation to container
-                    { transform: [{ scale: animationScaling }] },
+                    { transform: [{ scale: animationScaling }]},
                 ]}
             >
                 {/* Compass Icon   handleIconPress is to scale the pill when you press any icon*/}
@@ -64,6 +67,10 @@ const pillStyle = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: width * 0.20,
+        paddingHorizontal: width * 0.15,
+        shadowOpacity: 2,
+        shadowRadius: 4,
+        shadowColor: COLORS.Black,
+        shadowOffset: 0.9,
     },
 });

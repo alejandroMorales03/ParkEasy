@@ -34,8 +34,8 @@ const userPagesStyle= StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '75%',
-        backgroundColor: COLORS.DarkGreen,
+        height: '79%',
+        // backgroundColor: COLORS.GreenMainShadow1,
         paddingHorizontal: width * 0.08, // 8% of screen width
         borderRadius: 37,
     },
@@ -50,7 +50,7 @@ const userPagesStyle= StyleSheet.create({
         paddingVertical: width * 0.05,
         color: COLORS.Black,
         shadowOpacity: 1,
-        shadowColor: COLORS.Grey,
+        shadowColor: COLORS.Gray1,
         shadowRadius: 2,
         shadowOffset: 2,
 
