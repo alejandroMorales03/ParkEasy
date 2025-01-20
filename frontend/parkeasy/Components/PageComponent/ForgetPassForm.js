@@ -10,9 +10,9 @@ import {
     Keyboard,
     TouchableWithoutFeedback
 } from 'react-native';
-import Style from "../../Styles/CredentialsStyle";
-import GlobalStyle from "../../Styles/GlobalStyle";
 import CredentialsStyle from "../../Styles/CredentialsStyle";
+import GlobalStyle from "../../Styles/GlobalStyle";
+// import CredentialsStyle from "../../Styles/CredentialsStyle";
 import { COLORS } from "../../Constants/Constants";
 import imageLogo from "../../assets/logos/logo_pin_color.svg";
 import { ICONS } from "../../Constants/icons";
@@ -77,14 +77,15 @@ const ForgetPassForm = ({ navigation }) => {
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <SafeAreaView style={Style.fullPageContainer}>
-                <View style={Style.loginPageContainer}>
+            <SafeAreaView style={CredentialsStyle.fullPageContainer}>
+                <View style={CredentialsStyle.loginPageContainer}>
                    <LogoPinColor style={CredentialsStyle.imageLogo} />
 
-                    <View style={Style.credentialsContainer}>
-                        <View style={Style.textContainerFB}>
-                            <Text style={Style.mainTitleAlter}>
+                    <View style={CredentialsStyle.credentialsContainer}>
+                        <View style={CredentialsStyle.textContainerFB}>
+                            <Text style={CredentialsStyle.mainTitleAlter}>
                                 {isCodeSent ? "Enter Verification Code" : "Forgot Password?"}
+
                             </Text>
                             <Text style={GlobalStyle.Text}>
                                 {isCodeSent ? "Your code has been sent" : "Don't worry! It happens to all of us. Let's get your account back!"}
@@ -110,15 +111,10 @@ const ForgetPassForm = ({ navigation }) => {
                         )}
                     </View>
 
-                    <View style={Style.linksContainer}>
-                        <TouchableOpacity onPress={() => {
-                            resetFields();
-                            navigation.navigate('Login');
-                        }}>
-                            <Text style={Style.bottomLinks}>Back</Text>
-                        </TouchableOpacity>
+                    <View style={CredentialsStyle.linksContainer}>
 
-
+                        <BottomLink navigation = {navigation} text="Back" navigateTo= "Login" resetField={resetFields} fontWeight='normal'/>
+                        
                     </View>
                 </View>
             </SafeAreaView>

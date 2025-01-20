@@ -7,6 +7,7 @@ import SignUpForm from "../Components/PageComponent/SignUpForm";
 import MainPage from '../Components/PageComponent/MainPage';
 import MapView from '../Components/PageComponent/MapTest';
 import Splash from '../Components/PageComponent/SplashPage';
+import MenuPill from "../Components/BasicComponents/MenuPill";
 const Stack = createStackNavigator();
 
 // This is used to create the stack navigation
@@ -36,6 +37,10 @@ const App = () => {
         <NavigationContainer independent={true}>
             <CredentialsStack />
         </NavigationContainer>
+
+        //TESTING PAGES
+
+        // <MenuPill />
         // <Splash/>
     );
 };

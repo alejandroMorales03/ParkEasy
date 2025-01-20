@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { COLORS } from "../../Constants/Constants";
 
-const BottomLink = ({ navigation, text, navigateTo, resetField, fontWeight = "normal" }) => {
+const BottomLink = ({ navigation, text, navigateTo = null, resetField, fontWeight = "normal" }) => {
     const handlePress = () => {
         resetField(); // clear fields
         navigation.navigate(navigateTo) // navigate to specified route
