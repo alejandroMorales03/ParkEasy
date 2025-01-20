@@ -18,7 +18,7 @@ const PASSWORD_RECOVERY = sequelize.define("forgot_password", {
     }
 },
     {
-        timestamps: true,
+        timestamps: false,
         tableName: 'forgot_password',
 
 })

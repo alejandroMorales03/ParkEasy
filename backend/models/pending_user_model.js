@@ -22,7 +22,7 @@ const PENDING_USER = sequelize.define('PENDING_USER',{
     
 
 },{
-    timestamps: true,
+    timestamps: false,
     tableName: 'pending_users',
 
 })
