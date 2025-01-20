@@ -80,8 +80,12 @@ const reset_password = async(req, res) =>{
 
         return res.status(response_status_code).json({message: `Successful password recovery request operation with email ${email}. `})
 
-    }catch(err){
-
+    } catch (err) {
+            // Handle server-side errors
+            error.code = ERROR_CODE.SERVER_ERROR;
+            error.message = SERVER_ERROR_MESSAGE;
+            console.error("Server Error:", err);
+            return res.status(response_status_code).json({ error: error });
     }
 }
 export default reset_password;
