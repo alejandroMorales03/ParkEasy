@@ -8,18 +8,20 @@ const userPagesStyle= StyleSheet.create({
     mapContainer: {
         ...StyleSheet.absoluteFillObject,
         flex: 1,
-        backgroundColor: COLORS.White,
+        backgroundColor: COLORS.BlueHighlight1,
         paddingHorizontal: 20, // 8% of screen width
-        paddingTop: 70,
-        paddingBottom: 30,
-        flexDirection: 'column',  // Ensure vertical stacking
-        justifyContent: 'space-between',  // Start items from the top
+        flexDirection: 'column',
+        paddingTop: 90,
+        paddingBottom: 10,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+
+
     },
     mainPageContainer: {
         ...StyleSheet.absoluteFillObject,
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-evenly',
     },
     googleMapView:{
         flex: 1,
@@ -32,7 +34,7 @@ const userPagesStyle= StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '10%',
+        height: '75%',
         backgroundColor: COLORS.DarkGreen,
         paddingHorizontal: width * 0.08, // 8% of screen width
         borderRadius: 37,

@@ -17,7 +17,8 @@ import globalStyles from "../../Styles/GlobalStyle";
 import userPagesStyle from "../../Styles/UserPagesStyle";
 import GlobalStyle from "../../Styles/GlobalStyle";
 import axios from "axios";
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MenuPill from "../BasicComponents/MenuPill"; // remove PROVIDER_GOOGLE import if not using Google Maps
 
 //////////////////////////////////// API Configuration ////////////////////////////////////
 
@@ -126,8 +127,12 @@ const mainPage = () => {
         <SafeAreaView style={Style.mainPageContainer}>
             <View style = {Style.mapContainer}>
                 <GoogleMap />
-                < SearchBar style={{position: "absolute"}}/>
+                <View >
+
+                </View>
+                <SearchBar style={{position: "absolute"}}/>
                 <NavBar style={{position: "absolute"}}/>
+                <MenuPill />
                 {/*<SearchBar />*/}
                 {/*<NavBar/>*/}
                 {/*<MapView />*/}
