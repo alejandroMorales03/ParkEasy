@@ -10,7 +10,6 @@ import * as rotation from "react-native-reanimated";
 
 const MenuPill = ({ navigation }) => {
 
-
     // icons animations
 
     const animationDirection = useRef(new Animated.Value(0)).current;
@@ -24,8 +23,8 @@ const MenuPill = ({ navigation }) => {
             Animated.sequence([
                 // inside the sequence you can create many automations
                 Animated.timing(animationDirection, {
-                    toValue: 0,
-                    duration: 2000, // 1 second
+                    toValue: 0, // TODO set it to 0 to avoid movement for now
+                    duration: 1000, // 1 second
                     useNativeDriver: true,
                 }),
                 Animated.timing(animationRotation, {
@@ -43,24 +42,17 @@ const MenuPill = ({ navigation }) => {
         ).start();
     }, [animationDirection, animationRotation]);
 
-    //rotation interpolation
-
-    // const rotateInterpolate = rotation.interpolate({
-    //     inputRange: [0, 1],
-    //     outputRange: ['0deg', '45deg']
-    // })
-
     // onPress test
 
-    function onPressTest() {
-        console.log("pressed");
+    function onPressTest(buttonName) {
+        console.log("Button pressed");``
+        return null;
     }
     return (
         <View style={GlobalStyle.containerCreator}>
 
             <View style={pillStyle.PillContainer}>
 
-                {/*I have to add the new stack in the index to manipulate the pages based on the menu*/}
 
                 {/*compass*/}
                 <Animated.View style={{transform: [
@@ -73,14 +65,14 @@ const MenuPill = ({ navigation }) => {
                 <Animated.View style={{transform: [
                         {translateY: animationDirection},
                     ]}}>
-                    <PillCompass style={GlobalStyle.icons} onPress={null}/>
+                    <PillCompass style={GlobalStyle.icons} onPress={onPressTest} />
                 </Animated.View>
 
                 {/*/!*profile*!/*/}
                 <Animated.View style={{transform: [
                         {translateY: animationDirection},
                     ]}}>
-                    <PillProfile style={GlobalStyle.icons} onPress={null}/>
+                    <PillProfile style={GlobalStyle.icons} onPress={onPressTest} />
                 </Animated.View>
             </View>
 
