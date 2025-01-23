@@ -3,40 +3,28 @@ import {StyleSheet, View, Text, Dimensions} from "react-native";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import {COLORS, SIZES} from "../../Constants/Constants";
-
+import BottomSheetInfo from "./BottomSheetInfo";
+import ActionSheet from "react-native-actions-sheet";
+import {ActionSheetRef} from "react-native-actions-sheet";
 
 const App = () => {
-    // hooks
-    const sheetRef = useRef(null);
 
-
-
-    // callbacks
-    const handleSheetChange = useCallback((index) => {
-        console.log("handleSheetChange", index);
-    }, []);
-
-    // render
-    return (
-        <GestureHandlerRootView style={styles.container}>
-            <BottomSheet 
-                ref={sheetRef}
-                onChange={handleSheetChange}
-            >
-                    <View style={styles.header}>
-                        <Text style={styles.headerFont}>This is the Title</Text>
-                    </View>
-                <BottomSheetView style={styles.contentContainer}>
-                    {/*This is where the c*/}
-
-                    <View>
-                        <Text>Awesome 🔥</Text>
-                    </View>
-                </BottomSheetView>
-            </BottomSheet>
-        </GestureHandlerRootView>
-    );
+ return(
+     <View style={styles.container}>
+         <BottomSheetInfoAlt/>
+     </View>
+ )
 };
+
+const BottomSheetInfoAlt = ({ navigation }) => {
+    const actionSheetRef = useRef<ActionSheetRef>(null);
+    return(
+        <ActionSheet ref={actionSheetRef}>
+            <Text>Hi, I am here.</Text>
+        </ActionSheet>
+    )
+}
+
 
 const styles = StyleSheet.create({
     container: {
