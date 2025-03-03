@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { COLORS, SIZES } from "../../Constants/Constants";
-import ActionSheet from "react-native-actions-sheet";
+import ActionSheet, {SheetManager} from "react-native-actions-sheet";
 
 const App = () => {
     return (
         <View style={styles.container}>
-            <BottomSheet />
+            {/*<BottomSheet />*/}
         </View>
     );
 };
@@ -22,7 +22,9 @@ const BottomSheet = () => {
 
     return (
         <ActionSheet ref={actionSheetRef}>
-            <Text>Hi, I am inside the BottomSheet.</Text>
+            <View>
+                <Text>Hi, I am inside the BottomSheet.</Text>
+            </View>
         </ActionSheet>
     );
 };
