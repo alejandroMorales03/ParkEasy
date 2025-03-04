@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, {useRef, useEffect, useCallback, useMemo} from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { COLORS, SIZES } from "../../Constants/Constants";
 import ActionSheet, {SheetManager} from "react-native-actions-sheet";
@@ -6,14 +6,26 @@ import ActionSheet, {SheetManager} from "react-native-actions-sheet";
 const App = () => {
     return (
         <View style={styles.container}>
-            {/*<BottomSheet />*/}
+            <BottomSheet />
+
         </View>
     );
 };
 
 const BottomSheet = () => {
+
+    //Reference for BottomSheet this will use for changing states
     const actionSheetRef = useRef(null);
 
+    // Define snap points => represent the different point where the menu will go up or down
+    const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
+
+    //Handle Sheet Changes
+    const handleSheetChange = useCallback((index) => {
+            console.log("Bottom Sheet Position", index);
+        }, [],);
+
+    //initiate the bottom sheet shown
     useEffect(() => {
         if (actionSheetRef.current) {
             actionSheetRef.current.show();
@@ -21,11 +33,15 @@ const BottomSheet = () => {
     }, []);
 
     return (
-        <ActionSheet ref={actionSheetRef}>
+        <BottomSheet ref={actionSheetRef}
+            index={1} // default position
+            snapPoints={snapPoints} // establish snap points
+            onChange={handleSheetChange} // interaction state changes
+        >
             <View>
                 <Text>Hi, I am inside the BottomSheet.</Text>
             </View>
-        </ActionSheet>
+        </BottomSheet>
     );
 };
 
@@ -39,7 +55,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 200,
         width: "100%",
-        backgroundColor: COLORS.Black,
+        backgroundColor: COLORS.GreenMain,
     },
     contentContainer: {
         flex: 1,
